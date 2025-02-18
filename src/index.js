@@ -5,7 +5,10 @@ import { CarShowScene } from "./CarShowScene";
 import { CadresScene } from "./CadresScene";
 import { CategoryScene } from "./CategoryScene";
 import React, {Suspense } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger);
 
 const radius = 2.5; // Rayon du cercle (ajuste selon ton besoin)
 const center = [0, 0, 1.5]; // Point central de la scène
