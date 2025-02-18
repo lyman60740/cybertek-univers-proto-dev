@@ -7,7 +7,10 @@ import Lenis from "@studio-freight/lenis";
 import "./style.css";
 
 
-gsap.registerPlugin(ScrollTrigger);
+// Enregistre le plugin seulement si on est côté client
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const mm = gsap.matchMedia();
 

@@ -279,22 +279,22 @@ items.forEach(item => {
 
 // ✅ Calcule la longueur de chaque chemin et anime
 
-  paths.forEach(path => {
-    const length = path.getTotalLength(); // 📏 Obtiens la longueur du chemin
-    gsap.set(path, {
-      strokeDasharray: length,   // Fait correspondre la longueur totale
-      strokeDashoffset: length   // Cache complètement la ligne
-    });
-  document.querySelector(".cat-3d__top__description").addEventListener("click", ()=> {
-    gsap.to(path, {
-      strokeDashoffset: 0,       // 🪄 Dévoile le chemin
-      duration: 2,
-      ease: "power2.out",
-      delay: 0.3,
-    });
-  });
+//   paths.forEach(path => {
+//     const length = path.getTotalLength(); // 📏 Obtiens la longueur du chemin
+//     gsap.set(path, {
+//       strokeDasharray: length,   // Fait correspondre la longueur totale
+//       strokeDashoffset: length   // Cache complètement la ligne
+//     });
+//   document.querySelector(".cat-3d__top__description").addEventListener("click", ()=> {
+//     gsap.to(path, {
+//       strokeDashoffset: 0,       // 🪄 Dévoile le chemin
+//       duration: 2,
+//       ease: "power2.out",
+//       delay: 0.3,
+//     });
+//   });
 
-})
+// })
   </script>
   </body>
 </html>
