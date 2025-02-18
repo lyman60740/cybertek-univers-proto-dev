@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Web site created using create-react-app" />
 
-    <title>Car show</title>
+    <title>Prototype Cybertek Simracing</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -257,7 +257,7 @@ items.forEach(item => {
     const index = item.dataset.index;
 
     // ✅ Mets à jour les contenus
-    catIndex.textContent = `(${parseInt(index) + 1})`;  // Numérotation
+    catIndex.textContent = `(0${parseInt(index) + 1})`;  // Numérotation
     catName.textContent = data[index].name;             // Nom
     catContent.textContent = data[index].content;       // Description
 
