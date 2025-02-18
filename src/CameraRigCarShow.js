@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
 import "./style.css";
 
-gsap.registerPlugin(ScrollTrigger);
+
 
 const mm = gsap.matchMedia();
 
@@ -42,10 +42,14 @@ export const CameraRigCarShow =({ groundRef, spotLightRef1, spotLightRef2, spotL
   const lenisRef = useRef(null);
  
   useEffect(() => {
+    // On importe le plugin au moment du montage
+    const { ScrollTrigger } = require("gsap/ScrollTrigger");
+    gsap.registerPlugin(ScrollTrigger);
+  }, []);
+
+  useEffect(() => {
  
-
-
-    // ✅ Position initiale (évite la confusion)
+ // ✅ Position initiale (évite la confusion)
     camera.position.set(0, 10, 5);
     
     // 🛠️ Appliquer un quaternion propre dès le début
