@@ -6,6 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
 import "./style.css";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const mm = gsap.matchMedia();
 
 function useExternalRenderControl() {
@@ -40,7 +42,7 @@ export const CameraRigCarShow =({ groundRef, spotLightRef1, spotLightRef2, spotL
   const lenisRef = useRef(null);
  
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+ 
 
 
     // ✅ Position initiale (évite la confusion)
@@ -77,131 +79,134 @@ textAndOtherTl
   
 
     // 📌 Timeline GSAP pour déplacer la caméra en douceur
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".carshow-container",
-        start: "top top",
-        end: "+=2000px", 
-        scrub: 2,
-        pin: true,
-        // markers: true,
-        onUpdate: (self) => {
-          if (self.progress > 0.75) {
-            textAndOtherTl.timeScale(1).play();  // 🔥 Lecture normale
-          } else {
-            textAndOtherTl.timeScale(1).reverse();  // ⏩ Retour 2x plus rapide
-          }
-        }      
-      }
-    });
-
-    if (spotLightRef1.current && spotLightRef2.current) {
-      tl.to(
-        [spotLightRef2.current],
-        {
-          intensity: 1.5, // Les lumières augmentent en intensité
-          ease: "linear",
-          duration: 1
+    if(document.querySelector(".carshow-container")) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".carshow-container",
+          start: "top top",
+          end: "+=2000px", 
+          scrub: 2,
+          pin: true,
+          // markers: true,
+          onUpdate: (self) => {
+            if (self.progress > 0.75) {
+              textAndOtherTl.timeScale(1).play();  // 🔥 Lecture normale
+            } else {
+              textAndOtherTl.timeScale(1).reverse();  // ⏩ Retour 2x plus rapide
+            }
+          }      
         }
-      );
-      tl.to(
-        [spotLightRef1.current],
-        {
-          intensity: 2.5, // Les lumières augmentent en intensité
-          ease: "linear",
-          duration: 1
-        },"<"
-      );
-    }
-
-    if (logoElements) {
-      tl.to(logoElements, {
-        opacity: 0,
-        y: -20,
-        stagger: 0.1,
-        duration: 0.5, 
-        ease: "cubic-bezier(.21,.65,.67,1)",
-      },"<80%"); // 🔄 Démarre en même temps que l’animation de la caméra
-    }
-
-    
-
-    mm.add("(max-width: 999px)", ()=> {   
-      if (targetRef.current) {
-        tl.to(targetRef.current.position, {
-          x: -0.25,
-          y: 0,
-          z: 3.5,
-          duration: 3
-        });
-
+      });
+  
+      if (spotLightRef1.current && spotLightRef2.current) {
+        tl.to(
+          [spotLightRef2.current],
+          {
+            intensity: 1.5, // Les lumières augmentent en intensité
+            ease: "linear",
+            duration: 1
+          }
+        );
+        tl.to(
+          [spotLightRef1.current],
+          {
+            intensity: 2.5, // Les lumières augmentent en intensité
+            ease: "linear",
+            duration: 1
+          },"<"
+        );
+      }
+  
+      if (logoElements) {
+        tl.to(logoElements, {
+          opacity: 0,
+          y: -20,
+          stagger: 0.1,
+          duration: 0.5, 
+          ease: "cubic-bezier(.21,.65,.67,1)",
+        },"<80%"); // 🔄 Démarre en même temps que l’animation de la caméra
+      }
+  
+      
+  
+      mm.add("(max-width: 999px)", ()=> {   
+        if (targetRef.current) {
+          tl.to(targetRef.current.position, {
+            x: -0.25,
+            y: 0,
+            z: 3.5,
+            duration: 3
+          });
+  
+          tl.to(cameraTarget.current, {
+            x: 0,
+            y: 2,
+            z: 15, 
+            duration: 3,
+            ease: "linear"
+          },"<");
+        }
+      })
+  
+      mm.add("(min-width: 1000px)", ()=> {
         tl.to(cameraTarget.current, {
-          x: 0,
-          y: 2,
-          z: 15, 
+          x: -5,
+          y: 0.5,
+          z: -2.5, 
           duration: 3,
           ease: "linear"
         },"<");
-      }
-    })
-
-    mm.add("(min-width: 1000px)", ()=> {
-      tl.to(cameraTarget.current, {
-        x: -5,
-        y: 0.5,
-        z: -2.5, 
-        duration: 3,
-        ease: "linear"
-      },"<");
-    })
-
-    
-
-    mm.add("(min-width: 1000px)", ()=> {
-    if (groundRef.current) {
-      tl.to(groundRef.current.material, {
-        opacity: 0, // ✅ Disparition progressive
-        ease: "linear",
-        duration: 1,
-        onUpdate: () => {
-          groundRef.current.material.needsUpdate = true; // ✅ Forcer le rendu du changement d’opacité
-        },
-      }, "<"); // 🔄 Démarre en même temps que l’animation de la caméra
-    }
-  })
-    
-
-      if (spotLightRef1.current && spotLightRef2.current) {
-        tl.to(
-          [spotLightRef2.current, spotLightRef1.current],
-          {
-            intensity: 0, // Les lumières augmentent en intensité
-            ease: "linear",
-            duration: 0.5,
-          },"<50%"
-        );
-      }
-     
-      if (spotLightRef3.current) {
-        tl.to([spotLightRef3.current], {
-          intensity: .5, // Les lumières augmentent en intensité
+      })
+  
+      
+  
+      mm.add("(min-width: 1000px)", ()=> {
+      if (groundRef.current) {
+        tl.to(groundRef.current.material, {
+          opacity: 0, // ✅ Disparition progressive
+          ease: "linear",
           duration: 1,
-            ease: "linear",
-        },"<");
-
-        mm.add("(max-width: 999px)", ()=> {   
-          tl.to(spotLightRef3.current, {
-            intensity: 1,
-          });
-            tl.to(spotLightRef3.current.position, {
-              x: 0,
-              y: 10,
-              z: -1
-            },"<");
-        
-        })
+          onUpdate: () => {
+            groundRef.current.material.needsUpdate = true; // ✅ Forcer le rendu du changement d’opacité
+          },
+        }, "<"); // 🔄 Démarre en même temps que l’animation de la caméra
       }
-      tl.to({}, {},"<50%");
+    })
+      
+  
+        if (spotLightRef1.current && spotLightRef2.current) {
+          tl.to(
+            [spotLightRef2.current, spotLightRef1.current],
+            {
+              intensity: 0, // Les lumières augmentent en intensité
+              ease: "linear",
+              duration: 0.5,
+            },"<50%"
+          );
+        }
+       
+        if (spotLightRef3.current) {
+          tl.to([spotLightRef3.current], {
+            intensity: .5, // Les lumières augmentent en intensité
+            duration: 1,
+              ease: "linear",
+          },"<");
+  
+          mm.add("(max-width: 999px)", ()=> {   
+            tl.to(spotLightRef3.current, {
+              intensity: 1,
+            });
+              tl.to(spotLightRef3.current.position, {
+                x: 0,
+                y: 10,
+                z: -1
+              },"<");
+          
+          })
+        }
+        tl.to({}, {},"<50%");
+    }
+    
 
     return () => ScrollTrigger.getAll().forEach((t) => t.kill());
   }, [targetRef]);
