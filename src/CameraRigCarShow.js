@@ -6,12 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
 import "./style.css";
 
-
-// Enregistre le plugin seulement si on est côté client
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 const mm = gsap.matchMedia();
 
 function useExternalRenderControl() {
@@ -46,7 +40,7 @@ export const CameraRigCarShow =({ groundRef, spotLightRef1, spotLightRef2, spotL
   const lenisRef = useRef(null);
  
   useEffect(() => {
-
+    gsap.registerPlugin(ScrollTrigger);
 
 
     // ✅ Position initiale (évite la confusion)
