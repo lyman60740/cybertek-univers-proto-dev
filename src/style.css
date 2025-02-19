@@ -28,8 +28,8 @@ html, body {
   background: black;
 }
 html, body, #root, canvas {
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
   margin: 0;
 
 }
@@ -279,7 +279,7 @@ transform: translate(-100%, 50%);
 
 /*CADRES*/ 
 
-#cadres {
+#cadres, .canvas-wrapper {
 position: absolute;
 top: 0;
 left: 0;
@@ -287,6 +287,7 @@ z-index: 1;
 height: 100%;
 width: 100%;
 }
+
 
 .hero-banner {
 position: relative;
@@ -531,6 +532,7 @@ background: #FFCF00;
 #category {
   height: 100%;
   width: 100%;
+  position: relative;
 }
 .cat-3d__top__product__wrapper {
   width: 100%;

@@ -4,7 +4,8 @@ import { Canvas } from "@react-three/fiber";
 import { CarShowScene } from "./CarShowScene";
 import { CadresScene } from "./CadresScene";
 import { CategoryScene } from "./CategoryScene";
-import React, {Suspense } from "react";
+import React, {Suspense, useEffect } from "react";
+import { useInView } from "./useInView";
 
 const radius = 2.5; // Rayon du cercle (ajuste selon ton besoin)
 const center = [0, 0, 1.5]; // Point central de la scène
@@ -33,13 +34,29 @@ const rootElement = document.getElementById("root");
 const cadresElement = document.getElementById("cadres");
 const categoryElement = document.getElementById("category");
 
+const LazyCanvas = ({ name, children }) => {
+  const [ref, isVisible] = useInView();
+
+  useEffect(() => {
+    if (isVisible) {
+      console.log(`Scene active: ${name}`);
+    }
+  }, [isVisible, name]);
+
+  return (
+    <div ref={ref} className="canvas-wrapper">
+      <Canvas frameloop={isVisible ? "always" : "demand"}>{children}</Canvas>
+    </div>
+  );
+};
+
 // Vérification avant de monter l'application
 if (rootElement) {
   createRoot(rootElement).render(
     <Suspense fallback={null}>
-      <Canvas>
+      <LazyCanvas name="CarShowScene">
         <CarShowScene />
-      </Canvas>
+      </LazyCanvas>
     </Suspense>
   );
 }
@@ -47,20 +64,19 @@ if (rootElement) {
 if (cadresElement) {
   createRoot(cadresElement).render(
     <Suspense fallback={null}>
-      <Canvas dpr={[1, 1.5]} camera={{ fov: 50, position: [0, 0.5, 7.8] }}>
-        <CadresScene images={images} />
-      </Canvas>
+      <LazyCanvas name="CadresScene">
+      <CadresScene images={images} />
+      </LazyCanvas>
     </Suspense>
   );
 }
 
-
 if (categoryElement) {
   createRoot(categoryElement).render(
     <Suspense fallback={null}>
-      <Canvas dpr={[1, 1.5]} camera={{ fov: 30, position: [0, 0, 10] }}>
-      <CategoryScene />
-      </Canvas>
+      <LazyCanvas name="CategoryScene">
+        <CategoryScene />
+      </LazyCanvas>
     </Suspense>
   );
 }
