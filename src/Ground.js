@@ -16,8 +16,8 @@ export const Ground = ({
   mirror = 0,
   depthScale = 0,
   textureURLs = [
-    process.env.PUBLIC_URL + "https://cybertek-r3f-simracing-category.vercel.app/textures/terrain-roughness.webp",
-    process.env.PUBLIC_URL + "https://cybertek-r3f-simracing-category.vercel.app/textures/terrain-normal.webp"
+    process.env.PUBLIC_URL + "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/textures/terrain-roughness.webp",
+    process.env.PUBLIC_URL + "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/textures/terrain-normal.webp"
   ],
   scrollSpeed = 0.128, // ✅ Ajout vitesse de défilement texture
   color = [0, 0, 0], // ✅ Ajout couleur paramétrable

@@ -11,6 +11,23 @@ export const Model = React.forwardRef(({ url, position, rotation, scale, visible
     }
   }, [visible]);
 
+  useEffect(() => {
+    return () => {
+      scene.traverse((child) => {
+        if (child.isMesh) {
+          child.geometry.dispose();
+          if (child.material) {
+            if (Array.isArray(child.material)) {
+              child.material.forEach((mat) => mat.dispose());
+            } else {
+              child.material.dispose();
+            }
+          }
+        }
+      });
+    };
+  }, [scene]);
+
   return (
     <primitive
       ref={(el) => {

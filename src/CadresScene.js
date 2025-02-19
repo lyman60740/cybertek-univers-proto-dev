@@ -120,6 +120,7 @@ if (!canRender) return null;
         ref={lightRef}
         position={[0, 2, -3]}
         intensity={0.05}
+
       />
       <object3D ref={targetRef} position={[0, 0.5, 1]} />
       <group position={[0, -0.5, 0]}>

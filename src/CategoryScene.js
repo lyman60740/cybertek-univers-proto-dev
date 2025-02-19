@@ -76,10 +76,29 @@ export const CategoryScene = () => {
   const { gl } = useThree();
   const [visibleModelIndex, setVisibleModelIndex] = useState(null);
   const modelRefs = useRef(modelsList.map(() => React.createRef()));
+  const { scene } = useThree();
 
   useEffect(() => {
     gl.setClearColor("#5e66f9", 0.04); // rgba(94, 102, 249, 0.05)
   }, [gl]);
+
+  useEffect(() => {
+    return () => {
+      console.log(`Cleaning up WebGL resources for Category`);
+      scene.traverse((child) => {
+        if (child.isMesh) {
+          child.geometry.dispose();
+          if (child.material) {
+            if (Array.isArray(child.material)) {
+              child.material.forEach((mat) => mat.dispose());
+            } else {
+              child.material.dispose();
+            }
+          }
+        }
+      });
+    };
+  }, [scene]);
 
   // Gestion des clics sur les éléments .cat-item
   useEffect(() => {

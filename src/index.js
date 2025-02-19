@@ -4,7 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import { CarShowScene } from "./CarShowScene";
 import { CadresScene } from "./CadresScene";
 import { CategoryScene } from "./CategoryScene";
-import React, {Suspense, useEffect } from "react";
+import React, {Suspense, useEffect, useRef } from "react";
 import { useInView } from "./useInView";
 
 const radius = 2.5; // Rayon du cercle (ajuste selon ton besoin)
@@ -34,27 +34,39 @@ const rootElement = document.getElementById("root");
 const cadresElement = document.getElementById("cadres");
 const categoryElement = document.getElementById("category");
 
-const LazyCanvas = ({ name, children }) => {
+const LazyCanvas = React.memo(({ sceneName, children, camera }) => {
   const [ref, isVisible] = useInView();
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     if (isVisible) {
-      console.log(`Scene active: ${name}`);
+      console.log(`Scene active: ${sceneName}`);
     }
-  }, [isVisible, name]);
+  }, [isVisible, sceneName]);
 
   return (
     <div ref={ref} className="canvas-wrapper">
-      <Canvas dpr={[1, 1.5]} gl={{ powerPreference: "low-power" }} shadows={false} frameloop={isVisible ? "always" : "demand"}>{children}</Canvas>
+      <Canvas
+        ref={canvasRef}
+        key={sceneName} // 🔥 Force React à ne pas recréer inutilement le Canvas
+        dpr={[1, 1.5]}
+        gl={{ powerPreference: "low-power" }}
+        shadows={false}
+        frameloop={isVisible ? "always" : "demand"}
+        camera={camera}
+      >
+        {children}
+      </Canvas>
     </div>
   );
-};
+});
+
 
 // Vérification avant de monter l'application
 if (rootElement) {
   createRoot(rootElement).render(
     <Suspense fallback={null}>
-      <LazyCanvas name="CarShowScene">
+      <LazyCanvas sceneName="CarShowScene">
         <CarShowScene />
       </LazyCanvas>
     </Suspense>
@@ -64,7 +76,7 @@ if (rootElement) {
 if (cadresElement) {
   createRoot(cadresElement).render(
     <Suspense fallback={null}>
-      <LazyCanvas name="CadresScene">
+      <LazyCanvas sceneName="CadresScene" camera={{ fov: 30, position: [0, 0.5, 10] }}>
       <CadresScene images={images} />
       </LazyCanvas>
     </Suspense>
@@ -74,9 +86,10 @@ if (cadresElement) {
 if (categoryElement) {
   createRoot(categoryElement).render(
     <Suspense fallback={null}>
-      <LazyCanvas name="CategoryScene">
+      <LazyCanvas sceneName="CategoryScene" camera={{ fov: 45, position: [0, 0.5, 8] }}>
         <CategoryScene />
       </LazyCanvas>
     </Suspense>
   );
 }
+
