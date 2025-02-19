@@ -42,12 +42,13 @@ body {
   min-height: 300vh;
   font-family: "Outfit", serif;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: 150px;
+  
 }
 .us-container {
   background: black;
+  display: flex;
+  flex-direction: column;
+  gap: 150px;
 }
 html.lenis, html.lenis body {
 height: auto;

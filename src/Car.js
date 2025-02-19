@@ -7,7 +7,7 @@ import * as THREE from "three";
 export const Car = forwardRef(({ position = [], rotation = [0, 0, 0], scale = [1.5, 1.5, 1.5] }, ref) => {
   const gltf = useLoader(
     GLTFLoader,
-    process.env.PUBLIC_URL + "https://cybertek-r3f-carshow.vercel.app/models/car/alpine/alpine-car2.glb"
+    process.env.PUBLIC_URL + "https://cybertek-r3f-carshow.vercel.app/models/car/alpine/alpine-compressed.glb"
   );
 
   useEffect(() => {
