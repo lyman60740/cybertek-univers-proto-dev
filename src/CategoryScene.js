@@ -8,7 +8,7 @@ import gsap from "gsap";
 const modelsList = [
   {
     name: "Model 1",
-    url: "https://cybertek-proto-simracing-page-5m6beltuc-lyman60740s-projects.vercel.app/models/model1.glb",
+    url: "/models/model1.glb",
     position: [0, -2, 0],
     rotation: [0, Math.PI, 0],
     scale: [1.8, 1.8, 1.8],
@@ -16,7 +16,7 @@ const modelsList = [
   },
   {
     name: "Model 2",
-    url: "https://cybertek-proto-simracing-page-5m6beltuc-lyman60740s-projects.vercel.app/models/model2.glb",
+    url: "/models/model2.glb",
     position: [0, -2, 0],
     rotation: [0, Math.PI - 0.5, 0],
     scale: [0.8, 0.8, 0.8],
@@ -24,7 +24,7 @@ const modelsList = [
   },
   {
     name: "Model 3",
-    url: "https://cybertek-proto-simracing-page-5m6beltuc-lyman60740s-projects.vercel.app/models/model3.glb",
+    url: "/models/model3.glb",
     position: [0, -4, 0],
     rotation: [0, 0, 0],
     scale: [1, 1, 1],
@@ -32,7 +32,7 @@ const modelsList = [
   },
   {
     name: "Model 4",
-    url: "https://cybertek-proto-simracing-page-5m6beltuc-lyman60740s-projects.vercel.app/models/model4.glb",
+    url: "/models/model4.glb",
     position: [0, -4, 0],
     rotation: [0, 0, 0],
     scale: [1, 1, 1],
@@ -40,7 +40,7 @@ const modelsList = [
   },
   {
     name: "Model 5",
-    url: "https://cybertek-proto-simracing-page-5m6beltuc-lyman60740s-projects.vercel.app/models/model5.glb",
+    url: "/models/model5.glb",
     position: [0, -4, 0],
     rotation: [0, 0, 0],
     scale: [1, 1, 1],
@@ -48,7 +48,7 @@ const modelsList = [
   },
   {
     name: "Model 6",
-    url: "https://cybertek-proto-simracing-page-5m6beltuc-lyman60740s-projects.vercel.app/models/model6.glb",
+    url: "/models/model6.glb",
     position: [0, -4, 0],
     rotation: [0, 0, 0],
     scale: [0.13, 0.13, 0.13],
@@ -56,7 +56,7 @@ const modelsList = [
   },
   {
     name: "Model 7",
-    url: "https://cybertek-proto-simracing-page-5m6beltuc-lyman60740s-projects.vercel.app/models/model7.glb",
+    url: "/models/model7.glb",
     position: [0, -4, 0],
     rotation: [0, -Math.PI / 2, 0],
     scale: [0.035, 0.035, 0.035],
@@ -64,7 +64,7 @@ const modelsList = [
   },
   {
     name: "Model 8",
-    url: "https://cybertek-proto-simracing-page-5m6beltuc-lyman60740s-projects.vercel.app/models/model8.glb",
+    url: "/models/model8.glb",
     position: [0, -2.2, 0],
     rotation: [0, Math.PI, 0],
     scale: [7, 7, 7],
