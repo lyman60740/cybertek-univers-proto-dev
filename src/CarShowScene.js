@@ -66,7 +66,6 @@ export const CarShowScene = () => {
           angle={0.6}
           penumbra={0.5}
           position={[3, 5, 0]}
-          castShadow
           shadow-bias={-0.0001}
         />
   
@@ -77,7 +76,6 @@ export const CarShowScene = () => {
           angle={0.6}
           penumbra={0.5}
           position={[-3, 5, 0]}
-          castShadow
           shadow-bias={-0.0001}
   />
   <spotLight  
@@ -87,7 +85,6 @@ export const CarShowScene = () => {
           angle={0.6}
           penumbra={0.5}
           position={[-5, 5, -2]} // Position de la lumière
-          castShadow
           shadow-bias={-0.0001}
           target={targetRef.current} // Définit la cible
         />

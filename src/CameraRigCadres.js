@@ -4,7 +4,7 @@ import { easing } from "maath";
 
 export const CameraRigCadres = ({ 
   initialPosition = [0, 10, 55], 
-  targetPosition = [0, 0.5, 7.8], 
+  targetPosition = [0, 0.5, 6.5], 
   damping = 0.8 
 }) => {
   const { camera } = useThree();

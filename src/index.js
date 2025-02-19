@@ -45,7 +45,7 @@ const LazyCanvas = ({ name, children }) => {
 
   return (
     <div ref={ref} className="canvas-wrapper">
-      <Canvas frameloop={isVisible ? "always" : "demand"}>{children}</Canvas>
+      <Canvas dpr={[1, 1.5]} gl={{ powerPreference: "low-power" }} shadows={false} frameloop={isVisible ? "always" : "demand"}>{children}</Canvas>
     </div>
   );
 };

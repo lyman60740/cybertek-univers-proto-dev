@@ -8,7 +8,7 @@ import gsap from "gsap";
 const modelsList = [
   {
     name: "Model 1",
-    url: "/models/model1.glb",
+    url: "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/models/model1.glb",
     position: [0, -2, 0],
     rotation: [0, Math.PI, 0],
     scale: [1.8, 1.8, 1.8],
@@ -16,7 +16,7 @@ const modelsList = [
   },
   {
     name: "Model 2",
-    url: "/models/model2.glb",
+    url: "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/models/model2.glb",
     position: [0, -2, 0],
     rotation: [0, Math.PI - 0.5, 0],
     scale: [0.8, 0.8, 0.8],
@@ -24,7 +24,7 @@ const modelsList = [
   },
   {
     name: "Model 3",
-    url: "/models/model3.glb",
+    url: "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/models/model3.glb",
     position: [0, -4, 0],
     rotation: [0, 0, 0],
     scale: [1, 1, 1],
@@ -32,7 +32,7 @@ const modelsList = [
   },
   {
     name: "Model 4",
-    url: "/models/model4.glb",
+    url: "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/models/model4.glb",
     position: [0, -4, 0],
     rotation: [0, 0, 0],
     scale: [1, 1, 1],
@@ -40,7 +40,7 @@ const modelsList = [
   },
   {
     name: "Model 5",
-    url: "/models/model5.glb",
+    url: "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/models/model5.glb",
     position: [0, -4, 0],
     rotation: [0, 0, 0],
     scale: [1, 1, 1],
@@ -48,7 +48,7 @@ const modelsList = [
   },
   {
     name: "Model 6",
-    url: "/models/model6.glb",
+    url: "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/models/model6.glb",
     position: [0, -4, 0],
     rotation: [0, 0, 0],
     scale: [0.13, 0.13, 0.13],
@@ -56,7 +56,7 @@ const modelsList = [
   },
   {
     name: "Model 7",
-    url: "/models/model7.glb",
+    url: "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/models/model7.glb",
     position: [0, -4, 0],
     rotation: [0, -Math.PI / 2, 0],
     scale: [0.035, 0.035, 0.035],
@@ -64,7 +64,7 @@ const modelsList = [
   },
   {
     name: "Model 8",
-    url: "/models/model8.glb",
+    url: "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/models/model8.glb",
     position: [0, -2.2, 0],
     rotation: [0, Math.PI, 0],
     scale: [7, 7, 7],
@@ -141,7 +141,7 @@ export const CategoryScene = () => {
       {/* Fond et lumières */}
       <OrbitControls enableZoom={false}/>
       <ambientLight intensity={1} />
-      <directionalLight position={[0, 5, -5]} intensity={0.7} castShadow />
+      <directionalLight position={[0, 5, -5]} intensity={0.7} />
 
       {/* Affiche la liste des modèles dynamiquement */}
       {modelsList.map((model, index) => (

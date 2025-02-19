@@ -5,7 +5,7 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import * as THREE from "three";
 
 export const Car = forwardRef(({ position = [], rotation = [0, 0, 0], scale = [1.5, 1.5, 1.5] }, ref) => {
-  const gltf = useLoader(GLTFLoader, process.env.PUBLIC_URL + "/models/car/alpine/alpine-compressed.glb", (loader) => {
+  const gltf = useLoader(GLTFLoader, process.env.PUBLIC_URL + "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/models/car/alpine/alpine-compressed.glb", (loader) => {
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/"); // Utilisation d'un CDN Google
     loader.setDRACOLoader(dracoLoader);

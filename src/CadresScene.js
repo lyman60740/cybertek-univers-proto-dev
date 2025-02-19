@@ -6,29 +6,41 @@ import { Frames } from "./Frames";
 import { Ground } from "./Ground";
 
 function useExternalRenderControl() {
-  const [canRender, setCanRender] = useState(false);
+  const [canRender, setCanRender] = useState(window.isLoaded || false);
 
   useEffect(() => {
     const checkRender = () => {
-      if (window.isLoaded === true) {
+      if (window.isLoaded) {
         setCanRender(true);
       }
     };
-    
-    // Vérifie immédiatement et à intervalles
+
+    // Vérifie immédiatement
     checkRender();
-    const interval = setInterval(checkRender, 100);
-    
+
+    // Vérifie toutes les 100ms jusqu'à ce que `window.isLoaded === true`
+    const interval = setInterval(() => {
+      if (window.isLoaded) {
+        setCanRender(true);
+        clearInterval(interval); // ✅ Arrête l'interval dès que `isLoaded` est `true`
+      }
+    }, 100);
+
     return () => clearInterval(interval);
   }, []);
 
   return canRender;
 }
 
+
+
+
 export const CadresScene = ({ images }) => {
   const [hoveredObject, setHoveredObject] = useState(null) // Hover des `<li>`
   const [selectedObject, setSelectedObject] = useState(null) // Clic sur une frame
   const canRender = useExternalRenderControl();
+  const [key, setKey] = useState(0); // Permet de forcer le rechargement de la scène
+  const resizeTimeout = useRef(null);
 
   const lightRef = useRef();
   const targetRef = useRef();
@@ -78,6 +90,18 @@ useEffect(() => {
     });
 }, [hoveredObject, selectedObject]);
 
+useEffect(() => {
+  const handleResize = () => {
+    if (resizeTimeout.current) clearTimeout(resizeTimeout.current);
+    resizeTimeout.current = setTimeout(() => {
+      setKey((prevKey) => prevKey + 1);
+    }, 500);
+  };
+
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
+
 const cameraRigMemo = useMemo(() => (
   <CameraRigCadres />
 ), []); // ✅ Ne recrée jamais CameraRigCadres
@@ -86,7 +110,7 @@ const cameraRigMemo = useMemo(() => (
 if (!canRender) return null;
 
   return (
- <>
+    <React.Fragment key={key}>
  <color attach="background" args={['black']} />
       <fog attach="fog" args={['black', 0, 20]} />
       {/* <OrbitControls /> */}
@@ -96,7 +120,6 @@ if (!canRender) return null;
         ref={lightRef}
         position={[0, 2, -3]}
         intensity={0.05}
-        castShadow
       />
       <object3D ref={targetRef} position={[0, 0.5, 1]} />
       <group position={[0, -0.5, 0]}>
@@ -117,11 +140,11 @@ if (!canRender) return null;
         resolution={1024}
         mirror={1}
         depthScale={0.01}
-        scrollSpeed={0.064}
+        scrollSpeed={-0.064}
         color={[0.01, 0.01, 0.01]}
       />
       </group>
     
-    </>
+      </React.Fragment>
   )
 };
