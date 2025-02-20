@@ -119,7 +119,7 @@ if (!canRender) return null;
       <directionalLight
         ref={lightRef}
         position={[0, 2, -3]}
-        intensity={0.05}
+        intensity={0.02}
 
       />
       <object3D ref={targetRef} position={[0, 0.5, 1]} />

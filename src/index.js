@@ -3,9 +3,13 @@ import { createRoot } from "react-dom/client";
 import { Canvas } from "@react-three/fiber";
 import { CarShowScene } from "./CarShowScene";
 import { CadresScene } from "./CadresScene";
+import { MobileCadres } from "./MobileCadres";
 import { CategoryScene } from "./CategoryScene";
 import React, {Suspense, useEffect, useRef } from "react";
 import { useInView } from "./useInView";
+import gsap from "gsap";
+
+const mm = gsap.matchMedia();
 
 const radius = 2.5; // Rayon du cercle (ajuste selon ton besoin)
 const center = [0, 0, 1.5]; // Point central de la scène
@@ -34,62 +38,92 @@ const rootElement = document.getElementById("root");
 const cadresElement = document.getElementById("cadres");
 const categoryElement = document.getElementById("category");
 
-const LazyCanvas = React.memo(({ sceneName, children, camera }) => {
-  const [ref, isVisible] = useInView();
-  const canvasRef = useRef(null);
+// const LazyCanvas = React.memo(({ sceneName, children, camera }) => {
+//   const [ref, isVisible] = useInView();
+//   const canvasRef = useRef(null);
 
-  useEffect(() => {
-    if (isVisible) {
-      console.log(`Scene active: ${sceneName}`);
-    }
-  }, [isVisible, sceneName]);
+//   useEffect(() => {
+//     if (isVisible) {
+//       console.log(`Scene active: ${sceneName}`);
+//     }
+//   }, [isVisible, sceneName]);
 
-  return (
-    <div ref={ref} className="canvas-wrapper">
-      <Canvas
-        ref={canvasRef}
-        key={sceneName} // 🔥 Force React à ne pas recréer inutilement le Canvas
-        dpr={[1, 1.5]}
-        gl={{ powerPreference: "low-power" }}
-        shadows={false}
-        frameloop={isVisible ? "always" : "demand"}
-        camera={camera}
-      >
-        {children}
-      </Canvas>
-    </div>
-  );
-});
+//   return (
+//     <div ref={ref} className="canvas-wrapper">
+//       <Canvas
+//         ref={canvasRef}
+//         key={sceneName} // 🔥 Force React à ne pas recréer inutilement le Canvas
+//         dpr={[1, 1.5]}
+//         gl={{ powerPreference: "low-power" }}
+//         shadows={false}
+//         frameloop={isVisible ? "always" : "demand"}
+//         camera={camera}
+//       >
+//         {children}
+//       </Canvas>
+//     </div>
+//   );
+// });
 
 
 // Vérification avant de monter l'application
 if (rootElement) {
   createRoot(rootElement).render(
     <Suspense fallback={null}>
-      <LazyCanvas sceneName="CarShowScene">
+       <Canvas
+        dpr={[1, 1.5]}
+        frameloop={"always"}
+      >
         <CarShowScene />
-      </LazyCanvas>
+        </Canvas>
     </Suspense>
   );
 }
 
-if (cadresElement) {
-  createRoot(cadresElement).render(
-    <Suspense fallback={null}>
-      <LazyCanvas sceneName="CadresScene" camera={{ fov: 30, position: [0, 0.5, 10] }}>
-      <CadresScene images={images} />
-      </LazyCanvas>
-    </Suspense>
-  );
-}
+mm.add("(min-width: 800px)", ()=> {   
+  if (cadresElement) {
+    createRoot(cadresElement).render(
+      <Suspense fallback={null}>
+        <Canvas
+          dpr={[1, 1.5]}
+          camera={{ fov: 30, position: [0, 0.5, 10] }}
+          frameloop={"always"}
+        >
+        <CadresScene images={images} />
+        </Canvas>
+      </Suspense>
+    );
+  }
+})
+
+mm.add("(max-width: 799px)", ()=> {   
+  if (cadresElement) {
+    createRoot(cadresElement).render(
+      <Suspense fallback={null}>
+        <Canvas
+          dpr={[1, 1.5]}
+          camera={{ fov: 30, position: [0, 0.5, 10] }}
+          frameloop={"demand"}
+        >
+        <MobileCadres images={images} />
+        </Canvas>
+      </Suspense>
+    );
+  }
+})
+
 
 if (categoryElement) {
   createRoot(categoryElement).render(
     <Suspense fallback={null}>
-      <LazyCanvas sceneName="CategoryScene" camera={{ fov: 45, position: [0, 0.5, 8] }}>
+      
+      <Canvas
+        dpr={[1, 1.5]}
+        camera={{ fov: 45, position: [0, 0.5, 8] }}
+        frameloop={"always"}
+      >
         <CategoryScene />
-      </LazyCanvas>
+        </Canvas>
     </Suspense>
   );
 }
-
