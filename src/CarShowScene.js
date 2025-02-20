@@ -56,8 +56,7 @@ export const CarShowScene = () => {
   
         <color args={[0, 0, 0]} attach="background" />
   
-        {/* <Car ref={targetRef} position={[-0.25, 0, -5]} rotation={[0, 0, 0]} scale={[1.5, 1.5, 1.5]} /> */}
-      
+        <Car ref={targetRef} position={[-0.25, 0, -5]} rotation={[0, 0, 0]} scale={[1.5, 1.5, 1.5]} />     
   
         <spotLight
         ref={spotLightRef1}
@@ -89,7 +88,7 @@ export const CarShowScene = () => {
           target={targetRef.current} // Définit la cible
         />
   <object3D  position={[0, 2, 5]} />
-  <Ground 
+  {/* <Ground 
   ref={groundRef}
         position={[0, -0.51, 5]}
         planeSize={[30, 30]}
@@ -102,7 +101,7 @@ export const CarShowScene = () => {
         depthScale={0}
         scrollSpeed={0.128}
         color={[0, 0, 0]}
-      />
+      /> */}
   
     {/* <OrbitControls 
           target={[0, 0.35, 0]}
