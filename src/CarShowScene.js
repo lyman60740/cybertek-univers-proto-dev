@@ -56,7 +56,7 @@ export const CarShowScene = () => {
   
         <color args={[0, 0, 0]} attach="background" />
   
-        <Car ref={targetRef} position={[-0.25, 0, -5]} rotation={[0, 0, 0]} scale={[1.5, 1.5, 1.5]} />
+        {/* <Car ref={targetRef} position={[-0.25, 0, -5]} rotation={[0, 0, 0]} scale={[1.5, 1.5, 1.5]} /> */}
       
   
         <spotLight

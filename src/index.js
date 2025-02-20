@@ -67,18 +67,18 @@ const categoryElement = document.getElementById("category");
 
 
 // Vérification avant de monter l'application
-// if (rootElement) {
-//   createRoot(rootElement).render(
-//     <Suspense fallback={null}>
-//        <Canvas
-//         dpr={[1, 1.5]}
-//         frameloop={"always"}
-//       >
-//         <CarShowScene />
-//         </Canvas>
-//     </Suspense>
-//   );
-// }
+if (rootElement) {
+  createRoot(rootElement).render(
+    <Suspense fallback={null}>
+       <Canvas
+        dpr={[1, 1.5]}
+        frameloop={"always"}
+      >
+        <CarShowScene />
+        </Canvas>
+    </Suspense>
+  );
+}
 
 mm.add("(min-width: 800px)", ()=> {   
   if (cadresElement) {
