@@ -103,7 +103,7 @@ mm.add("(max-width: 799px)", ()=> {
         <Canvas
           dpr={[1, 1.5]}
           camera={{ fov: 30, position: [0, 0.5, 10] }}
-          frameloop={"demand"}
+          frameloop={"always"}
         >
         <MobileCadres images={images} />
         </Canvas>
