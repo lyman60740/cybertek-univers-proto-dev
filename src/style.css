@@ -576,3 +576,33 @@ border-radius: 50%;
   top: 11px;
   transform: translateX(-110%);
 }
+
+
+/* RESPONSIVE */
+
+@media screen and (max-width: 799px) {
+  /* BANNER  */
+  .us-container {
+    padding-top: 125px;
+  }
+  .hero-banner {
+    height: calc(70dvh - 125px);
+    justify-content: flex-start;
+    gap: 10px
+  }
+  .hero-banner h1 {
+    font-size: 24px;
+font-style: normal;
+font-weight: 700;
+text-align: center;
+width: 100%;
+  }
+  .hero-banner ul {
+    display: none;
+  }
+  #cadres {
+    height: 100%;
+    position: initial;
+
+  }
+}

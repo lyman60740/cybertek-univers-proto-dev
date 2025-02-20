@@ -88,7 +88,7 @@ export const CarShowScene = () => {
           target={targetRef.current} // Définit la cible
         />
   <object3D  position={[0, 2, 5]} />
-  {/* <Ground 
+  <Ground 
   ref={groundRef}
         position={[0, -0.51, 5]}
         planeSize={[30, 30]}
@@ -101,7 +101,7 @@ export const CarShowScene = () => {
         depthScale={0}
         scrollSpeed={0.128}
         color={[0, 0, 0]}
-      /> */}
+      />
   
     {/* <OrbitControls 
           target={[0, 0.35, 0]}

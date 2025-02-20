@@ -1,8 +1,10 @@
 import React, { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useThree,useFrame  } from "@react-three/fiber";
 import * as THREE from "three";
 import { OrbitControls } from '@react-three/drei';
 import { MobileFrames } from "./MobileFrames"; // Composant affichant vos cadres
+import { useEffect } from "react";
+import { Ground } from "./Ground";
 
 // Paramètres pour le cercle
 const radius = 1.3; // Rayon du cercle
@@ -33,22 +35,57 @@ const images = imagesData.map((item, i, arr) => {
 
 export const MobileCadres = () => {
   const rotatingGroupRef = useRef();
+  const { camera } = useThree();
+  const lightRef = useRef();
+  const { scene } = useThree()
+
+  useEffect(() => {
+    // Positionner la caméra si besoin
+    camera.position.set(0, 0.5, 4.5);
+    camera.fov = 45;
+    camera.updateProjectionMatrix();
+
+    if (lightRef.current) {
+        camera.add(lightRef.current);
+        scene.add(lightRef.current.target);  // Assurez-vous que la target est dans la scène
+        // Positionner la lumière dans l'espace local de la caméra
+        lightRef.current.position.set(0, 0, 0);
+      }
+  }, [camera, scene]);
+  useFrame(() => {
+    if (lightRef.current) {
+      const direction = new THREE.Vector3();
+      camera.getWorldDirection(direction);
+      // Mettre la cible de la lumière à 1 unité devant la caméra
+      lightRef.current.target.position.copy(camera.position).add(direction);
+      lightRef.current.target.updateMatrixWorld();
+
+      // Créer des vecteurs temporaires pour obtenir les positions mondiales
+      const lightWorldPos = new THREE.Vector3();
+      lightRef.current.getWorldPosition(lightWorldPos);
+      const targetWorldPos = new THREE.Vector3();
+      lightRef.current.target.getWorldPosition(targetWorldPos);
+
+      console.log("Light Position:", lightWorldPos);
+      console.log("Light Target Position:", targetWorldPos);
+      console.log("Camera Direction:", direction);
+    }
+  });
 
   return (
     <>
-    <ambientLight intensity={0.1} />
-    <directionalLight
-     
-      position={[0, 2, 0]}
-      intensity={2}
-
-    />
+    <ambientLight intensity={1} />
     <group>
+    {/* <directionalLight
+        position={[0,2,0]}
+        intensity={10.5}
+        color={'white'}
+      /> */}
       {/* Zone de capture */}
       <OrbitControls 
-        target={[0, 0, 0.5]} 
-        minPolarAngle={Math.PI / 2.4} 
-        maxPolarAngle={Math.PI / 2.4} 
+        target={[0, 0.7, 0.5]} 
+        minPolarAngle={Math.PI / 2.1} 
+        maxPolarAngle={Math.PI / 2.1} 
         enablePan={false} 
         enableZoom={false}
       />
@@ -57,6 +94,19 @@ export const MobileCadres = () => {
         <MobileFrames images={images} />
       </group>
     </group>
+     <Ground 
+            position={[0, 0, 5]}
+            planeSize={[30, 50]}
+            normalScale={[0.8, 0.8]}
+            roughnessValue={0.7}
+            mixBlur={15}
+            mixStrength={15}
+            resolution={1024}
+            mirror={1}
+            depthScale={0.01}
+            scrollSpeed={0}
+            color={[0.01, 0.01, 0.01]}
+          />
     </>
   );
 };

@@ -20,8 +20,8 @@ function MobileFrame({ url, position, rotation, name }) {
   // Créer un matériau "gris" avec un rendu PBR léger
   const carboneMaterial = new THREE.MeshStandardMaterial({
     color: "gray",
-    metalness: 0.2,  // Ajustez pour un rendu plus ou moins métallique
-    roughness: 0.4,  // Plus la valeur est faible, plus la surface est lisse et réfléchissante
+    metalness : .2,
+    roughness:0.7,
     side: THREE.DoubleSide
   });
 
@@ -34,24 +34,29 @@ function MobileFrame({ url, position, rotation, name }) {
       <mesh scale={[1, GOLDENRATIO, 0.05]} position={[0, 0.9, 0.2]}>
         <boxGeometry />
         {/* Appliquer le matériau gris */}
-        <primitive object={carboneMaterial} attach="material" />
+        <meshStandardMaterial
+  color="gray"
+  metalness={0.2}
+  roughness={0.7}
+  side={THREE.DoubleSide}
+/>
 
         <mesh scale={[0.9, 0.93, 0.9]} position={[0, 0, 0.2]}>
           <boxGeometry />
-          <meshBasicMaterial toneMapped={false} fog={true} />
+          <meshStandardMaterial/>
         </mesh>
         <mesh position={[0, 0, 0.7]}>
           <planeGeometry args={[0.8, 0.87]} />
           {/* Garder l'image si nécessaire, sinon remplacez par un matériau uni */}
-          <meshBasicMaterial map={new THREE.TextureLoader().load(url)} />
+          <meshStandardMaterial map={new THREE.TextureLoader().load(url)} />
         </mesh>
       </mesh>
       <Text
         maxWidth={0.5}
         anchorX="left"
         anchorY="top"
-        position={[0.55, GOLDENRATIO, 0.2]}
-        fontSize={0.05}
+        position={[-0.2, 0, 0.2]}
+        fontSize={0.07}
         color="white"
         toneMapped={false}
       >

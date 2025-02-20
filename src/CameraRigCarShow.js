@@ -85,6 +85,8 @@ textAndOtherTl
     // 📌 Timeline GSAP pour déplacer la caméra en douceur
     if(document.querySelector(".carshow-container")) {
       gsap.registerPlugin(ScrollTrigger);
+
+      
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".carshow-container",
@@ -92,6 +94,7 @@ textAndOtherTl
           end: "+=2000px", 
           scrub: 2,
           pin: true,
+          pinSpacing: true,
           // markers: true,
           onUpdate: (self) => {
             if (self.progress > 0.75) {
