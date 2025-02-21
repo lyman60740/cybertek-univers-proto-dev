@@ -600,12 +600,15 @@ font-style: normal;
 font-weight: 700;
 text-align: center;
 width: 100%;
+position: absolute;
+bottom: 0;
   }
   .hero-banner ul {
     display: none;
   }
   #cadres {
     height: 100%;
+    position: initial;
   }
   .cat-3d {
     display: none;
