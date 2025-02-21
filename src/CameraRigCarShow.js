@@ -268,6 +268,8 @@ textAndOtherTl
       getBoundingClientRect() {
         return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
       },
+      // Gestion des événements tactiles sur mobile
+      pinType: document.body.style.transform ? "transform" : "fixed",
     });
   
     // 📌 Rafraîchir ScrollTrigger après setup
