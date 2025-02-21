@@ -94,7 +94,7 @@ export const MobileCadres = () => {
         <MobileFrames images={images} />
       </group>
     </group>
-     <Ground 
+     {/* <Ground 
             position={[0, 0, 5]}
             planeSize={[30, 50]}
             normalScale={[0.8, 0.8]}
@@ -106,7 +106,7 @@ export const MobileCadres = () => {
             depthScale={0.01}
             scrollSpeed={0}
             color={[0.01, 0.01, 0.01]}
-          />
+          /> */}
     </>
   );
 };

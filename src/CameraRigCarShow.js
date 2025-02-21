@@ -45,7 +45,12 @@ export const CameraRigCarShow =({ groundRef, spotLightRef1, spotLightRef2, spotL
     // On importe le plugin au moment du montage
     const { ScrollTrigger } = require("gsap/ScrollTrigger");
     gsap.registerPlugin(ScrollTrigger);
+
+    // ✅ Rends GSAP globalement accessible
+    window.gsap = gsap;
+    window.ScrollTrigger = ScrollTrigger;
   }, []);
+
 
   useEffect(() => {
  
@@ -268,8 +273,6 @@ textAndOtherTl
       getBoundingClientRect() {
         return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
       },
-      // Gestion des événements tactiles sur mobile
-      pinType: document.body.style.transform ? "transform" : "fixed",
     });
   
     // 📌 Rafraîchir ScrollTrigger après setup

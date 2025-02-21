@@ -80,6 +80,7 @@ if (rootElement) {
   );
 }
 
+
 mm.add("(min-width: 800px)", ()=> {   
   if (cadresElement) {
     createRoot(cadresElement).render(
@@ -113,17 +114,20 @@ mm.add("(max-width: 799px)", ()=> {
 })
 
 
-if (categoryElement) {
-  createRoot(categoryElement).render(
-    <Suspense fallback={null}>
-      
-      <Canvas
-        dpr={[1, 1.5]}
-        camera={{ fov: 45, position: [0, 0.5, 8] }}
-        frameloop={"always"}
-      >
-        <CategoryScene />
-        </Canvas>
-    </Suspense>
-  );
-}
+mm.add("(min-width: 800px)", ()=> {   
+  if (categoryElement) {
+    createRoot(categoryElement).render(
+      <Suspense fallback={null}>
+        
+        <Canvas
+          dpr={[1, 1.5]}
+          camera={{ fov: 45, position: [0, 0.5, 8] }}
+          frameloop={"always"}
+        >
+          <CategoryScene />
+          </Canvas>
+      </Suspense>
+    );
+  }
+})
+

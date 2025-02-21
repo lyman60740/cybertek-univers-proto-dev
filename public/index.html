@@ -81,6 +81,41 @@
       </div>
     </div>
 
+    <div class="cat-3d-mobile">
+      <ul>
+        <li>
+          <div class="cat-3d-mobile__top">
+            <div class="cat-3d-mobile__top__name">
+              <span>01.</span>
+              <span>Volants</span>
+            </div>
+            <div class="cat-3d__bot__point"></div>
+          </div>
+          <div class="cat-3d-mobile__content">
+            <div class="cat-3d-mobile__content__img">
+              <div class="cat-3d-mobile__img-wrap">
+                <img src="/images/ph-product-mobile.png" alt="">
+              </div>
+            </div>
+
+            <div class="cat-3d__top__description">
+              <svg xmlns="http://www.w3.org/2000/svg" width="39" height="25" viewBox="0 0 39 25" fill="none">
+                <path d="M12.374 1.11352H39M12.5586 1L1 24" stroke="#D9D9D9" stroke-width="1"/>
+              </svg>
+              
+              <p id="cat-content">Dotés de <strong>de force précis</strong>, de matériaux haut de gamme et d'une ergonomie pensée pour la <strong>performance</strong>, nos volants vous permettent de ressentir chaque virage, chaque vibration et chaque instant de la piste comme un véritable pilote.</p>
+            </div>
+            <a href="" class="cat-3d__redirect" id="cat-link">
+              <span>En savoir plus</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <path d="M4 11.25L10 5.25V10.625H11.25V3.125H3.75V4.375H9.125L3.125 10.375L4 11.25Z" fill="white"/>
+              </svg>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
     <div class="carshow-container">
       <div id="root"></div>
       
@@ -100,6 +135,8 @@
           <a href="#">Découvrir nos SimRacing</a>
         </div>
       </div>
+
+      
       
     </div>
 
@@ -108,7 +145,8 @@
     </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+ <script>
      document.addEventListener('DOMContentLoaded', () => {
       let isLoaded = false
       const title = document.querySelector('h1')
@@ -185,6 +223,8 @@
   </script>
 
   <script>
+gsap.registerPlugin(ScrollTrigger);
+
     // CATEGORY
 
     const data = [
@@ -230,6 +270,7 @@
   }
 ];
 
+const mm = gsap.matchMedia()
 
 // ✅ Sélecteurs
 const liBox = document.querySelector(".cat-3d__bot ul");
@@ -238,43 +279,134 @@ const catName = document.getElementById("cat-name");
 const catContent = document.getElementById("cat-content");
 const catLink = document.getElementById("cat-link");
 
-// ✅ Insère dynamiquement les <li>
-for (let i = 0; i < data.length; i++) {
-  liBox.insertAdjacentHTML('beforeend', `
-    <li class="cat-item" data-index="${i}">
-      <div class="cat-3d__bot__infos">
-        <span>0${i + 1}.</span>
-        <span>${data[i].name}</span>
-      </div>
-      <div class="cat-3d__bot__point"></div>
-    </li>
-  `);
-}
+mm.add("(min-width: 800px)", ()=> {
+  // ✅ Insère dynamiquement les <li>
+    for (let i = 0; i < data.length; i++) {
+      liBox.insertAdjacentHTML('beforeend', `
+        <li class="cat-item" data-index="${i}">
+          <div class="cat-3d__bot__infos">
+            <span>0${i + 1}.</span>
+            <span>${data[i].name}</span>
+          </div>
+          <div class="cat-3d__bot__point"></div>
+        </li>
+      `);
+    }
+    
+    // ✅ Ajoute l'événement click sur chaque <li>
+    const items = document.querySelectorAll(".cat-item");
+    
+    items.forEach(item => {
+      item.addEventListener("click", () => {
+        const index = item.dataset.index;
+    
+        // ✅ Mets à jour les contenus
+        catIndex.textContent = `(0${parseInt(index) + 1})`;  // Numérotation
+        catName.textContent = data[index].name;             // Nom
+        catContent.textContent = data[index].content;       // Description
+    
+        catLink.href = data[index].link
+    
+        // ✅ Animation GSAP pour effet fluide
+        gsap.fromTo(catContent, 
+          { opacity: 0, y: 20 }, 
+          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
+        );
+      });
+    });
 
-// ✅ Ajoute l'événement click sur chaque <li>
-const items = document.querySelectorAll(".cat-item");
 
-items.forEach(item => {
-  item.addEventListener("click", () => {
-    const index = item.dataset.index;
+})
 
-    // ✅ Mets à jour les contenus
-    catIndex.textContent = `(0${parseInt(index) + 1})`;  // Numérotation
-    catName.textContent = data[index].name;             // Nom
-    catContent.textContent = data[index].content;       // Description
+  // LOGIQUE MOBILE 
 
-    catLink.href = data[index].link
 
-    // ✅ Animation GSAP pour effet fluide
-    gsap.fromTo(catContent, 
-      { opacity: 0, y: 20 }, 
-      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
-    );
+  mm.add("(max-width: 799px)", () => {
+  const mobileList = document.querySelector(".cat-3d-mobile ul");
+
+  // ✅ Génère dynamiquement les catégories mobiles
+  data.forEach((data, i) => {
+    mobileList.insertAdjacentHTML('beforeend', `
+      <li>
+          <div class="cat-3d-mobile__top">
+            <div class="cat-3d-mobile__top__name">
+              <span>0${i+1}.</span>
+              <span>${data.name}</span>
+            </div>
+            <div class="cat-3d__bot__point"></div>
+          </div>
+          <div class="cat-3d-mobile__content">
+            <div class="cat-3d-mobile__content__img">
+              <div class="cat-3d-mobile__img-wrap">
+                <img src="/images/ph-product-mobile.png" alt="">
+              </div>
+            </div>
+
+            <div class="cat-3d__top__description">
+              <svg xmlns="http://www.w3.org/2000/svg" width="39" height="25" viewBox="0 0 39 25" fill="none">
+                <path d="M12.374 1.11352H39M12.5586 1L1 24" stroke="#D9D9D9" stroke-width="1"/>
+              </svg>
+              
+              <p id="cat-content">Dotés de <strong>de force précis</strong>, de matériaux haut de gamme et d'une ergonomie pensée pour la <strong>performance</strong>, nos volants vous permettent de ressentir chaque virage, chaque vibration et chaque instant de la piste comme un véritable pilote.</p>
+            </div>
+            <a href="${data.link}" class="cat-3d__redirect" id="cat-link">
+              <span>En savoir plus</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <path d="M4 11.25L10 5.25V10.625H11.25V3.125H3.75V4.375H9.125L3.125 10.375L4 11.25Z" fill="white"/>
+              </svg>
+            </a>
+          </div>
+        </li>
+    `);
   });
+
+  const mobileItems = document.querySelectorAll(".cat-3d-mobile ul li");
+
+  mobileItems.forEach((item) => {
+    const itemHeight = item.querySelector(".cat-3d-mobile__content").offsetHeight
+    console.log(itemHeight)
+    item.style.maxHeight = "62px";
+
+    item.addEventListener('click', ()=> {
+ 
+      gsap.to(mobileItems, {
+        "max-height": 62,
+        duration: 1.5,
+        ease: "expo.out"
+      })
+      gsap.to(item, {
+        "max-height": itemHeight + 62,
+        duration: 1.5,
+        ease: "expo.out"
+      })
+    })
+  })
+
 });
 
-
-
+// ✅ Animation pour chaque <li> indépendamment
+  gsap.utils.toArray(".cat-3d-mobile ul li").forEach((item) => {
+  gsap.fromTo(
+    item,
+    {
+      opacity: 0, 
+      y: 20,
+    },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.7, 
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: item, 
+        start: "top 90%",
+        end: "bottom bottom",
+        toggleActions: "play none none reverse",
+        markers: false,
+      },
+    }
+  );
+});
 
 
     const paths = document.querySelectorAll('.cat-3d__top__description svg path');
@@ -297,6 +429,12 @@ items.forEach(item => {
 //   });
 
 // })
+  </script>
+
+  <script>
+  
+
+
   </script>
   </body>
 </html>

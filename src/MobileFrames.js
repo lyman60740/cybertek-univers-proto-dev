@@ -35,7 +35,7 @@ function MobileFrame({ url, position, rotation, name }) {
         <boxGeometry />
         {/* Appliquer le matériau gris */}
         <meshStandardMaterial
-  color="gray"
+  color="#292929"
   metalness={0.2}
   roughness={0.7}
   side={THREE.DoubleSide}

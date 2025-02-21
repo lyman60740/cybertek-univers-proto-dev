@@ -26,6 +26,7 @@ li {
 
 html, body {
   background: black;
+  
 }
 html, body, #root, canvas {
   width: 100% !important;
@@ -77,8 +78,8 @@ z-index: 1;
 height: 100%;
 width: 100%
 }
-.previous-section, .next-section {
-height: 100vh;
+.next-section {
+height: 300vh;
 width: 100%;
 display: flex;
 justify-content: center;
@@ -86,6 +87,7 @@ align-items: center;
 background: black;
 color: white;
 }
+
 .carshow-container {
 position: relative;
 height: 100vh;
@@ -577,7 +579,9 @@ border-radius: 50%;
   transform: translateX(-110%);
 }
 
-
+.cat-3d-mobile {
+  display: none;
+}
 /* RESPONSIVE */
 
 @media screen and (max-width: 799px) {
@@ -604,5 +608,95 @@ width: 100%;
     height: 100%;
     position: initial;
 
+  }
+  .cat-3d {
+    display: none;
+  }
+  .cat-3d-mobile {
+    width: 100%;
+    display: flex;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+  .cat-3d-mobile ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .cat-3d-mobile li {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 10px;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.50);
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.50);
+    background: rgba(255, 255, 255, 0.01);
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .cat-3d-mobile__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+  }
+  .cat-3d-mobile__top__name {
+    display: flex;
+    gap: 50px;
+  }
+  .cat-3d-mobile__top__name span {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    color: white;
+  }
+  .cat-3d-mobile__top__name span:nth-child(1) {
+    color: #FFCF00;
+  }
+  .cat-3d-mobile__content {
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+    position: relative;
+  }
+  .cat-3d-mobile__content__img {
+    border-radius: 10px;
+    border: 0.5px solid rgba(255, 255, 255, 0.50);
+    padding: 2px;
+    height: max-content;
+    width: 126px;
+    aspect-ratio: 1/1;
+  }
+  .cat-3d-mobile__img-wrap {
+    border-radius: 8px;
+    background: rgba(94, 102, 249, 0.05);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cat-3d-mobile__img-wrap img {
+    width: 90%;
+    object-fit: cover;
+  }
+  .cat-3d__top__description {
+    margin: 0 0 auto 0;
+  }
+  #cat-content {
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .cat-3d__top__description svg {
+    top: 8px;
+  }
+  .cat-3d__top__description p::after {
+    top: 7px;
+  }
+  .cat-3d__redirect span {
+    font-size: 12px;
   }
 }
