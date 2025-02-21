@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { Text } from "@react-three/drei";
+import { Text, Html } from "@react-three/drei";
 
 export const MobileFrames = ({ images }) => {
   return (
@@ -13,7 +13,7 @@ export const MobileFrames = ({ images }) => {
   );
 };
 
-function MobileFrame({ url, position, rotation, name }) {
+function MobileFrame({ url, position, rotation, name, link }) {
   const ref = useRef();
   const GOLDENRATIO = 1.61803398875;
 
@@ -24,13 +24,16 @@ function MobileFrame({ url, position, rotation, name }) {
     roughness:0.7,
     side: THREE.DoubleSide
   });
+  const handleClick = () => {
+    window.open(link, "_blank"); // 🔗 Ouvre le lien dans un nouvel onglet
+  };
 
   useFrame((state, dt) => {
     // Laissez vide ou ajoutez des animations si nécessaire
   });
 
   return (
-    <group ref={ref} position={position} rotation={rotation}>
+    <group ref={ref} position={position} rotation={rotation} onClick={handleClick}>
       <mesh scale={[1, GOLDENRATIO, 0.05]} position={[0, 0.9, 0.2]}>
         <boxGeometry />
         {/* Appliquer le matériau gris */}
@@ -50,6 +53,7 @@ function MobileFrame({ url, position, rotation, name }) {
           {/* Garder l'image si nécessaire, sinon remplacez par un matériau uni */}
           <meshStandardMaterial map={new THREE.TextureLoader().load(url)} />
         </mesh>
+
       </mesh>
       <Text
         maxWidth={0.5}

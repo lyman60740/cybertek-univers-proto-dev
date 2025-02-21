@@ -34,17 +34,17 @@ html, body, #root, canvas {
   margin: 0;
 
 }
-
-:root {
-  --leftSpan: 5vw;
-}
-
 body {
   min-height: 300vh;
   font-family: "Outfit", serif;
   overflow: hidden;
   
 }
+
+:root {
+  --leftSpan: 5vw;
+}
+
 .us-container {
   background: black;
   display: flex;
