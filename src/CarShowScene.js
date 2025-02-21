@@ -87,7 +87,7 @@ export const CarShowScene = () => {
       <object3D position={[0, 2, 5]} />
 
       {/* ✅ Render du Ground conditionné par la taille de l'écran */}
-      {showGround && (
+    
         <Ground
           ref={groundRef}
           position={[0, -0.51, 5]}
@@ -102,7 +102,7 @@ export const CarShowScene = () => {
           scrollSpeed={0.128}
           color={[0, 0, 0]}
         />
-      )}
+      
     </>
   );
 };

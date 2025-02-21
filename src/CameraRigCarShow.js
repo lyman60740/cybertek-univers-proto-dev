@@ -145,7 +145,7 @@ textAndOtherTl
       mm.add("(max-width: 999px)", ()=> {   
         if (targetRef.current) {
           tl.to(targetRef.current.position, {
-            x: -0.25,
+            x: -0.2,
             y: 0,
             z: 3.5,
             duration: 3
@@ -153,7 +153,7 @@ textAndOtherTl
   
           tl.to(cameraTarget.current, {
             x: 0,
-            y: 2,
+            y: 1,
             z: 15, 
             duration: 3,
             ease: "linear"
