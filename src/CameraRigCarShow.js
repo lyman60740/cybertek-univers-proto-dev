@@ -91,7 +91,6 @@ textAndOtherTl
     if(document.querySelector(".carshow-container")) {
       gsap.registerPlugin(ScrollTrigger);
 
-      
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".carshow-container",
@@ -110,7 +109,8 @@ textAndOtherTl
           }      
         }
       });
-  
+
+      mm.add("(min-width: 1000px)", ()=> {
       if (spotLightRef1.current && spotLightRef2.current) {
         tl.to(
           [spotLightRef2.current],
@@ -129,7 +129,7 @@ textAndOtherTl
           },"<"
         );
       }
-  
+    })
       if (logoElements) {
         tl.to(logoElements, {
           opacity: 0,
@@ -139,21 +139,39 @@ textAndOtherTl
           ease: "cubic-bezier(.21,.65,.67,1)",
         },"<80%"); // 🔄 Démarre en même temps que l’animation de la caméra
       }
-  
+    
       
   
-      mm.add("(max-width: 999px)", ()=> {   
+      mm.add("(max-width: 999px)", ()=> {  
+        if (spotLightRef1.current && spotLightRef2.current) {
+          tl.to(
+            [spotLightRef2.current],
+            {
+              intensity: .5, // Les lumières augmentent en intensité
+              ease: "linear",
+              duration: 1
+            }
+          );
+          tl.to(
+            [spotLightRef1.current],
+            {
+              intensity: 1.5, // Les lumières augmentent en intensité
+              ease: "linear",
+              duration: 1
+            },"<"
+          );
+        } 
         if (targetRef.current) {
           tl.to(targetRef.current.position, {
             x: -0.2,
             y: 0,
-            z: 3.5,
+            z: .5,
             duration: 3
           });
   
           tl.to(cameraTarget.current, {
             x: 0,
-            y: 1,
+            y: 3,
             z: 15, 
             duration: 3,
             ease: "linear"
@@ -186,7 +204,7 @@ textAndOtherTl
       }
     })
       
-  
+
         if (spotLightRef1.current && spotLightRef2.current) {
           tl.to(
             [spotLightRef2.current, spotLightRef1.current],
@@ -204,19 +222,20 @@ textAndOtherTl
             duration: 1,
               ease: "linear",
           },"<");
+        }
   
           mm.add("(max-width: 999px)", ()=> {   
             tl.to(spotLightRef3.current, {
-              intensity: 1,
+              intensity: 0.7,
             });
               tl.to(spotLightRef3.current.position, {
                 x: 0,
                 y: 10,
-                z: -1
+                z: 15
               },"<");
           
           })
-        }
+        
         tl.to({}, {},"<50%");
     }
     

@@ -62,7 +62,7 @@ export const CarShowScene = () => {
         position={[3, 5, 0]}
         shadow-bias={-0.0001}
       />
-
+{/* TODO ADAPTER LE Z DES SPOTLIGHT POUR MOBILE */}
       <spotLight
         ref={spotLightRef2}
         color={[1, 0.811, 0]}
