@@ -311,7 +311,7 @@ width: 100%;
 z-index: 2;
 top: 0;
 left: 0;
-background: linear-gradient(to bottom, rgba(0,0,0, 1) 0%, rgba(0,0,0, 0) 20%, rgba(0,0,0, 0) 80%,rgba(0,0,0, 1) 100%);
+background: linear-gradient(to bottom, rgba(0,0,0, 0) 0%, rgba(0,0,0, 0) 80%,rgba(0,0,0, 1) 100%);
 }
 
 .hero-banner h1 {
@@ -586,13 +586,13 @@ border-radius: 50%;
 
 @media screen and (max-width: 799px) {
   /* BANNER  */
-  .us-container {
+  /* .us-container {
     padding-top: 125px;
-  }
+  } */
   .hero-banner {
     height: calc(70dvh - 125px);
     justify-content: flex-start;
-    gap: 10px
+    gap: 20px
   }
   .hero-banner h1 {
     font-size: 24px;
@@ -606,8 +606,6 @@ width: 100%;
   }
   #cadres {
     height: 100%;
-    position: initial;
-
   }
   .cat-3d {
     display: none;

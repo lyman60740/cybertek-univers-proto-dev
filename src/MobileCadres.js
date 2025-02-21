@@ -42,7 +42,7 @@ export const MobileCadres = () => {
 
   useEffect(() => {
     // Positionner la caméra si besoin
-    camera.position.set(0, 0.5, 4.5);
+    camera.position.set(0, 0.5, 5);
     camera.fov = 45;
     camera.updateProjectionMatrix();
 
@@ -89,16 +89,16 @@ export const MobileCadres = () => {
         maxPolarAngle={Math.PI / 2.1} 
         enablePan={false} 
         enableZoom={false}
-        rotateSpeed={0.2}
+        rotateSpeed={0.3}
       />
       {/* Groupe rotatif */}
       <group ref={rotatingGroupRef} position={center}>
         <MobileFrames images={images} />
       </group>
     </group>
-     {/* <Ground 
-            position={[0, 0, 5]}
-            planeSize={[30, 50]}
+     <Ground 
+            position={[0, -0.5, 0]}
+            planeSize={[10, 10]}
             normalScale={[0.8, 0.8]}
             roughnessValue={0.7}
             mixBlur={15}
@@ -108,7 +108,7 @@ export const MobileCadres = () => {
             depthScale={0.01}
             scrollSpeed={0}
             color={[0.01, 0.01, 0.01]}
-          /> */}
+          />
     </>
   );
 };
