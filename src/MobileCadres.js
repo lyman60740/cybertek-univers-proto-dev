@@ -75,13 +75,13 @@ export const MobileCadres = () => {
 
   return (
     <>
-    <ambientLight intensity={1} />
+    <ambientLight intensity={1.5} />
     <group>
-    {/* <directionalLight
+    <directionalLight
         position={[0,2,0]}
-        intensity={10.5}
+        intensity={1.5}
         color={'white'}
-      /> */}
+      />
       {/* Zone de capture */}
       <OrbitControls 
         target={[0, 0.7, 0.5]} 
