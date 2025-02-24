@@ -99,7 +99,7 @@ textAndOtherTl
           scrub: 2,
           pin: true,
           pinSpacing: true,
-          // markers: true,
+          markers: true,
           onUpdate: (self) => {
             if (self.progress > 0.75) {
               textAndOtherTl.timeScale(1).play();  // 🔥 Lecture normale
@@ -143,7 +143,7 @@ textAndOtherTl
       
   
       mm.add("(max-width: 999px)", ()=> {  
-        if (spotLightRef1.current && spotLightRef2.current && cameraTarget.current) {
+        if (spotLightRef1.current && spotLightRef2.current ) {
           tl.to(
             [spotLightRef2.current],
             {
@@ -161,13 +161,16 @@ textAndOtherTl
             },"<"
           );
         } 
-        if (targetRef.current) {
+        if (targetRef.current && cameraTarget.current) {
           tl.to(targetRef.current.position, {
             x: -0.2,
             y: 0,
             z: .5,
             duration: 3
           });
+
+          
+          console.log(cameraTarget.current)
   
           tl.to(cameraTarget.current, {
             x: 0,
