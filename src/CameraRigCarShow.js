@@ -165,20 +165,12 @@ textAndOtherTl
             },"<"
           );
         } 
-        if (targetRef.current) {
-          tl.to(targetRef.current.position, {
-            x: -0.2,
-            y: 0,
-            z: .5,
-            duration: 3
-          });
-
-        }
+    
         tl.to(cameraTarget.current, {
           x: 0,
           y: 0.5,
-          z: 10, 
-          duration: 1.5,
+          z: 5, 
+          duration: 1,
           ease: "linear"
         },"<");
       })
