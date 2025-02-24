@@ -19,12 +19,18 @@ export const CarShowScene = () => {
     const mm = gsap.matchMedia();
 
     // ✅ Active le Ground uniquement si min-width >= 800px
-    mm.add("(min-width: 800px)", () => {
+    mm.add("(min-width: 1000px)", () => {
       setShowGround(true); // Active le rendu du Ground
     });
 
-    mm.add("(max-width: 799px)", () => {
+    mm.add("(max-width: 999px)", () => {
       setShowGround(false); // Désactive le rendu du Ground
+
+      if (spotLightRef1.current && spotLightRef2.current) {
+        gsap.set(spotLightRef1.current.position, { z: -5});
+        gsap.set(spotLightRef2.current.position, { z: -5});
+      }
+
     });
 
     // ✅ Cleanup à la destruction du composant
@@ -62,7 +68,6 @@ export const CarShowScene = () => {
         position={[3, 5, 0]}
         shadow-bias={-0.0001}
       />
-{/* TODO ADAPTER LE Z DES SPOTLIGHT POUR MOBILE */}
       <spotLight
         ref={spotLightRef2}
         color={[1, 0.811, 0]}
