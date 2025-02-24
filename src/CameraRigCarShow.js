@@ -144,15 +144,7 @@ textAndOtherTl
         );
       }
     })
-      if (logoElements) {
-        tl.to(logoElements, {
-          opacity: 0,
-          y: -20,
-          stagger: 0.1,
-          duration: 0.5, 
-          ease: "cubic-bezier(.21,.65,.67,1)",
-        },"<80%"); // 🔄 Démarre en même temps que l’animation de la caméra
-      }
+      
     
       
   
@@ -161,7 +153,7 @@ textAndOtherTl
           tl.to(
             [spotLightRef2.current],
             {
-              intensity: .5, // Les lumières augmentent en intensité
+              intensity: 1.5, // Les lumières augmentent en intensité
               ease: "linear",
               duration: 1
             }, "<"
@@ -169,7 +161,7 @@ textAndOtherTl
           tl.to(
             [spotLightRef1.current],
             {
-              intensity: 1.5, // Les lumières augmentent en intensité
+              intensity: 2.5, // Les lumières augmentent en intensité
               ease: "linear",
               duration: 1
             },"<"
@@ -196,6 +188,15 @@ textAndOtherTl
           }, "<"); // 🔄 Démarre en même temps que l’animation de la caméra
         }
       })
+      if (logoElements) {
+        tl.to(logoElements, {
+          opacity: 0,
+          y: -20,
+          stagger: 0.1,
+          duration: 0.5, 
+          ease: "cubic-bezier(.21,.65,.67,1)",
+        },"<80%"); // 🔄 Démarre en même temps que l’animation de la caméra
+      }
   
       mm.add("(min-width: 1000px)", ()=> {
         tl.to(cameraTarget.current, {
