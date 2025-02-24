@@ -176,6 +176,7 @@ textAndOtherTl
             duration: 3,
             ease: "linear"
           },"<");
+          
         }
       })
   
