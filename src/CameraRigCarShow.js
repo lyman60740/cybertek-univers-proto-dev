@@ -221,41 +221,26 @@ textAndOtherTl
           },
         }, "<"); // 🔄 Démarre en même temps que l’animation de la caméra
       }
-    })
-      
+      if (spotLightRef1.current && spotLightRef2.current) {
+        tl.to(
+          [spotLightRef2.current, spotLightRef1.current],
+          {
+            intensity: 0, // Les lumières augmentent en intensité
+            ease: "linear",
+            duration: 0.5,
+          },"<50%"
+        );
+      }
 
-        if (spotLightRef1.current && spotLightRef2.current) {
-          tl.to(
-            [spotLightRef2.current, spotLightRef1.current],
-            {
-              intensity: 0, // Les lumières augmentent en intensité
-              ease: "linear",
-              duration: 0.5,
-            },"<50%"
-          );
-        }
-       
-        if (spotLightRef3.current) {
-          tl.to([spotLightRef3.current], {
-            intensity: .5, // Les lumières augmentent en intensité
-            duration: 1,
-              ease: "linear",
-          },"<");
-        }
-  
-          mm.add("(max-width: 999px)", ()=> {   
-            tl.to(spotLightRef3.current, {
-              intensity: 0.7,
-              duration: 1
-            },"<");
-              tl.to(spotLightRef3.current.position, {
-                x: 0,
-                y: 10,
-                z: 15,
-                duration: 1
-              },"<");
-          
-          })
+      if (spotLightRef3.current) {
+        tl.to([spotLightRef3.current], {
+          intensity: .5, // Les lumières augmentent en intensité
+          duration: 1,
+            ease: "linear",
+        },"<");
+      }
+    })
+    
         
         // tl.to({}, {},"<50%");
     }
