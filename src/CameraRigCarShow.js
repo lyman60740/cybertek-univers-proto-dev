@@ -97,6 +97,7 @@ textAndOtherTl
         duration: 3,
         ease: "linear"
       },"<");
+      
       gsap.registerPlugin(ScrollTrigger);
 
       const tl = gsap.timeline({
