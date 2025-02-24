@@ -90,14 +90,8 @@ textAndOtherTl
     // 📌 Timeline GSAP pour déplacer la caméra en douceur
     if(document.querySelector(".carshow-container")) {
 
-      gsap.to(cameraTarget.current, {
-        x: 0,
-        y: 0.5,
-        z: 15, 
-        duration: 3,
-        ease: "linear"
-      },"<");
       
+
       gsap.registerPlugin(ScrollTrigger);
 
       const tl = gsap.timeline({
@@ -181,15 +175,16 @@ textAndOtherTl
 
           console.log(cameraTarget.current)
   
-          tl.to(cameraTarget.current, {
-            x: 0,
-            y: 0.5,
-            z: 15, 
-            duration: 3,
-            ease: "linear"
-          },"<");
+          
 
         }
+        tl.to(cameraTarget.current, {
+          x: 0,
+          y: 0.5,
+          z: 15, 
+          duration: 3,
+          ease: "linear"
+        },"<");
       })
   
       mm.add("(min-width: 1000px)", ()=> {
