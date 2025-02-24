@@ -110,6 +110,7 @@ textAndOtherTl
               textAndOtherTl.timeScale(1).reverse();  // ⏩ Retour 2x plus rapide
             }
           }      
+          
         }
       });
 
