@@ -148,6 +148,14 @@ textAndOtherTl
   
       mm.add("(max-width: 999px)", ()=> {  
         if (spotLightRef1.current && spotLightRef2.current ) {
+          gsap.set(
+            [spotLightRef2.current.position, spotLightRef1.current.position],
+            {
+              z: -5
+            }
+          );
+        
+
           tl.to(
             [spotLightRef2.current],
             {
