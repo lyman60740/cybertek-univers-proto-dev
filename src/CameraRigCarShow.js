@@ -110,7 +110,7 @@ textAndOtherTl
               textAndOtherTl.timeScale(1).reverse();  // ⏩ Retour 2x plus rapide
             }
           }      
-          
+
         }
       });
 
@@ -154,7 +154,7 @@ textAndOtherTl
               intensity: .5, // Les lumières augmentent en intensité
               ease: "linear",
               duration: 1
-            }
+            }, "<"
           );
           tl.to(
             [spotLightRef1.current],
@@ -165,7 +165,7 @@ textAndOtherTl
             },"<"
           );
         } 
-        if (targetRef.current && cameraTarget.current) {
+        if (targetRef.current) {
           tl.to(targetRef.current.position, {
             x: -0.2,
             y: 0,
@@ -173,17 +173,12 @@ textAndOtherTl
             duration: 3
           });
 
-
-          console.log(cameraTarget.current)
-  
-          
-
         }
         tl.to(cameraTarget.current, {
           x: 0,
           y: 0.5,
-          z: 15, 
-          duration: 3,
+          z: 10, 
+          duration: 1.5,
           ease: "linear"
         },"<");
       })
