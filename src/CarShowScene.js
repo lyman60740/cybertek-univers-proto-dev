@@ -29,6 +29,7 @@ export const CarShowScene = () => {
       if (spotLightRef1.current && spotLightRef2.current) {
         gsap.set(spotLightRef1.current.position, { z: -5});
         gsap.set(spotLightRef2.current.position, { z: -5});
+        console.log(spotLightRef1.current.position + "----" + spotLightRef2.current.position)
       }
 
     });
@@ -67,6 +68,7 @@ export const CarShowScene = () => {
         penumbra={0.5}
         position={[3, 5, -5]}
         shadow-bias={-0.0001}
+        
       />
       <spotLight
         ref={spotLightRef2}
@@ -74,8 +76,9 @@ export const CarShowScene = () => {
         intensity={0}
         angle={0.6}
         penumbra={0.5}
-        position={[-3, 5, -5]}
+        position={[-3, 5, 0]}
         shadow-bias={-0.0001}
+       
       />
 
       <spotLight

@@ -33,7 +33,8 @@ function useExternalRenderControl() {
 export const CameraRigCarShow =({ groundRef, spotLightRef1, spotLightRef2, spotLightRef3, targetRef }) => {
   const { camera } = useThree();
   const cameraTarget = useRef(new THREE.Vector3(0, 10, 5)); 
-  const lookAtTarget = useRef(new THREE.Vector3(0, 0, -5)); 
+  const lookAtTarget = useRef(new THREE.Vector3(0, 0, 0)); 
+ 
   const logoElements = document.querySelectorAll(".logo-cyb, .logo-alp, .sep")
   const blocTxtElements = document.querySelectorAll(".surTitre span, h2 span")
   const otherTxtElements = document.querySelectorAll(".bloc-txt__p p, .bloc-txt a ")
