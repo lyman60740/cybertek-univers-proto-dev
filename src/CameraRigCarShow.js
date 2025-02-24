@@ -171,7 +171,7 @@ textAndOtherTl
   
           tl.to(cameraTarget.current, {
             x: 0,
-            y: 3,
+            y: 0.5,
             z: 15, 
             duration: 3,
             ease: "linear"
