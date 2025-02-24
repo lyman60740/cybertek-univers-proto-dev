@@ -65,7 +65,7 @@ export const CarShowScene = () => {
         intensity={0}
         angle={0.6}
         penumbra={0.5}
-        position={[3, 5, 0]}
+        position={[3, 5, -5]}
         shadow-bias={-0.0001}
       />
       <spotLight
@@ -74,7 +74,7 @@ export const CarShowScene = () => {
         intensity={0}
         angle={0.6}
         penumbra={0.5}
-        position={[-3, 5, 0]}
+        position={[-3, 5, -5]}
         shadow-bias={-0.0001}
       />
 
