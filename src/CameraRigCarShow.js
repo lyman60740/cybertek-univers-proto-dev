@@ -172,7 +172,7 @@ textAndOtherTl
             opacity: 0,
             y: -20,
             stagger: 0.1,
-            duration: 0.5, 
+            duration: 0.25, 
             ease: "cubic-bezier(.21,.65,.67,1)",
           },"<80%"); // 🔄 Démarre en même temps que l’animation de la caméra
         }
