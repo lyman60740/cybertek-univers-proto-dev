@@ -245,16 +245,18 @@ textAndOtherTl
           mm.add("(max-width: 999px)", ()=> {   
             tl.to(spotLightRef3.current, {
               intensity: 0.7,
-            });
+              duration: 1
+            },"<");
               tl.to(spotLightRef3.current.position, {
                 x: 0,
                 y: 10,
-                z: 15
+                z: 15,
+                duration: 1
               },"<");
           
           })
         
-        tl.to({}, {},"<50%");
+        // tl.to({}, {},"<50%");
     }
     
 
