@@ -115,10 +115,10 @@ textAndOtherTl
           trigger: ".carshow-container",
           start: isMobile ? "top-=70px top" : "top top",
           end: "+=2000px", 
-          scrub: 2,
+          scrub: isMobile ? 1 : 2,
           pin: true,
           pinSpacing: true,
-          markers: true,
+          markers: false,
           onUpdate: (self) => {
             mm.add("(min-width: 1000px)", ()=> { 
               if (self.progress > 0.75) {
