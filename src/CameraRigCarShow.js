@@ -143,7 +143,7 @@ textAndOtherTl
       
   
       mm.add("(max-width: 999px)", ()=> {  
-        if (spotLightRef1.current && spotLightRef2.current) {
+        if (spotLightRef1.current && spotLightRef2.current && cameraTarget.current) {
           tl.to(
             [spotLightRef2.current],
             {
@@ -176,7 +176,7 @@ textAndOtherTl
             duration: 3,
             ease: "linear"
           },"<");
-          
+
         }
       })
   
