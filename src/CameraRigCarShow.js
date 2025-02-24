@@ -103,7 +103,7 @@ textAndOtherTl
           scrub: 2,
           pin: true,
           pinSpacing: true,
-          markers: true,
+          markers: false,
           onUpdate: (self) => {
             mm.add("(min-width: 1000px)", ()=> { 
               if (self.progress > 0.75) {
@@ -183,7 +183,7 @@ textAndOtherTl
           z: 5, 
           duration: 0.5,
           ease: "linear"
-        },"<");
+        });
 
         if (groundRef.current) {
           console.log('groundref')
