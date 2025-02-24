@@ -63,6 +63,7 @@ export const Ground = forwardRef(({
         reflectorOffset={0}
         transparent
         {...props}
+       
       />
     </mesh>
   );

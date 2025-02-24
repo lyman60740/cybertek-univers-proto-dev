@@ -38,7 +38,7 @@ export const CameraRigCadres = ({
         } else if (conditions.medium) {
           setTargetPosition([0, 0.5, 14]);
         } else if (conditions.large) {
-          setTargetPosition([0, 0.5, 10.5]);
+          setTargetPosition([0, 0.5, 12.5]);
         }
       }
     );

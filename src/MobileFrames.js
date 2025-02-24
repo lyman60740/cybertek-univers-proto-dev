@@ -46,12 +46,12 @@ function MobileFrame({ url, position, rotation, name, link }) {
 
         <mesh scale={[0.9, 0.93, 0.9]} position={[0, 0, 0.2]}>
           <boxGeometry />
-          <meshStandardMaterial/>
+          <meshStandardMaterial fog={false}/>
         </mesh>
         <mesh position={[0, 0, 0.7]}>
           <planeGeometry args={[0.8, 0.87]} />
           {/* Garder l'image si nécessaire, sinon remplacez par un matériau uni */}
-          <meshStandardMaterial map={new THREE.TextureLoader().load(url)} />
+          <meshStandardMaterial map={new THREE.TextureLoader().load(url)} fog={false} />
         </mesh>
 
       </mesh>

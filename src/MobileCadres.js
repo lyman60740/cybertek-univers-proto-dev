@@ -76,6 +76,7 @@ export const MobileCadres = () => {
   return (
     <>
     <ambientLight intensity={1.5} />
+      <fog attach="fog" args={['black', 0, 12]} />
     <group>
     <directionalLight
         position={[0,2,0]}

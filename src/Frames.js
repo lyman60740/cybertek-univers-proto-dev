@@ -78,11 +78,11 @@ function Frame({ url, position, rotation, isSelected, isHovered, onSelect, onDes
   
           <mesh ref={frame} raycast={() => null} scale={[0.9, 0.93, 0.9]} position={[0, 0, 0.2]}>
             <boxGeometry />
-            <meshBasicMaterial toneMapped={false} fog={true} />
+            <meshBasicMaterial toneMapped={false} fog={false} />
           </mesh>
           <mesh position={[0, 0, 0.7]}>
             <planeGeometry args={[0.8, 0.87]} /> {/* Respecte le ratio 380x235 */}
-            <meshBasicMaterial map={useLoader(THREE.TextureLoader, url)} />
+            <meshBasicMaterial map={useLoader(THREE.TextureLoader, url)} fog={false}  />
           </mesh>
   
         </mesh>
