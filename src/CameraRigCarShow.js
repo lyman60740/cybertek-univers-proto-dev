@@ -98,7 +98,7 @@ textAndOtherTl
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".carshow-container",
-          start: "top top",
+          start: "top-=125px top",
           end: "+=2000px", 
           scrub: 2,
           pin: true,
