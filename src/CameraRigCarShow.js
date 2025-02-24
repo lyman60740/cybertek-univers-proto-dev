@@ -98,12 +98,12 @@ textAndOtherTl
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".carshow-container",
-          start: "top-=125px top",
+          start: "top-=70px top",
           end: "+=2000px", 
           scrub: 2,
           pin: true,
           pinSpacing: true,
-          markers: false,
+          markers: true,
           onUpdate: (self) => {
             mm.add("(min-width: 1000px)", ()=> { 
               if (self.progress > 0.75) {
