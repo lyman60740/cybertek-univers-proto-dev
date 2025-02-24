@@ -155,7 +155,7 @@ textAndOtherTl
             {
               intensity: 1.5, // Les lumières augmentent en intensité
               ease: "linear",
-              duration: 1
+              duration: 0.3
             }, "<"
           );
           tl.to(
@@ -163,7 +163,7 @@ textAndOtherTl
             {
               intensity: 2.5, // Les lumières augmentent en intensité
               ease: "linear",
-              duration: 1
+              duration: 0.3
             },"<"
           );
         } 
@@ -181,7 +181,7 @@ textAndOtherTl
           x: 0,
           y: 0.5,
           z: 5, 
-          duration: 1,
+          duration: 0.5,
           ease: "linear"
         },"<");
 
@@ -190,7 +190,7 @@ textAndOtherTl
           tl.to(groundRef.current.material, {
             opacity: 0, // ✅ Disparition progressive
             ease: "linear",
-            duration: 1,
+            duration: 0.5,
             onUpdate: () => {
               groundRef.current.material.needsUpdate = true; // ✅ Forcer le rendu du changement d’opacité
             },
