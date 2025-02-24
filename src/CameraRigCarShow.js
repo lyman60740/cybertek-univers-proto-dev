@@ -41,6 +41,8 @@ export const CameraRigCarShow =({ groundRef, spotLightRef1, spotLightRef2, spotL
   const canRender = useExternalRenderControl();
   const [isLoaded, setIsLoaded] = useState(false);
   const lenisRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
  
   useEffect(() => {
     // On importe le plugin au moment du montage
@@ -50,6 +52,15 @@ export const CameraRigCarShow =({ groundRef, spotLightRef1, spotLightRef2, spotL
     // ✅ Rends GSAP globalement accessible
     window.gsap = gsap;
     window.ScrollTrigger = ScrollTrigger;
+
+
+    mm.add("(min-width: 1000px)", () => { 
+      setIsMobile(false);
+    });
+    
+    mm.add("(max-width: 999px)", () => { 
+      setIsMobile(true);
+    });
   }, []);
 
 
@@ -98,12 +109,12 @@ textAndOtherTl
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".carshow-container",
-          start: "top-=70px top",
+          start: isMobile ? "top-=70px top" : "top top",
           end: "+=2000px", 
           scrub: 2,
           pin: true,
           pinSpacing: true,
-          markers: true,
+          markers: false,
           onUpdate: (self) => {
             mm.add("(min-width: 1000px)", ()=> { 
               if (self.progress > 0.75) {

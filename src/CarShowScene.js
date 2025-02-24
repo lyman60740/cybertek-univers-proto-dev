@@ -29,8 +29,7 @@ export const CarShowScene = () => {
       if (spotLightRef1.current && spotLightRef2.current) {
         gsap.set(spotLightRef1.current.position, { z: -5 });
     gsap.set(spotLightRef2.current.position, { z: -5 });
-    console.log("spotLightRef1 position:", spotLightRef1.current.position.toArray());
-    console.log("spotLightRef2 position:", spotLightRef2.current.position.toArray());
+
       }
 
     });
