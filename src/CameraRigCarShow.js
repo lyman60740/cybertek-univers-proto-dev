@@ -167,6 +167,15 @@ textAndOtherTl
             },"<"
           );
         } 
+        if (logoElements) {
+          tl.to(logoElements, {
+            opacity: 0,
+            y: -20,
+            stagger: 0.1,
+            duration: 0.5, 
+            ease: "cubic-bezier(.21,.65,.67,1)",
+          },"<80%"); // 🔄 Démarre en même temps que l’animation de la caméra
+        }
     
         tl.to(cameraTarget.current, {
           x: 0,
@@ -188,17 +197,18 @@ textAndOtherTl
           }, "<"); // 🔄 Démarre en même temps que l’animation de la caméra
         }
       })
-      if (logoElements) {
-        tl.to(logoElements, {
-          opacity: 0,
-          y: -20,
-          stagger: 0.1,
-          duration: 0.5, 
-          ease: "cubic-bezier(.21,.65,.67,1)",
-        },"<80%"); // 🔄 Démarre en même temps que l’animation de la caméra
-      }
+     
   
       mm.add("(min-width: 1000px)", ()=> {
+        if (logoElements) {
+          tl.to(logoElements, {
+            opacity: 0,
+            y: -20,
+            stagger: 0.1,
+            duration: 0.5, 
+            ease: "cubic-bezier(.21,.65,.67,1)",
+          },"<80%"); // 🔄 Démarre en même temps que l’animation de la caméra
+        }
         tl.to(cameraTarget.current, {
           x: -5,
           y: 0.5,
@@ -206,11 +216,7 @@ textAndOtherTl
           duration: 3,
           ease: "linear"
         },"<");
-      })
-  
-      
-  
-      mm.add("(min-width: 1000px)", ()=> {
+
       if (groundRef.current) {
         tl.to(groundRef.current.material, {
           opacity: 0, // ✅ Disparition progressive
