@@ -109,7 +109,7 @@ textAndOtherTl
       
     
       gsap.registerPlugin(ScrollTrigger);
-
+      console.log(isMobile)
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".carshow-container",
@@ -118,7 +118,7 @@ textAndOtherTl
           scrub: 2,
           pin: true,
           pinSpacing: true,
-          markers: false,
+          markers: true,
           onUpdate: (self) => {
             mm.add("(min-width: 1000px)", ()=> { 
               if (self.progress > 0.75) {
