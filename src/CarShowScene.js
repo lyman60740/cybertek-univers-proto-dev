@@ -27,9 +27,10 @@ export const CarShowScene = () => {
       setShowGround(false); // Désactive le rendu du Ground
 
       if (spotLightRef1.current && spotLightRef2.current) {
-        gsap.set(spotLightRef1.current.position, { z: -5});
-        gsap.set(spotLightRef2.current.position, { z: -5});
-        console.log(spotLightRef1.current.position + "----" + spotLightRef2.current.position)
+        gsap.set(spotLightRef1.current.position, { z: -5 });
+    gsap.set(spotLightRef2.current.position, { z: -5 });
+    console.log("spotLightRef1 position:", spotLightRef1.current.position.toArray());
+    console.log("spotLightRef2 position:", spotLightRef2.current.position.toArray());
       }
 
     });
@@ -66,7 +67,7 @@ export const CarShowScene = () => {
         intensity={0}
         angle={0.6}
         penumbra={0.5}
-        position={[3, 5, -5]}
+        position={[3, 5, 0]}
         shadow-bias={-0.0001}
         
       />

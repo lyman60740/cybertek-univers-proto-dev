@@ -183,6 +183,17 @@ textAndOtherTl
           duration: 1,
           ease: "linear"
         },"<");
+
+        if (groundRef.current) {
+          tl.to(groundRef.current.material, {
+            opacity: 0, // ✅ Disparition progressive
+            ease: "linear",
+            duration: 1,
+            onUpdate: () => {
+              groundRef.current.material.needsUpdate = true; // ✅ Forcer le rendu du changement d’opacité
+            },
+          }, "<"); // 🔄 Démarre en même temps que l’animation de la caméra
+        }
       })
   
       mm.add("(min-width: 1000px)", ()=> {

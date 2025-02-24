@@ -209,10 +209,11 @@ max-width: 1280px;
 @media screen and (max-width : 1000px) {
 .container__bloc-txt {
 justify-content: center;
-height: 100dvh;
+/* height: 100dvh; */
 max-width: 600px !important;
-padding: 40px 0;
+padding: 140px 0 40px 0;
 box-sizing: border-box;
+margin-bottom: -100vh;
 }
 .bloc-txt {
 justify-content: flex-start;
@@ -227,9 +228,7 @@ font-size: 14px;
 .surTitre {
 font-size: 16px;
 }
-#root {
-transform: translateY(25vh);
-}
+
 #root::after {
 position: absolute;
 content: "";
@@ -700,10 +699,6 @@ bottom: 0;
   .cat-3d__redirect span {
     font-size: 12px;
   }
-  .carshow-container {
-    padding-top: 125px;
-}
-#root {
-         transform: translateY(39vh);
-}
+  
+
 }
