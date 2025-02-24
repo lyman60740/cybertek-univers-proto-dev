@@ -63,6 +63,7 @@ function MobileFrame({ url, position, rotation, name, link }) {
         fontSize={0.07}
         color="white"
         toneMapped={false}
+        fog={false}
       >
         {name}
       </Text>

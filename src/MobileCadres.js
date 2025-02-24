@@ -98,7 +98,7 @@ export const MobileCadres = () => {
       </group>
     </group>
      <Ground 
-            position={[0, -0, 0]}
+            position={[0, -0.1, 0]}
             planeSize={[10, 10]}
             normalScale={[0.8, 0.8]}
             roughnessValue={0.7}

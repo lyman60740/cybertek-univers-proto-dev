@@ -95,7 +95,8 @@ function Frame({ url, position, rotation, isSelected, isHovered, onSelect, onDes
            color={isSelected ? "#FFCF00" : isHovered ? "#FFCF00" : "white"}
            toneMapped={false}    
            onPointerOver={(e) => e.stopPropagation()} 
-            onPointerOut={(e) => e.stopPropagation()}       
+            onPointerOut={(e) => e.stopPropagation()}    
+            fog={false}   
            >
           {props.name}
         </Text>
