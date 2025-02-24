@@ -1,11 +1,10 @@
-// components/Ground.jsx
-import React, { useEffect } from "react";
+import React, { useEffect, forwardRef } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { MeshReflectorMaterial } from "@react-three/drei";
 import { LinearEncoding, RepeatWrapping, TextureLoader } from "three";
-import * as THREE from 'three';
+import * as THREE from "three";
 
-export const Ground = ({
+export const Ground = forwardRef(({
   position = [0, -0.5, 5],
   planeSize = [30, 30],
   normalScale = [0.15, 0.15],
@@ -19,10 +18,10 @@ export const Ground = ({
     process.env.PUBLIC_URL + "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/textures/terrain-roughness.webp",
     process.env.PUBLIC_URL + "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/textures/terrain-normal.webp"
   ],
-  scrollSpeed = 0.128, // ✅ Ajout vitesse de défilement texture
-  color = [0, 0, 0], // ✅ Ajout couleur paramétrable
+  scrollSpeed = 0.128, // Vitesse de défilement texture
+  color = [0, 0, 0],
   ...props
-}) => {
+}, ref) => {
   const [roughness, normal] = useLoader(TextureLoader, textureURLs);
 
   useEffect(() => {
@@ -43,12 +42,7 @@ export const Ground = ({
   });
 
   return (
-    <mesh 
-      {...props}
-      rotation-x={-Math.PI * 0.5} 
-      position={position} 
-      transparent
-    >
+    <mesh ref={ref} {...props} rotation-x={-Math.PI * 0.5} position={position} transparent>
       <planeGeometry args={planeSize} />
       <MeshReflectorMaterial
         envMapIntensity={0}
@@ -67,8 +61,9 @@ export const Ground = ({
         maxDepthThreshold={1}
         depthToBlurRatioBias={0.25}
         reflectorOffset={0}
+        transparent
         {...props}
       />
     </mesh>
   );
-};
+});

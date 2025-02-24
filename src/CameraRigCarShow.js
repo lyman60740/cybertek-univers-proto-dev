@@ -185,6 +185,7 @@ textAndOtherTl
         },"<");
 
         if (groundRef.current) {
+          console.log('groundref')
           tl.to(groundRef.current.material, {
             opacity: 0, // ✅ Disparition progressive
             ease: "linear",
