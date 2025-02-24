@@ -52,7 +52,9 @@ export const CameraRigCarShow =({ groundRef, spotLightRef1, spotLightRef2, spotL
     // ✅ Rends GSAP globalement accessible
     window.gsap = gsap;
     window.ScrollTrigger = ScrollTrigger;
-
+    console.log("innerWidth:", window.innerWidth);
+    console.log("max-width (999px):", window.matchMedia("(max-width: 999px)").matches);
+    console.log("min-width (1000px):", window.matchMedia("(min-width: 1000px)").matches);
 
     mm.add("(min-width: 1000px)", () => { 
       setIsMobile(false);
@@ -61,6 +63,8 @@ export const CameraRigCarShow =({ groundRef, spotLightRef1, spotLightRef2, spotL
     mm.add("(max-width: 999px)", () => { 
       setIsMobile(true);
     });
+
+
   }, []);
 
 
@@ -103,7 +107,7 @@ textAndOtherTl
     if(document.querySelector(".carshow-container")) {
 
       
-
+    
       gsap.registerPlugin(ScrollTrigger);
 
       const tl = gsap.timeline({
@@ -264,7 +268,7 @@ textAndOtherTl
     
 
     return () => ScrollTrigger.getAll().forEach((t) => t.kill());
-  }, [targetRef]);
+  }, [targetRef, isMobile]);
 
   // 📌 Applique progressivement la position et la rotation
   useFrame(() => {
