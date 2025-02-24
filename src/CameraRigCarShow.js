@@ -104,11 +104,20 @@ textAndOtherTl
           pinSpacing: true,
           markers: true,
           onUpdate: (self) => {
-            if (self.progress > 0.75) {
-              textAndOtherTl.timeScale(1).play();  // 🔥 Lecture normale
-            } else {
-              textAndOtherTl.timeScale(1).reverse();  // ⏩ Retour 2x plus rapide
-            }
+            mm.add("(min-width: 1000px)", ()=> { 
+              if (self.progress > 0.75) {
+                textAndOtherTl.timeScale(1).play();  // 🔥 Lecture normale
+              } else {
+                textAndOtherTl.timeScale(1).reverse();  // ⏩ Retour 2x plus rapide
+              }
+             })
+             mm.add("(max-width: 999px)", ()=> { 
+              if (self.progress > 0.5) {
+                textAndOtherTl.timeScale(1).play();  // 🔥 Lecture normale
+              } else {
+                textAndOtherTl.timeScale(1).reverse();  // ⏩ Retour 2x plus rapide
+              }
+             })
           }      
 
         }
