@@ -18,20 +18,19 @@ const angleOffset = Math.PI / 9; // Angle supplémentaire pour ajuster la courbu
 const images = [
 
   // Arrière légèrement tourné vers le centre
-  { position: [-radius * 0.3, 0, center[2] - 0.5], rotation: [0, 0, 0], url: 'https://cybertek-r3f-simracing-category.vercel.app/images/common-ph.png', name: "(1) CHASSIS" },
-  { position: [radius * 0.3, 0, center[2] - 0.5], rotation: [0, 0, 0], url: 'https://cybertek-r3f-simracing-category.vercel.app/images/common-ph.png', name: "(2) PC GAMER" },
+  { position:[-radius * 1.6, 0, center[2] + 2.1], rotation: [0, Math.PI / 2.5, 0] , url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle.jpg', name: "(1) BUNDLE" },
+  { position: [-radius * 1.3, 0, center[2] + 0.8], rotation: [0, Math.PI / 3.5, 0], url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/volant1.jpg', name: "(2) VOLANTS" },
 
   // Côtés gauches
-  { position: [-radius * 0.9, 0, center[2] + 0.2], rotation: [0, Math.PI / 4, 0], url: 'https://cybertek-r3f-simracing-category.vercel.app/images/common-ph.png', name: "(3) PEDALIER" },
-  { position: [-radius * 1.3, 0, center[2] + 0.8], rotation: [0, Math.PI / 3.5, 0], url: 'https://cybertek-r3f-simracing-category.vercel.app/images/common-ph.png', name: "(4) ECRANS" },
-  { position: [-radius * 1.6, 0, center[2] + 2.1], rotation: [0, Math.PI / 2.5, 0], url: 'https://cybertek-r3f-simracing-category.vercel.app/images/common-ph.png', name: "(5) VOLANTS" },
+  { position: [-radius * 0.9, 0, center[2] + 0.2], rotation: [0, Math.PI / 4, 0], url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/base_de_volant.jpg', name: "(3) BASES DE VOLANT" },
+  { position: [-radius * 0.3, 0, center[2] - 0.5], rotation: [0, 0, 0], url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/chassis.jpg', name: "(4) CHÂSSIS" },
+  { position:[radius * 0.3, 0, center[2] - 0.5], rotation: [0, 0, 0] , url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pedalier1.jpg', name: "(5) PÉDALIERS" },
 
   // Côtés droits
-  { position: [radius * 0.9, 0, center[2] + 0.2], rotation: [0, -Math.PI / 4, 0], url: 'https://cybertek-r3f-simracing-category.vercel.app/images/common-ph.png', name: "(6) BASE DE VOLANT" },
-  { position: [radius * 1.3, 0, center[2] + 0.8], rotation: [0, -Math.PI / 3.5, 0], url: 'https://cybertek-r3f-simracing-category.vercel.app/images/common-ph.png', name: "(7) ACCESSOIRES GAMING" },
-  { position: [radius * 1.6, 0, center[2] + 2.1], rotation: [0, -Math.PI / 2.5, 0], url: 'https://cybertek-r3f-simracing-category.vercel.app/images/common-ph.png', name: "(8) BUNDLE" }
+  { position: [radius * 0.9, 0, center[2] + 0.2], rotation: [0, -Math.PI / 4, 0], url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/boite_de_vitesse.jpg', name: "(6) ACCÉSSOIRES GAMING" },
+  { position: [radius * 1.3, 0, center[2] + 0.8], rotation: [0, -Math.PI / 3.5, 0], url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/common-ph.jpg', name: "(7) ÉCRANS" },
+  { position: [radius * 1.6, 0, center[2] + 2.1], rotation: [0, -Math.PI / 2.5, 0], url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pc_gamer.jpg', name: "(8) PC GAMER" }
 ];
-
 
 
 const rootElement = document.getElementById("root");

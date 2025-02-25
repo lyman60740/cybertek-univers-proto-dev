@@ -39,52 +39,64 @@
       </ul>
     </div>
 
-    <div class="cat-3d">
-      <div class="cat-3d__wrapper">
-        <div class="cat-3d__top">
-          <div class="cat-3d__top__name">
-            <div class="cat-3d__top__name__wrapper">
-              <span id="cat-index">(00)</span>
-              <span id="cat-name">Set up SimRacing</span>
+    <div class="cat-3d-container">
+      <div class="cat-3d">
+        <div class="cat-3d__wrapper">
+          <div class="cat-3d__top">
+            <div class="cat-3d__top__name">
+              <div class="cat-3d__top__name__wrapper">
+                <span id="cat-index">(00)</span>
+                <span id="cat-name">Set up SimRacing</span>
+              </div>
             </div>
-          </div>
-
-          <div class="cat-3d__top__product">
-            <div class="cat-3d__top__product__wrapper">
-              <div id="category"></div>
-              <div class="cat-3d__top__product__plaque"></div>
+  
+            <div class="cat-3d__top__product">
+              <div class="cat-3d__top__product__wrapper">
+                <div id="category"></div>
+                <div class="cat-3d__top__product__plaque"></div>
+                
+              </div>
+            </div>
+  
+            <div class="cat-3d__top__description">
+              <svg xmlns="http://www.w3.org/2000/svg" width="94" height="58" viewBox="0 0 94 58" fill="none">
+                <path d="M28.5528 1.27639H93.0528M29 1L1 57" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              </svg>
               
+              <p id="cat-content">Dotés de <strong>de force précis</strong>, de matériaux haut de gamme et d'une ergonomie pensée pour la <strong>performance</strong>, nos volants vous permettent de ressentir chaque virage, chaque vibration et chaque instant de la piste comme un véritable pilote.</p>
             </div>
+  
+            <a href="" class="cat-3d__redirect" id="cat-link">
+              <span>En savoir plus</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6.4 18L16 8.4V17H18V5H6V7H14.6L5 16.6L6.4 18Z" fill="white"/>
+              </svg>
+            </a>
           </div>
-
-          <div class="cat-3d__top__description">
-            <svg xmlns="http://www.w3.org/2000/svg" width="94" height="58" viewBox="0 0 94 58" fill="none">
-              <path d="M28.5528 1.27639H93.0528M29 1L1 57" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            
-            <p id="cat-content">Dotés de <strong>de force précis</strong>, de matériaux haut de gamme et d'une ergonomie pensée pour la <strong>performance</strong>, nos volants vous permettent de ressentir chaque virage, chaque vibration et chaque instant de la piste comme un véritable pilote.</p>
+  
+          <div class="cat-3d__bot">
+            <ul>
+              <!-- INSERTION DATA DYNAMIQUE -->
+            </ul>
           </div>
-
-          <a href="" class="cat-3d__redirect" id="cat-link">
-            <span>En savoir plus</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M6.4 18L16 8.4V17H18V5H6V7H14.6L5 16.6L6.4 18Z" fill="white"/>
-            </svg>
-          </a>
         </div>
-
-        <div class="cat-3d__bot">
-          <ul>
-            <!-- INSERTION DATA DYNAMIQUE -->
-          </ul>
-        </div>
+        
+      </div>
+      <div class="cat-3d__bg">
+        <div class="cat-3d__bg__overlay"></div>
+        <img src="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bg-pneu.png" alt="">
       </div>
     </div>
+    
 
     <div class="cat-3d-mobile">
       <ul>
       <!-- INSERTION DATA -->
       </ul>
+    </div>
+
+    <div class="next-section">
+      <span>NEXT SECTION</span>
     </div>
 
     <div class="carshow-container">
@@ -378,6 +390,31 @@ mm.add("(min-width: 800px)", ()=> {
     }
   );
 });
+
+// Animation linear bg 
+
+gsap.fromTo(
+    ":root",
+    {
+      "--gradientStop1": "5%", 
+      "--gradientStop2": "10%",
+      "--gradientStop3": "50%",
+    },
+    {
+      "--gradientStop1": "70%", 
+      "--gradientStop2": "85%",
+      "--gradientStop3": "95%",
+
+      scrollTrigger: {
+        scrub: 2,
+        trigger: ".cat-3d", 
+        start: "top top",
+        end: "bottom center",
+        toggleActions: "play none none reverse",
+        markers: false,
+      },
+    }
+  );
 
 
     const paths = document.querySelectorAll('.cat-3d__top__description svg path');
