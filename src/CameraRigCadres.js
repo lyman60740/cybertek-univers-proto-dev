@@ -4,7 +4,7 @@ import { easing } from "maath";
 import gsap from "gsap";
 
 export const CameraRigCadres = ({
-  initialPosition = [0, 10, 55],
+  initialPosition = [0, 0.5, 35],
   defaultTargetPosition = [0, 0.5, 10.5],
   damping = 0.8
 }) => {

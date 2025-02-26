@@ -81,7 +81,7 @@ if (rootElement) {
 }
 
 
-mm.add("(min-width: 800px)", ()=> {   
+mm.add("(min-width: 1000px)", ()=> {   
   if (cadresElement) {
     createRoot(cadresElement).render(
       <Suspense fallback={null}>
@@ -97,7 +97,7 @@ mm.add("(min-width: 800px)", ()=> {
   }
 })
 
-mm.add("(max-width: 799px)", ()=> {   
+mm.add("(max-width: 999px)", ()=> {   
   if (cadresElement) {
     createRoot(cadresElement).render(
       <Suspense fallback={null}>

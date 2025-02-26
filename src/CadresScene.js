@@ -1,7 +1,7 @@
 // scenes/CadresScene.js
 import React, { useState, useEffect, useMemo, useRef  } from "react";
 import { CameraRigCadres } from "./CameraRigCadres";
-// import { OrbitControls } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { Frames } from "./Frames";
 import { Ground } from "./Ground";
 
@@ -121,7 +121,6 @@ if (!canRender) return null;
         ref={lightRef}
         position={[0, 2, -3]}
         intensity={0.02}
-
       />
      
       <object3D ref={targetRef} position={[0, 0.5, 1]} />

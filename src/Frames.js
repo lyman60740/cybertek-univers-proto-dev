@@ -90,7 +90,7 @@ function Frame({ url, position, rotation, isSelected, isHovered, onSelect, onDes
          maxWidth={0.5}
           anchorX="left"
            anchorY="top" 
-           position={[0.55, GOLDENRATIO, 0.2]} 
+           position={[0.55, 0.2, 0.2]} 
            fontSize={0.05} 
            color={isSelected ? "#FFCF00" : isHovered ? "#FFCF00" : "white"}
            toneMapped={false}    

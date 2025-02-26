@@ -136,7 +136,7 @@
           const lisDiv = gsap.utils.toArray('.hero-banner ul li div')
     
           gsap.set(title, {
-              y: -20
+              y: 20
           })
           gsap.set(usLoaderDiv, {
               scaleX: 0
@@ -167,11 +167,17 @@
                   window.dispatchEvent(new CustomEvent("loaded"));
               }
           })
+          .to(title, {
+                  autoAlpha: 1,
+                  y: 0,
+                  duration: 0.5,
+    
+              })
           tl.to(catLine, {
               scaleX: 1,
               ease: "power3.inOut",
               duration: 1,
-          })
+          }, "<")
               .to(catLineDivs, {
                   scaleY: 1,
                   ease: "power3.inOut",
@@ -188,22 +194,67 @@
                   yPercent: 0,
                   duration: 0.5,
               }, "<")
-              .to(title, {
-                  autoAlpha: 1,
-                  y: 0,
-                  duration: 0.5,
-    
-              }, "<")
+              
     
       })
      </script>
     
      <script>
        gsap.registerPlugin(ScrollTrigger);
+
+       const dataCadres = [
+
+  {
+    name: "Base de volant PC",
+
+  },
+  {
+    name: "Volant PC",
+
+  },
+  {
+    name: "Pédalier Simracing",
+
+  },
+  {
+    name: "Frein à Main PC",
+
+  },
+  {
+    name: "Levier de Vitesse PC",
+
+  },
+  {
+    name: "Accessoires gaming",
+
+  },
+  {
+    name: "Pack Simracing",
+
+  },
+  {
+    name: "Chassis Simracing",
+
+  }
+];
     
                  // CATEGORY
     
-                 const data = [
+                 const dataCat = [
+                 {
+    name: "PC Gamer",
+    content:
+      "Nos châssis de simulation sont conçus pour offrir une stabilité maximale et une immersion totale. Fabriqués avec des matériaux robustes, ils sont réglables pour s'adapter à votre position de conduite idéale.",
+    image:
+      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle.jpg"
+  },
+  {
+    name: "Écrans PC",
+    content:
+      "Nos châssis de simulation sont conçus pour offrir une stabilité maximale et une immersion totale. Fabriqués avec des matériaux robustes, ils sont réglables pour s'adapter à votre position de conduite idéale.",
+    image:
+      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle.jpg"
+  },
   {
     name: "Base de volant PC",
     content:
@@ -324,25 +375,25 @@ function animateCategoryImage(newImageUrl) {
 
                  const ulCadres = document.querySelector('.hero-banner ul');
 
-                data.forEach(item => {
+                dataCadres.forEach(item => {
                   ulCadres.insertAdjacentHTML('beforeend', `<li><span>${item.name}</span><div></div></li>`);
                 });
 
                  //Categories
     
-                 mm.add("(min-width: 800px)", () => {
+                 mm.add("(min-width: 1000px)", () => {
                      // ✅ Insère dynamiquement les <li>
-                     for (let i = 0; i < data.length; i++) {
-                         liBox.insertAdjacentHTML('beforeend', `
-         <li class="cat-item" data-index="${i}">
-           <div class="cat-3d__bot__infos">
-             <span>0${i + 1}.</span>
-             <span>${data[i].name}</span>
-           </div>
-           <div class="cat-3d__bot__point"></div>
-         </li>
-       `);
-                     }
+                      for (let i = 0; i < dataCat.length; i++) {
+  liBox.insertAdjacentHTML('beforeend', `
+    <li class="cat-item" data-index="${i}">
+      <div class="cat-3d__bot__infos">
+        <span>${(i + 1).toString().padStart(2, '0')}.</span>
+        <span>${dataCat[i].name}</span>
+      </div>
+      <div class="cat-3d__bot__point"></div>
+    </li>
+  `);
+}
     
                      // ✅ Ajoute l'événement click sur chaque <li>
                      const items = document.querySelectorAll(".cat-item");
@@ -355,10 +406,10 @@ function animateCategoryImage(newImageUrl) {
     
                              // ✅ Mets à jour les contenus
                              catIndex.textContent = `(0${parseInt(index) + 1})`;  // Numérotation
-                             catName.textContent = data[index].name;             // Nom
-                             catContent.textContent = data[index].content;       // Description
+                             catName.textContent = dataCat[index].name;             // Nom
+                             catContent.textContent = dataCat[index].content;       // Description
     
-                             catLink.href = data[index].link
+                             catLink.href = dataCat[index].link
     
                              gsap.fromTo([catIndex, catName, catContent],
                                  { opacity: 0, y: 20 },
@@ -376,26 +427,28 @@ function animateCategoryImage(newImageUrl) {
                                  ease: "expo.out"
                              })
 
-                             animateCategoryImage(data[index].image);
+                             animateCategoryImage(dataCat[index].image);
                          });
                      });
-    
+                     if (items.length > 0) {
+  items[0].click();
+}
     
                  })
     
                  // LOGIQUE MOBILE 
     
     
-                 mm.add("(max-width: 799px)", () => {
+                 mm.add("(max-width: 999px)", () => {
                      const mobileList = document.querySelector(".cat-3d-mobile ul");
     
                      // ✅ Génère dynamiquement les catégories mobiles
-                     data.forEach((data, i) => {
+                     dataCat.forEach((data, i) => {
                          mobileList.insertAdjacentHTML('beforeend', `
        <li>
            <div class="cat-3d-mobile__top">
              <div class="cat-3d-mobile__top__name">
-               <span>0${i + 1}.</span>
+               <span>${(i + 1).toString().padStart(2, '0')}.</span>
                <span>${data.name}</span>
              </div>
              <div class="cat-3d__bot__point"></div>

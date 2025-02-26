@@ -52,9 +52,6 @@ export const CameraRigCarShow =({ groundRef, spotLightRef1, spotLightRef2, spotL
     // ✅ Rends GSAP globalement accessible
     window.gsap = gsap;
     window.ScrollTrigger = ScrollTrigger;
-    console.log("innerWidth:", window.innerWidth);
-    console.log("max-width (999px):", window.matchMedia("(max-width: 999px)").matches);
-    console.log("min-width (1000px):", window.matchMedia("(min-width: 1000px)").matches);
 
     mm.add("(min-width: 1000px)", () => { 
       setIsMobile(false);
@@ -109,7 +106,7 @@ textAndOtherTl
       
     
       gsap.registerPlugin(ScrollTrigger);
-      console.log(isMobile)
+ 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".carshow-container",
@@ -201,7 +198,7 @@ textAndOtherTl
         });
 
         if (groundRef.current) {
-          console.log('groundref')
+        
           tl.to(groundRef.current.material, {
             opacity: 0, // ✅ Disparition progressive
             ease: "linear",
@@ -277,9 +274,7 @@ textAndOtherTl
     // ✅ LookAt interpolé pour éviter les sauts
     const matrix = new THREE.Matrix4().lookAt(camera.position, lookAtTarget.current, new THREE.Vector3(0, 1, 0));
     camera.quaternion.slerp(new THREE.Quaternion().setFromRotationMatrix(matrix), 0.1);
-    
-    // console.log(`📷 Camera Position: x=${camera.position.x.toFixed(3)}, y=${camera.position.y.toFixed(3)}, z=${camera.position.z.toFixed(3)}`);
-    // console.log(`🔄 Camera Rotation: x=${camera.rotation.x.toFixed(3)}, y=${camera.rotation.y.toFixed(3)}, z=${camera.rotation.z.toFixed(3)}`);
+
   });
 
   useEffect(() => {
