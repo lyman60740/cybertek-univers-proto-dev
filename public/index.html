@@ -91,8 +91,8 @@
         <span>NEXT SECTION</span>
       </div>
 
-      <div class="carshow-container">
-        <div id="root" style="display: none"></div>
+      <div class="carshow-container" style="display: none">
+        <div id="root" ></div>
         <!--   
           <div class="feature-box">
               <img src="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/cybertek.png" alt="" class="logo-cyb">
@@ -258,124 +258,182 @@
       // CATEGORY
 
       const dataCat = [
-        {
-          name: 'PC Gamer',
-          content:
-            "Nos châssis de simulation sont conçus pour offrir une stabilité maximale et une immersion totale. Fabriqués avec des matériaux robustes, ils sont réglables pour s'adapter à votre position de conduite idéale.",
-          image: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pc_gamer.jpg',
-          link: '#1'
-        },
-        {
-          name: 'Écrans PC',
-          content:
-            "Nos châssis de simulation sont conçus pour offrir une stabilité maximale et une immersion totale. Fabriqués avec des matériaux robustes, ils sont réglables pour s'adapter à votre position de conduite idéale.",
-          image: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle.jpg',
-          link: '#2'
-        },
-        {
-          name: 'Base de volant PC',
-          content:
-            "Nos châssis de simulation sont conçus pour offrir une stabilité maximale et une immersion totale. Fabriqués avec des matériaux robustes, ils sont réglables pour s'adapter à votre position de conduite idéale.",
-          image: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/base_de_volant.jpg',
-          link: '#3'
-        },
-        {
-          name: 'Volant PC',
-          content:
-            'Conçus pour la performance, nos PC Gamer intègrent des composants haut de gamme, garantissant fluidité, graphismes époustouflants et une expérience de simulation réaliste.',
-          image: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/volant1.jpg',
-          link: '#'
-        },
-        {
-          name: 'Pédalier Simracing',
-          content:
-            'Offrant un ressenti réaliste et une réactivité optimale, nos pédaliers sont ajustables et dotés de capteurs de précision pour vous permettre de maîtriser chaque accélération et freinage.',
-          image: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pedalier1.jpg',
-          link: '#'
-        },
-        {
-          name: 'Frein à Main PC',
-          content:
-            'Vivez la course avec un réalisme saisissant grâce à nos écrans haute définition, offrant une fréquence de rafraîchissement élevée et des couleurs éclatantes pour une immersion totale.',
-          image: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/frein_a_main.jpg',
-          link: '#'
-        },
-        {
-          name: 'Levier de Vitesse PC',
-          content:
-            "Dotés de retours de force précis, de matériaux haut de gamme et d'une ergonomie pensée pour la performance, nos volants vous permettent de ressentir chaque virage, chaque vibration et chaque instant de la piste comme un véritable pilote.",
-          image: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/boite_de_vitesse1.jpg',
-          link: '#'
-        },
-        {
-          name: 'Accessoires gaming',
-          content:
-            'Puissantes et réactives, nos bases de volant garantissent un retour de force fluide et détaillé, offrant une expérience de conduite ultra-immersive, compatible avec tous types de volants.',
-          image: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/accessoires.jpg',
-          link: '#'
-        },
-        {
-          name: 'Pack Simracing',
-          content:
-            'Optimisez votre installation avec nos accessoires gaming : leviers de vitesse, supports de casque et tapis de simulation, tout pour parfaire votre cockpit de course.',
-          image: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle.jpg',
-          link: '#'
-        },
-        {
-          name: 'Chassis Simracing',
-          content:
-            'Simplifiez votre choix avec nos bundles clés en main, combinant châssis, volant, pédalier et écran, pour une expérience complète dès le déballage.',
-          image: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/chassis.jpg',
-          link: '#'
-        }
-      ]
+  {
+    name: 'PC Gamer',
+    content:
+      "Nos châssis de simulation sont conçus pour offrir une stabilité maximale et une immersion totale. Fabriqués avec des matériaux robustes, ils sont réglables pour s'adapter à votre position de conduite idéale.",
+    image:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pc_gamer.jpg',
+    link: '#1',
+    plaque:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/plaque-1.png'
+  },
+  {
+    name: 'Écrans PC',
+    content:
+      "Nos châssis de simulation sont conçus pour offrir une stabilité maximale et une immersion totale. Fabriqués avec des matériaux robustes, ils sont réglables pour s'adapter à votre position de conduite idéale.",
+    image:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle.jpg',
+    link: '#2',
+    plaque:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/plaque-2.png'
+  },
+  {
+    name: 'Base de volant PC',
+    content:
+      "Nos châssis de simulation sont conçus pour offrir une stabilité maximale et une immersion totale. Fabriqués avec des matériaux robustes, ils sont réglables pour s'adapter à votre position de conduite idéale.",
+    image:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/base_de_volant.jpg',
+    link: '#3',
+    plaque:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/plaque-3.png'
+  },
+  {
+    name: 'Volant PC',
+    content:
+      'Conçus pour la performance, nos PC Gamer intègrent des composants haut de gamme, garantissant fluidité, graphismes époustouflants et une expérience de simulation réaliste.',
+    image:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/volant1.jpg',
+    link: '#',
+    plaque:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/plaque-4.png'
+  },
+  {
+    name: 'Pédalier Simracing',
+    content:
+      'Offrant un ressenti réaliste et une réactivité optimale, nos pédaliers sont ajustables et dotés de capteurs de précision pour vous permettre de maîtriser chaque accélération et freinage.',
+    image:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pedalier1.jpg',
+    link: '#',
+    plaque:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/plaque-5.png'
+  },
+  {
+    name: 'Frein à Main PC',
+    content:
+      'Vivez la course avec un réalisme saisissant grâce à nos écrans haute définition, offrant une fréquence de rafraîchissement élevée et des couleurs éclatantes pour une immersion totale.',
+    image:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/frein_a_main.jpg',
+    link: '#',
+    plaque:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/plaque-6.png'
+  },
+  {
+    name: 'Levier de Vitesse PC',
+    content:
+      "Dotés de retours de force précis, de matériaux haut de gamme et d'une ergonomie pensée pour la performance, nos volants vous permettent de ressentir chaque virage, chaque vibration et chaque instant de la piste comme un véritable pilote.",
+    image:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/boite_de_vitesse1.jpg',
+    link: '#',
+    plaque:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/plaque-7.png'
+  },
+  {
+    name: 'Accessoires gaming',
+    content:
+      'Puissantes et réactives, nos bases de volant garantissent un retour de force fluide et détaillé, offrant une expérience de conduite ultra-immersive, compatible avec tous types de volants.',
+    image:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/accessoires.jpg',
+    link: '#',
+    plaque:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/plaque-8.png'
+  },
+  {
+    name: 'Pack Simracing',
+    content:
+      'Optimisez votre installation avec nos accessoires gaming : leviers de vitesse, supports de casque et tapis de simulation, tout pour parfaire votre cockpit de course.',
+    image:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle.jpg',
+    link: '#',
+    plaque:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/plaque-9.png'
+  },
+  {
+    name: 'Chassis Simracing',
+    content:
+      'Simplifiez votre choix avec nos bundles clés en main, combinant châssis, volant, pédalier et écran, pour une expérience complète dès le déballage.',
+    image:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/chassis.jpg',
+    link: '#',
+    plaque:
+      'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/plaque-10.png'
+  }
+];
+
 
       // Déclarez un flag global pour suivre l'état de l'animation
       let isAnimating = false
 
-      function animateCategoryImage(newImageUrl) {
-        // Si une animation est déjà en cours, on ignore le clic
-        if (isAnimating) return
-        isAnimating = true
+      function animateCategoryImage(newImageUrl, newPlaqueUrl) {
+  // Si une animation est déjà en cours, on ignore le clic
+  if (isAnimating) return;
+  isAnimating = true;
 
-        const categoryDiv = document.getElementById('category')
-        const currentImg = categoryDiv.querySelector('img')
+  const categoryDiv = document.getElementById('category');
+  // On suppose que la précédente animation était contenue dans un div ayant la classe "category-container"
+  const currentContainer = categoryDiv.querySelector('.category-container');
 
-        // Crée le nouvel élément image et initialise ses styles pour l'animation
-        const newImg = document.createElement('img')
-        newImg.src = newImageUrl
-        newImg.style.position = 'absolute'
-        newImg.style.left = '0'
-        newImg.style.width = '100%'
-        newImg.style.transform = 'translateY(100%)' // démarre en bas
+  // Création d'un conteneur pour regrouper l'image principale et la plaque
+  const newContainer = document.createElement('div');
+  newContainer.className = 'category-container';
+  newContainer.style.position = 'relative';
+  newContainer.style.width = '100%';
+  // On positionne le conteneur en dehors de la vue (en bas)
+  newContainer.style.transform = 'translateY(100%)';
 
-        // Ajoute le nouvel élément dans le conteneur
-        categoryDiv.appendChild(newImg)
+  // Création de l'image principale
+  const newMainImg = document.createElement('img');
+  newMainImg.src = newImageUrl;
+  newMainImg.style.position = 'absolute';
+  newMainImg.style.left = '0';
+  newMainImg.style.width = '100%';
+  // Pas besoin d'initialiser de transform ici puisque le conteneur le gère
 
-        // Crée une timeline GSAP pour animer les deux images simultanément
-        const tl = gsap.timeline({
-          onComplete: () => {
-            // Une fois l'animation terminée, retire l'ancienne image (si présente)
-            if (currentImg) {
-              currentImg.remove()
-            }
-            // Réinitialise les styles en ligne si besoin
-            newImg.style.position = ''
-            newImg.style.transform = ''
-            newImg.style.left = ''
-            newImg.style.width = ''
-            // Remet le flag à false pour autoriser une nouvelle animation
-            isAnimating = false
-          }
-        })
+  // Création de l'image plaque
+  const newPlaqueImg = document.createElement('img');
+  newPlaqueImg.src = newPlaqueUrl;
+  newPlaqueImg.style.position = 'absolute';
+  // Par exemple, positionnée en bas à gauche avec une largeur de 30%
+  newPlaqueImg.style.bottom = '10px';
+  newPlaqueImg.style.left = '10px';
+  newPlaqueImg.style.width = '30%';
+  
+  // On ajoute les deux images dans le conteneur
+  newContainer.appendChild(newMainImg);
+  newContainer.appendChild(newPlaqueImg);
 
-        // Anime l'ancienne image (si présente) vers le haut et la fait disparaître
-        if (currentImg) {
-          tl.to(currentImg, { scale: '0.7', duration: 0.5, ease: 'power2.out' })
-        }
-        // Anime la nouvelle image pour qu'elle arrive du bas vers sa position finale
-        tl.to(newImg, { y: '0%', duration: 0.5, ease: 'power2.out' }, '<10%')
+  // On ajoute le nouveau conteneur dans le conteneur principal
+  categoryDiv.appendChild(newContainer);
+
+  // Création de la timeline GSAP pour animer la transition
+  const tl = gsap.timeline({
+    onComplete: () => {
+      // Une fois l'animation terminée, retire l'ancien conteneur (s'il existe)
+      if (currentContainer) {
+        currentContainer.remove();
       }
+      // Réinitialisation des styles en ligne si besoin
+      newContainer.style.position = '';
+      newContainer.style.transform = '';
+      newMainImg.style.position = '';
+      newMainImg.style.left = '';
+      newMainImg.style.width = '';
+      newPlaqueImg.style.position = '';
+      newPlaqueImg.style.bottom = '';
+      newPlaqueImg.style.left = '';
+      newPlaqueImg.style.width = '';
+      // On remet le flag à false pour autoriser une nouvelle animation
+      isAnimating = false;
+    }
+  });
+
+  // Si un ancien conteneur existe, on l'anime pour le faire disparaître (exemple : réduction d'échelle)
+  if (currentContainer) {
+    tl.to(currentContainer, { scale: '0.7', duration: 0.5, ease: 'power2.out' });
+  }
+  // Anime le nouveau conteneur de translateY(100%) à sa position finale (0%)
+  tl.to(newContainer, { y: '0%', duration: 0.5, ease: 'power2.out' }, '<10%');
+}
 
       const mm = gsap.matchMedia()
 
@@ -457,7 +515,8 @@
               ease: 'expo.out'
             })
 
-            animateCategoryImage(dataCat[index].image)
+            animateCategoryImage(dataCat[index].image, dataCat[index].plaque);
+
           })
 
           // Hover : quand on entre sur un élément
