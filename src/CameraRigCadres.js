@@ -27,18 +27,18 @@ export const CameraRigCadres = ({
     const mm = gsap.matchMedia();
     mm.add(
       {
-        small: "(max-width: 600px)",
-        medium: "(min-width: 601px) and (max-width: 1024px)",
-        large: "(min-width: 1025px)"
+        small: "(max-width: 1199px)",
+        medium: "(min-width: 1200px) and (max-width: 1599px)",
+        large: "(min-width: 1600px)"
       },
       (context) => {
         const { conditions } = context;
         if (conditions.small) {
-          setTargetPosition([0, 0.5, 12]); // Plus éloigné pour petits écrans
+          setTargetPosition([0, 0.5, 17]); // Plus éloigné pour petits écrans
         } else if (conditions.medium) {
-          setTargetPosition([0, 0.5, 14]);
+          setTargetPosition([0, 0.5, 15]);
         } else if (conditions.large) {
-          setTargetPosition([0, 0.5, 12.5]);
+          setTargetPosition([0, 0.5, 13]);
         }
       }
     );

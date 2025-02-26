@@ -5,6 +5,7 @@ import { CameraRigCadres } from "./CameraRigCadres";
 import { Frames } from "./Frames";
 import { Ground } from "./Ground";
 
+
 function useExternalRenderControl() {
   const [canRender, setCanRender] = useState(window.isLoaded || false);
 
@@ -122,6 +123,7 @@ if (!canRender) return null;
         intensity={0.02}
 
       />
+     
       <object3D ref={targetRef} position={[0, 0.5, 1]} />
       <group position={[0, -0.5, 0]}>
       <Frames 

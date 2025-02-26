@@ -5,6 +5,7 @@ import { CarShowScene } from "./CarShowScene";
 import { CadresScene } from "./CadresScene";
 import { MobileCadres } from "./MobileCadres";
 import { CategoryScene } from "./CategoryScene";
+import { Cat2D } from "./Cat2D";
 import React, {Suspense, useEffect, useRef } from "react";
 import { useInView } from "./useInView";
 import gsap from "gsap";
@@ -28,7 +29,7 @@ const images = [
 
   // Côtés droits
   { position: [radius * 0.9, 0, center[2] + 0.2], rotation: [0, -Math.PI / 4, 0], url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/boite_de_vitesse.jpg', name: "(6) ACCÉSSOIRES GAMING" },
-  { position: [radius * 1.3, 0, center[2] + 0.8], rotation: [0, -Math.PI / 3.5, 0], url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/common-ph.jpg', name: "(7) ÉCRANS" },
+  { position: [radius * 1.3, 0, center[2] + 0.8], rotation: [0, -Math.PI / 3.5, 0], url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pc_gamer.jpg', name: "(7) ÉCRANS" },
   { position: [radius * 1.6, 0, center[2] + 2.1], rotation: [0, -Math.PI / 2.5, 0], url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pc_gamer.jpg', name: "(8) PC GAMER" }
 ];
 
@@ -86,7 +87,7 @@ mm.add("(min-width: 800px)", ()=> {
       <Suspense fallback={null}>
         <Canvas
           dpr={[1, 1.5]}
-          camera={{ fov: 30, position: [0, 0.5, 10] }}
+          camera={{ fov: 20, position: [0, 0.5, 10] }}
           frameloop={"always"}
         >
         <CadresScene images={images} />
@@ -113,20 +114,36 @@ mm.add("(max-width: 799px)", ()=> {
 })
 
 
-mm.add("(min-width: 800px)", ()=> {   
-  if (categoryElement) {
-    createRoot(categoryElement).render(
-      <Suspense fallback={null}>
+// mm.add("(min-width: 800px)", ()=> {   
+//   if (categoryElement) {
+//     createRoot(categoryElement).render(
+//       <Suspense fallback={null}>
         
-        <Canvas
-          dpr={[1, 1.5]}
-          camera={{ fov: 45, position: [0, 0.5, 8] }}
-          frameloop={"always"}
-        >
-          <CategoryScene />
-          </Canvas>
-      </Suspense>
-    );
-  }
-})
+//         <Canvas
+//           dpr={[1, 1.5]}
+//           camera={{ fov: 45, position: [0, 0.5, 8] }}
+//           frameloop={"always"}
+//         >
+//           <CategoryScene />
+//           </Canvas>
+//       </Suspense>
+//     );
+//   }
+// })
+
+// mm.add("(min-width: 800px)", ()=> {   
+//   if (categoryElement) {
+//     createRoot(categoryElement).render(
+//       <Suspense fallback={null}>
+//         <Canvas
+//           dpr={[1, 1.5]}
+//           camera={{ fov: 45, position: [0, 0, 6] }}
+//           frameloop={"always"}
+//         >
+//           <Cat2D images={images} />
+//         </Canvas>
+//       </Suspense>
+//     );
+//   }
+// });
 

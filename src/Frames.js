@@ -74,7 +74,7 @@ function Frame({ url, position, rotation, isSelected, isHovered, onSelect, onDes
           position={[0, 0.9, 0.2]}
         >
           <boxGeometry />
-          <meshBasicMaterial color="black"  />
+          <meshBasicMaterial color="#292929"  />
   
           <mesh ref={frame} raycast={() => null} scale={[0.9, 0.93, 0.9]} position={[0, 0, 0.2]}>
             <boxGeometry />
