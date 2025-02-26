@@ -552,11 +552,22 @@ border-radius: 50%;
   width: 100%;
   position: relative;
 }
-#category img {
+.category-container {
+  height: 100%;
+}
+#category .main-img-cat {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 15px;
+
+  z-index: 1;
+}
+#category .plaque {
+  position: absolute;
+  z-index: 2;
+  bottom: 10px;
+  left: 10px;
 }
 .cat-3d__top__product__wrapper {
   width: 100%;
@@ -570,6 +581,7 @@ border-radius: 50%;
   position: relative;
   height: max-content;
   margin: auto 0;
+  z-index: 3;
 }
 .cat-3d__top__description p {
   color: #878787;

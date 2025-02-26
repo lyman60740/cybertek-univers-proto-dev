@@ -44,7 +44,7 @@
               <div class="cat-3d__top__product">
                 <div class="cat-3d__top__product__wrapper">
                   <div id="category"></div>
-                  <div class="cat-3d__top__product__plaque"></div>
+                 
                 </div>
               </div>
 
@@ -365,74 +365,54 @@
       let isAnimating = false
 
       function animateCategoryImage(newImageUrl, newPlaqueUrl) {
-  // Si une animation est déjà en cours, on ignore le clic
   if (isAnimating) return;
   isAnimating = true;
 
   const categoryDiv = document.getElementById('category');
-  // On suppose que la précédente animation était contenue dans un div ayant la classe "category-container"
-  const currentContainer = categoryDiv.querySelector('.category-container');
+  const currentMainImg = categoryDiv.querySelector('img.main-img-cat');
+  const currentPlaqueImg = categoryDiv.querySelector('img.plaque');
 
-  // Création d'un conteneur pour regrouper l'image principale et la plaque
-  const newContainer = document.createElement('div');
-  newContainer.className = 'category-container';
-  newContainer.style.position = 'relative';
-  newContainer.style.width = '100%';
-  // On positionne le conteneur en dehors de la vue (en bas)
-  newContainer.style.transform = 'translateY(100%)';
+  // Création de la nouvelle image principale
+  const newImg = document.createElement('img');
+  newImg.src = newImageUrl;
+  newImg.className = 'main-img-cat';
+  newImg.style.position = 'absolute';
+  newImg.style.left = '0';
+  newImg.style.width = '100%';
+  newImg.style.height = '100%';
+  newImg.style.transform = 'translateY(100%)';
+  newImg.style.zIndex = '2';
 
-  // Création de l'image principale
-  const newMainImg = document.createElement('img');
-  newMainImg.src = newImageUrl;
-  newMainImg.style.position = 'absolute';
-  newMainImg.style.left = '0';
-  newMainImg.style.width = '100%';
-  // Pas besoin d'initialiser de transform ici puisque le conteneur le gère
+  // Création de la nouvelle image plaque
+  const newPlaque = document.createElement('img');
+  newPlaque.src = newPlaqueUrl;
+  newPlaque.className = 'plaque';
 
-  // Création de l'image plaque
-  const newPlaqueImg = document.createElement('img');
-  newPlaqueImg.src = newPlaqueUrl;
-  newPlaqueImg.style.position = 'absolute';
-  // Par exemple, positionnée en bas à gauche avec une largeur de 30%
-  newPlaqueImg.style.bottom = '10px';
-  newPlaqueImg.style.left = '10px';
-  newPlaqueImg.style.width = '30%';
-  
-  // On ajoute les deux images dans le conteneur
-  newContainer.appendChild(newMainImg);
-  newContainer.appendChild(newPlaqueImg);
 
-  // On ajoute le nouveau conteneur dans le conteneur principal
-  categoryDiv.appendChild(newContainer);
+  // Si une image actuelle existe, on lui assigne un z-index inférieur
+  if (currentMainImg) currentMainImg.style.zIndex = '1';
+  if (currentPlaqueImg) currentPlaqueImg.style.zIndex = '1';
 
-  // Création de la timeline GSAP pour animer la transition
+  // Ajoute les nouvelles images dans le conteneur
+  categoryDiv.appendChild(newImg);
+  categoryDiv.appendChild(newPlaque);
+
   const tl = gsap.timeline({
     onComplete: () => {
-      // Une fois l'animation terminée, retire l'ancien conteneur (s'il existe)
-      if (currentContainer) {
-        currentContainer.remove();
-      }
-      // Réinitialisation des styles en ligne si besoin
-      newContainer.style.position = '';
-      newContainer.style.transform = '';
-      newMainImg.style.position = '';
-      newMainImg.style.left = '';
-      newMainImg.style.width = '';
-      newPlaqueImg.style.position = '';
-      newPlaqueImg.style.bottom = '';
-      newPlaqueImg.style.left = '';
-      newPlaqueImg.style.width = '';
-      // On remet le flag à false pour autoriser une nouvelle animation
+      if (currentMainImg) currentMainImg.remove();
+      if (currentPlaqueImg) currentPlaqueImg.remove();
+
+      // Réinitialise les styles inline pour revenir aux styles par défaut (ou CSS)
+   
       isAnimating = false;
     }
   });
 
-  // Si un ancien conteneur existe, on l'anime pour le faire disparaître (exemple : réduction d'échelle)
-  if (currentContainer) {
-    tl.to(currentContainer, { scale: '0.7', duration: 0.5, ease: 'power2.out' });
+  if (currentMainImg) {
+    tl.to(currentMainImg, { scale: '0.7', duration: 0.5, ease: 'power2.out' });
   }
-  // Anime le nouveau conteneur de translateY(100%) à sa position finale (0%)
-  tl.to(newContainer, { y: '0%', duration: 0.5, ease: 'power2.out' }, '<10%');
+  tl.fromTo(newImg, { y: '100%' }, { y: '0%', duration: 0.5, ease: 'power2.out' }, '<10%')
+    .fromTo(newPlaque, { y: 50, autoAlpha: 0 }, { y: 0,autoAlpha: 1 , duration: 0.5, ease: 'power2.out' }, '<50%');
 }
 
       const mm = gsap.matchMedia()
@@ -478,85 +458,87 @@
         let selectedIndex = null
 
         items.forEach((item) => {
-          // Click : met à jour le contenu et définit l'élément sélectionné
-          item.addEventListener('click', () => {
-            if (isAnimating) return
+  // Click : met à jour le contenu et définit l'élément sélectionné
+  item.addEventListener('click', () => {
+    // Ne rien faire si l'élément cliqué est déjà sélectionné
+    if (selectedIndex === item.dataset.index) return;
+    if (isAnimating) return;
 
-            const index = item.dataset.index
-            selectedIndex = index // Stocke l'élément cliqué
+    const index = item.dataset.index;
+    selectedIndex = index; // Stocke l'élément cliqué
 
-            // Met à jour les contenus
-            catIndex.textContent = `(0${parseInt(index) + 1})` // Numérotation
-            catName.textContent = dataCat[index].name // Nom
-            catContent.textContent = dataCat[index].content // Description
-            catLink.href = dataCat[index].link
+    // Met à jour les contenus
+    catIndex.textContent = `(0${parseInt(index) + 1})`; // Numérotation
+    catName.textContent = dataCat[index].name;            // Nom
+    catContent.textContent = dataCat[index].content;      // Description
+    catLink.href = dataCat[index].link;
 
-            gsap.fromTo(
-              [catIndex, catName, catContent],
-              { opacity: 0, y: 20 },
-              { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', stagger: 0.1 }
-            )
+    gsap.fromTo(
+      [catIndex, catName, catContent],
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', stagger: 0.1 }
+    );
 
-            // Anime tous les points à -200%
-            const targetEl = item.querySelector('.cat-3d__bot__point div')
-            document.querySelectorAll('.cat-3d__bot__point div').forEach((el) => {
-              if (el !== targetEl) {
-                gsap.to(el, {
-                  xPercent: -200,
-                  duration: 0.5,
-                  ease: 'expo.out'
-                })
-              }
-            })
-            // Et celui de l'élément cliqué à 0%
-            gsap.to(item.querySelector('.cat-3d__bot__point div'), {
-              xPercent: 0,
-              duration: 0.5,
-              ease: 'expo.out'
-            })
+    // Anime tous les points à -200%
+    const targetEl = item.querySelector('.cat-3d__bot__point div');
+    document.querySelectorAll('.cat-3d__bot__point div').forEach((el) => {
+      if (el !== targetEl) {
+        gsap.to(el, {
+          xPercent: -200,
+          duration: 0.5,
+          ease: 'expo.out'
+        });
+      }
+    });
+    // Et celui de l'élément cliqué à 0%
+    gsap.to(item.querySelector('.cat-3d__bot__point div'), {
+      xPercent: 0,
+      duration: 0.5,
+      ease: 'expo.out'
+    });
 
-            animateCategoryImage(dataCat[index].image, dataCat[index].plaque);
+    animateCategoryImage(dataCat[index].image, dataCat[index].plaque);
+  });
 
-          })
+  // Hover : quand on entre sur un élément
+  item.addEventListener('mouseenter', () => {
+    // On anime tous les points des éléments non sélectionnés vers -200%
+    document.querySelectorAll('.cat-item').forEach((el) => {
+      if (el.dataset.index !== selectedIndex) {
+        gsap.to(el.querySelector('.cat-3d__bot__point div'), {
+          xPercent: -200,
+          duration: 0.5,
+          ease: 'expo.out'
+        });
+      }
+    });
+    // Et pour l'élément survolé, on l'anime vers 0 si ce n'est pas déjà sélectionné
+    if (item.dataset.index !== selectedIndex) {
+      gsap.to(item.querySelector('.cat-3d__bot__point div'), {
+        xPercent: 0,
+        duration: 0.5,
+        ease: 'expo.out'
+      });
+    }
+  });
 
-          // Hover : quand on entre sur un élément
-          item.addEventListener('mouseenter', () => {
-            // On anime tous les points des éléments non sélectionnés vers -200%
-            document.querySelectorAll('.cat-item').forEach((el) => {
-              if (el.dataset.index !== selectedIndex) {
-                gsap.to(el.querySelector('.cat-3d__bot__point div'), {
-                  xPercent: -200,
-                  duration: 0.5,
-                  ease: 'expo.out'
-                })
-              }
-            })
-            // Et pour l'élément survolé, on l'anime vers 0 si ce n'est pas déjà sélectionné
-            if (item.dataset.index !== selectedIndex) {
-              gsap.to(item.querySelector('.cat-3d__bot__point div'), {
-                xPercent: 0,
-                duration: 0.5,
-                ease: 'expo.out'
-              })
-            }
-          })
+  // Mouseleave : quand on quitte un élément
+  item.addEventListener('mouseleave', () => {
+    // Si l'élément quitté n'est pas le sélectionné, on ramène son point à -200%
+    if (item.dataset.index !== selectedIndex) {
+      gsap.to(item.querySelector('.cat-3d__bot__point div'), {
+        xPercent: -200,
+        duration: 0.5,
+        ease: 'expo.out'
+      });
+    }
+  });
+});
 
-          // Mouseleave : quand on quitte un élément
-          item.addEventListener('mouseleave', () => {
-            // Si l'élément quitté n'est pas le sélectionné, on ramène son point à -200%
-            if (item.dataset.index !== selectedIndex) {
-              gsap.to(item.querySelector('.cat-3d__bot__point div'), {
-                xPercent: -200,
-                duration: 0.5,
-                ease: 'expo.out'
-              })
-            }
-          })
-        })
+if (items.length > 0) {
+  items[0].click();
+}
 
-        if (items.length > 0) {
-          items[0].click()
-        }
       })
 
       // LOGIQUE MOBILE
