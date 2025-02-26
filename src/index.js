@@ -26,8 +26,8 @@ const images = [
   { 
     position: [-radius * 1.6, 0, center[2] + 2.1], 
     rotation: [0, Math.PI / 2.5, 0], 
-    url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle.jpg', 
-    name: "(1) PACK SIMRACING",
+    url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/base_de_volant.jpg', 
+    name: "(1) BASE DE VOLANT",
     link: "#" 
   },
   { 
@@ -41,44 +41,44 @@ const images = [
   { 
     position: [-radius * 0.9, 0, center[2] + 0.2], 
     rotation: [0, Math.PI / 4, 0], 
-    url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/base_de_volant.jpg', 
-    name: "(3) BASES DE VOLANT",
+    url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pedalier1.jpg', 
+    name: "(3) PÉDALIERS",
     link: "#" 
   },
   { 
     position: [-radius * 0.3, 0, center[2] - 0.5], 
     rotation: [0, 0, 0], 
-    url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/chassis.jpg', 
-    name: "(4) CHÂSSIS",
+    url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/frein_a_main.jpg', 
+    name: "(4) FREIN À MAIN",
     link: "#" 
   },
   { 
     position: [radius * 0.3, 0, center[2] - 0.5], 
     rotation: [0, 0, 0], 
-    url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pedalier1.jpg', 
-    name: "(5) PÉDALIERS",
+    url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/boite_de_vitesse1.jpg', 
+    name: "(5) LEVIER DE VITESSE",
     link: "#" 
   },
   // Côtés droits
   { 
     position: [radius * 0.9, 0, center[2] + 0.2], 
     rotation: [0, -Math.PI / 4, 0], 
-    url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/boite_de_vitesse.jpg', 
-    name: "(6) ACCÉSSOIRES GAMING",
+    url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/accessoires.jpg', 
+    name: "(6) ACCESSOIRES GAMING",
     link: "#" 
   },
   { 
     position: [radius * 1.3, 0, center[2] + 0.8], 
     rotation: [0, -Math.PI / 3.5, 0], 
-    url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pc_gamer.jpg', 
-    name: "(7) ÉCRANS",
+    url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle.jpg', 
+    name: "(7) PACK SIMRACING",
     link: "#" 
   },
   { 
     position: [radius * 1.6, 0, center[2] + 2.1], 
     rotation: [0, -Math.PI / 2.5, 0], 
-    url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pc_gamer.jpg', 
-    name: "(8) PC GAMER",
+    url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/chassis.jpg', 
+    name: "(8) CHÂSSIS",
     link: "#" 
   }
 ];
