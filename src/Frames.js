@@ -65,7 +65,15 @@ function Frame({ url, position, rotation, isSelected, isHovered, onSelect, onDes
         rotation={rotation}
         onPointerOver={() => setHoveredObject && setHoveredObject(index)} // ✅ Vérifie que `setHoveredObject` existe
         onPointerOut={() => setHoveredObject && setHoveredObject(null)}
-        onClick={() => (isSelected ? onDeselect() : onSelect())} // Garde le clic
+        onClick={() => {
+          if (isSelected) {
+            // Si la frame est déjà sélectionnée, on redirige vers son lien en target="_blank"
+            window.open(props.link, '_blank');
+          } else {
+            // Sinon, on la sélectionne pour lancer l'animation
+            onSelect();
+          }
+        }}
       >
         <mesh
           onPointerOver={(e) => (e.stopPropagation(), hover(true))}
