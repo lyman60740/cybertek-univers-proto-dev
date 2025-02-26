@@ -360,6 +360,7 @@ height: 8px;
 background-color: #FFCF00; /* Couleur jaune */ 
 opacity: 0; /* Invisible au départ */
 transition: transform 0.3s ease, opacity 0.3s ease; /* Transition fluide */
+border-radius: 50%;
 }
 
 /* Apparition avec effet */
@@ -468,11 +469,20 @@ font-weight: 400;
 font-weight: 400;
 }
 .cat-3d__bot__point {
-  width: 5px;
-height: 5px;
+  width: 10px;
+height: 10px;
 border-radius: 50%;
-background: #FFCF00;
-border: 1px solid #FFCF00
+
+border: 1px solid #FFCF00;
+padding: 1px;
+box-sizing: border-box;
+}
+.cat-3d__bot__point div {
+  
+  background: #FFCF00;
+  width: 100%;
+height: 100%;
+border-radius: 50%;
 }
 
 

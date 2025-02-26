@@ -246,70 +246,70 @@
     content:
       "Nos châssis de simulation sont conçus pour offrir une stabilité maximale et une immersion totale. Fabriqués avec des matériaux robustes, ils sont réglables pour s'adapter à votre position de conduite idéale.",
     image:
-      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle.jpg"
+      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pc_gamer-d.jpg"
   },
   {
     name: "Écrans PC",
     content:
       "Nos châssis de simulation sont conçus pour offrir une stabilité maximale et une immersion totale. Fabriqués avec des matériaux robustes, ils sont réglables pour s'adapter à votre position de conduite idéale.",
     image:
-      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle.jpg"
+      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle-d.jpg"
   },
   {
     name: "Base de volant PC",
     content:
       "Nos châssis de simulation sont conçus pour offrir une stabilité maximale et une immersion totale. Fabriqués avec des matériaux robustes, ils sont réglables pour s'adapter à votre position de conduite idéale.",
     image:
-      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle.jpg"
+      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/base_de_volant-d.jpg"
   },
   {
     name: "Volant PC",
     content:
       "Conçus pour la performance, nos PC Gamer intègrent des composants haut de gamme, garantissant fluidité, graphismes époustouflants et une expérience de simulation réaliste.",
     image:
-      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/volant1.jpg"
+      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/volant1-d.jpg"
   },
   {
     name: "Pédalier Simracing",
     content:
       "Offrant un ressenti réaliste et une réactivité optimale, nos pédaliers sont ajustables et dotés de capteurs de précision pour vous permettre de maîtriser chaque accélération et freinage.",
     image:
-      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/base_de_volant.jpg"
+      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pedalier1-d.jpg"
   },
   {
     name: "Frein à Main PC",
     content:
       "Vivez la course avec un réalisme saisissant grâce à nos écrans haute définition, offrant une fréquence de rafraîchissement élevée et des couleurs éclatantes pour une immersion totale.",
     image:
-      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/chassis.jpg"
+      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/chassis-d.jpg"
   },
   {
     name: "Levier de Vitesse PC",
     content:
       "Dotés de retours de force précis, de matériaux haut de gamme et d'une ergonomie pensée pour la performance, nos volants vous permettent de ressentir chaque virage, chaque vibration et chaque instant de la piste comme un véritable pilote.",
     image:
-      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pedalier1.jpg"
+      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/boite_de_vitesse-d.jpg"
   },
   {
     name: "Accessoires gaming",
     content:
       "Puissantes et réactives, nos bases de volant garantissent un retour de force fluide et détaillé, offrant une expérience de conduite ultra-immersive, compatible avec tous types de volants.",
     image:
-      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/accessoires.jpg"
+      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/accessoires-d.jpg"
   },
   {
     name: "Pack Simracing",
     content:
       "Optimisez votre installation avec nos accessoires gaming : leviers de vitesse, supports de casque et tapis de simulation, tout pour parfaire votre cockpit de course.",
     image:
-      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pc_gamer.jpg"
+      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle-d.jpg"
   },
   {
     name: "Chassis Simracing",
     content:
       "Simplifiez votre choix avec nos bundles clés en main, combinant châssis, volant, pédalier et écran, pour une expérience complète dès le déballage.",
     image:
-      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pc_gamer.jpg"
+      "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/chassis-d.jpg"
   }
 ];
 // Déclarez un flag global pour suivre l'état de l'animation
@@ -390,7 +390,7 @@ function animateCategoryImage(newImageUrl) {
         <span>${(i + 1).toString().padStart(2, '0')}.</span>
         <span>${dataCat[i].name}</span>
       </div>
-      <div class="cat-3d__bot__point"></div>
+      <div class="cat-3d__bot__point"><div></div></div>
     </li>
   `);
 }
@@ -398,41 +398,87 @@ function animateCategoryImage(newImageUrl) {
                      // ✅ Ajoute l'événement click sur chaque <li>
                      const items = document.querySelectorAll(".cat-item");
     
-                     items.forEach(item => {
-                         item.addEventListener("click", () => {
-                          if (isAnimating) return;
-                          
-                             const index = item.dataset.index;
-    
-                             // ✅ Mets à jour les contenus
-                             catIndex.textContent = `(0${parseInt(index) + 1})`;  // Numérotation
-                             catName.textContent = dataCat[index].name;             // Nom
-                             catContent.textContent = dataCat[index].content;       // Description
-    
-                             catLink.href = dataCat[index].link
-    
-                             gsap.fromTo([catIndex, catName, catContent],
-                                 { opacity: 0, y: 20 },
-                                 { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", stagger: 0.1 }
-                             );
-    
-                             gsap.to(document.querySelectorAll('.cat-3d__bot__point'), {
-                                 background: "rgba(0,0,0,0)",
-                                 duration: .5,
-                                 ease: "expo.out"
-                             })
-                             gsap.to(item.querySelector('.cat-3d__bot__point'), {
-                                 background: "#FFCF00",
-                                 duration: .5,
-                                 ease: "expo.out"
-                             })
+                   // Variable globale pour stocker l'index de l'élément cliqué
+let selectedIndex = null;
 
-                             animateCategoryImage(dataCat[index].image);
-                         });
-                     });
+items.forEach(item => {
+  // Click : met à jour le contenu et définit l'élément sélectionné
+  item.addEventListener("click", () => {
+    if (isAnimating) return;
+    
+    const index = item.dataset.index;
+    selectedIndex = index; // Stocke l'élément cliqué
+
+    // Met à jour les contenus
+    catIndex.textContent = `(0${parseInt(index) + 1})`;  // Numérotation
+    catName.textContent = dataCat[index].name;             // Nom
+    catContent.textContent = dataCat[index].content;       // Description
+    catLink.href = dataCat[index].link;
+
+    gsap.fromTo([catIndex, catName, catContent],
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", stagger: 0.1 }
+    );
+
+    // Anime tous les points à -200%
+    const targetEl = item.querySelector('.cat-3d__bot__point div');
+document.querySelectorAll('.cat-3d__bot__point div').forEach(el => {
+  if (el !== targetEl) {
+    gsap.to(el, {
+      xPercent: -200,
+      duration: 0.5,
+      ease: "expo.out"
+    });
+  }
+});
+    // Et celui de l'élément cliqué à 0%
+    gsap.to(item.querySelector('.cat-3d__bot__point div'), {
+      xPercent: 0,
+      duration: 0.5,
+      ease: "expo.out"
+    });
+
+    animateCategoryImage(dataCat[index].image);
+  });
+
+  // Hover : quand on entre sur un élément
+  item.addEventListener("mouseenter", () => {
+    // On anime tous les points des éléments non sélectionnés vers -200%
+    document.querySelectorAll('.cat-item').forEach(el => {
+      if (el.dataset.index !== selectedIndex) {
+        gsap.to(el.querySelector('.cat-3d__bot__point div'), {
+          xPercent: -200,
+          duration: 0.5,
+          ease: "expo.out"
+        });
+      }
+    });
+    // Et pour l'élément survolé, on l'anime vers 0 si ce n'est pas déjà sélectionné
+    if (item.dataset.index !== selectedIndex) {
+      gsap.to(item.querySelector('.cat-3d__bot__point div'), {
+        xPercent: 0,
+        duration: 0.5,
+        ease: "expo.out"
+      });
+    }
+  });
+
+  // Mouseleave : quand on quitte un élément
+  item.addEventListener("mouseleave", () => {
+    // Si l'élément quitté n'est pas le sélectionné, on ramène son point à -200%
+    if (item.dataset.index !== selectedIndex) {
+      gsap.to(item.querySelector('.cat-3d__bot__point div'), {
+        xPercent: -200,
+        duration: 0.5,
+        ease: "expo.out"
+      });
+    }
+  });
+});
+
                      if (items.length > 0) {
-  items[0].click();
-}
+                        items[0].click();
+                      }
     
                  })
     

@@ -19,7 +19,7 @@ const angleOffset = Math.PI / 9; // Angle supplémentaire pour ajuster la courbu
 const images = [
 
   // Arrière légèrement tourné vers le centre
-  { position:[-radius * 1.6, 0, center[2] + 2.1], rotation: [0, Math.PI / 2.5, 0] , url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle.jpg', name: "(1) BUNDLE" },
+  { position:[-radius * 1.6, 0, center[2] + 2.1], rotation: [0, Math.PI / 2.5, 0] , url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle.jpg', name: "(1) PACK SIMRACING" },
   { position: [-radius * 1.3, 0, center[2] + 0.8], rotation: [0, Math.PI / 3.5, 0], url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/volant1.jpg', name: "(2) VOLANTS" },
 
   // Côtés gauches
