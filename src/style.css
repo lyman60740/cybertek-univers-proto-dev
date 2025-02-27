@@ -598,6 +598,7 @@ border-radius: 50%;
   position: relative;
   margin: 0;
   height: 250px;
+  line-height: 1.2;
 }
 .cat-3d__top__description p strong {
   color: white;
@@ -770,8 +771,10 @@ box-sizing: border-box;
     justify-content: center;
   }
   .cat-3d-mobile__img-wrap img {
-    width: 90%;
-    object-fit: cover;
+    width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
   }
   .cat-3d__top__description {
     margin: 0 0 auto 0;
