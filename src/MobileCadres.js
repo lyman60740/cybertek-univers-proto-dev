@@ -12,15 +12,16 @@ const center = [0, 0, 0.5]; // Centre du cercle
 
 // Données de base pour les images
 const imagesData = [
-  { url: 'https://cybertek-r3f-simracing-category.vercel.app/images/common-ph.png', name: "(1) CHASSIS", link: "https://example.com/chassis" },
-  { url: 'https://cybertek-r3f-simracing-category.vercel.app/images/common-ph.png', name: "(2) PC GAMER", link: "https://example.com/pc-gamer" },
-  { url: 'https://cybertek-r3f-simracing-category.vercel.app/images/common-ph.png', name: "(3) PEDALIER", link: "https://example.com/pedalier" },
-  { url: 'https://cybertek-r3f-simracing-category.vercel.app/images/common-ph.png', name: "(4) ECRANS", link: "https://example.com/ecrans" },
-  { url: 'https://cybertek-r3f-simracing-category.vercel.app/images/common-ph.png', name: "(5) VOLANTS", link: "https://example.com/volants" },
-  { url: 'https://cybertek-r3f-simracing-category.vercel.app/images/common-ph.png', name: "(6) BASE DE VOLANT", link: "https://example.com/base-volant" },
-  { url: 'https://cybertek-r3f-simracing-category.vercel.app/images/common-ph.png', name: "(7) ACCESSOIRES GAMING", link: "https://example.com/accessoires" },
-  { url: 'https://cybertek-r3f-simracing-category.vercel.app/images/common-ph.png', name: "(8) BUNDLE", link: "https://example.com/bundle" }
+  { url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/base_de_volant.jpg', name: "(1) BASE DE VOLANT", link: "https://example.com/chassis" },
+  { url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/volant1.jpg', name: "(2) VOLANTS", link: "https://example.com/pc-gamer" },
+  { url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pedalier1.jpg', name: "(3) PÉDALIERS", link: "https://example.com/pedalier" },
+  { url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/frein_a_main.jpg', name: "(4) FREIN À MAIN", link: "https://example.com/ecrans" },
+  { url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/boite_de_vitesse1.jpg', name: "(5) LEVIER DE VITESSE", link: "https://example.com/volants" },
+  { url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/accessoires.jpg', name: "(6) ACCESSOIRES GAMING", link: "https://example.com/base-volant" },
+  { url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle.jpg', name: "(7) PACK SIMRACING", link: "https://example.com/accessoires" },
+  { url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/chassis.jpg', name: "(8) CHÂSSIS", link: "https://example.com/bundle" }
 ];
+
 
 
 const images = imagesData.map((item, i, arr) => {
