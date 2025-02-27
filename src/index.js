@@ -93,6 +93,7 @@ const categoryElement = document.getElementById("category");
 // ====================
 function LenisController() {
   useEffect(() => {
+    
     // Toujours démarrer en haut de la page
     window.scrollTo(0, 0);
 
@@ -139,6 +140,7 @@ function LenisController() {
     // Lorsque le chargement est terminé (indiqué par l'événement "loaded"), on démarre Lenis
     const handleLoaded = () => {
       lenis.start();
+      lenis.scrollTo(0, { immediate: true });
     };
     window.addEventListener("loaded", handleLoaded);
 
