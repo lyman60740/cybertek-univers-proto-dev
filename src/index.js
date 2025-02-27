@@ -115,6 +115,10 @@ function LenisController() {
     }
     requestAnimationFrame(raf);
 
+    lenis.on('scroll', () => {
+      ScrollTrigger.update()
+    })
+
     // Synchronisation avec ScrollTrigger (seulement la synchronisation, pas les animations)
     ScrollTrigger.scrollerProxy(document.body, {
       scrollTop(value) {
