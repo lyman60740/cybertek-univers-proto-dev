@@ -405,11 +405,14 @@ z-index: 2;
   position: absolute;
   bottom: -30%;
   z-index: 0;
+  width: 100%
 }
-.cat-3d__bg img {
-  position: relative;
-  z-index: 0;
-}
+
+  .cat-3d__bg img {
+      position: relative;
+      z-index: 0;
+      width: 100%
+  }
 .cat-3d__bg__overlay {
   position: absolute;
   bottom: 0;
