@@ -40,6 +40,11 @@ function Frame({ url, position, rotation, isSelected, isHovered, onSelect, onDes
   
     // Un seul objet peut être actif (soit par hover, soit par clic)
     const isActive = isSelected || (isHovered && !isSelected)
+
+     // Chargement de la texture pour le plane et désactivation des mipmaps
+  const texture = useLoader(THREE.TextureLoader, url);
+  texture.generateMipmaps = false;
+  texture.minFilter = THREE.LinearFilter;
    
     useFrame((state, dt) => {
       const targetPosition = isActive ? new THREE.Vector3(0, 0, 4.5) : originalPosition.current
@@ -90,7 +95,7 @@ function Frame({ url, position, rotation, isSelected, isHovered, onSelect, onDes
           </mesh>
           <mesh position={[0, 0, 0.7]}>
             <planeGeometry args={[0.8, 0.87]} /> {/* Respecte le ratio 380x235 */}
-            <meshBasicMaterial map={useLoader(THREE.TextureLoader, url)} fog={false}  />
+            <meshBasicMaterial map={texture} fog={false}  />
           </mesh>
   
         </mesh>
