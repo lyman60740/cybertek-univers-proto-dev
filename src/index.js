@@ -141,6 +141,8 @@ function LenisController() {
     const handleLoaded = () => {
       lenis.start();
       lenis.scrollTo(0, { immediate: true });
+      // Déclenche un événement 'scroll' pour notifier les écouteurs (comme ta navbar)
+  window.dispatchEvent(new Event('scroll'));
     };
     window.addEventListener("loaded", handleLoaded);
 
