@@ -28,14 +28,14 @@ const images = [
     rotation: [0, Math.PI / 2.5, 0], 
     url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/base_de_volant.jpg', 
     name: "(1) BASE DE VOLANT",
-    link: "#" 
+    link: "https://www.cybertek.fr/Base-de-volant-Simracing-159.aspx" 
   },
   { 
     position: [-radius * 1.3, 0, center[2] + 0.8], 
     rotation: [0, Math.PI / 3.5, 0], 
     url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/volant1.jpg', 
     name: "(2) VOLANTS",
-    link: "#" 
+    link: "https://www.cybertek.fr/volant-pc-160.aspx" 
   },
   // Côtés gauches
   { 
@@ -43,21 +43,21 @@ const images = [
     rotation: [0, Math.PI / 4, 0], 
     url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/pedalier1.jpg', 
     name: "(3) PÉDALIERS",
-    link: "#" 
+    link: "https://www.cybertek.fr/pedalier-simracing-161.aspx" 
   },
   { 
     position: [-radius * 0.3, 0, center[2] - 0.5], 
     rotation: [0, 0, 0], 
     url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/frein_a_main.jpg', 
     name: "(4) FREIN À MAIN",
-    link: "#" 
+    link: "https://www.cybertek.fr/frein-à-main-162.aspx" 
   },
   { 
     position: [radius * 0.3, 0, center[2] - 0.5], 
     rotation: [0, 0, 0], 
     url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/boite_de_vitesse1.jpg', 
     name: "(5) LEVIER DE VITESSE",
-    link: "#" 
+    link: "https://www.cybertek.fr/Levier-de-Vitesse-PC-163.aspx" 
   },
   // Côtés droits
   { 
@@ -65,21 +65,21 @@ const images = [
     rotation: [0, -Math.PI / 4, 0], 
     url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/accessoires.jpg', 
     name: "(6) ACCESSOIRES GAMING",
-    link: "#" 
+    link: "https://www.cybertek.fr/Accessoires-Simracing-164.aspx" 
   },
   { 
     position: [radius * 1.3, 0, center[2] + 0.8], 
     rotation: [0, -Math.PI / 3.5, 0], 
     url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/bundle.jpg', 
     name: "(7) PACK SIMRACING",
-    link: "#" 
+    link: "https://www.cybertek.fr/Pack-Simracing-165.aspx" 
   },
   { 
     position: [radius * 1.6, 0, center[2] + 2.1], 
     rotation: [0, -Math.PI / 2.5, 0], 
     url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/chassis.jpg', 
     name: "(8) CHÂSSIS",
-    link: "#" 
+    link: "https://www.cybertek.fr/Chassis-Simracing-166.aspx" 
   }
 ];
 

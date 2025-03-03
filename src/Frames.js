@@ -1,6 +1,6 @@
 // components/Frames.jsx
 import { useFrame, useLoader } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { useRef, useState, useMemo } from "react";
 import * as THREE from "three";
 import { easing } from "maath";
 import { Text, useCursor } from "@react-three/drei";
@@ -45,6 +45,12 @@ function Frame({ url, position, rotation, isSelected, isHovered, onSelect, onDes
   const texture = useLoader(THREE.TextureLoader, url);
   texture.generateMipmaps = false;
   texture.minFilter = THREE.LinearFilter;
+
+  // On recrée le material quand l'état change.
+  const textMaterial = useMemo(() => new THREE.MeshBasicMaterial({ 
+    color: isSelected ? "#FFCF00" : isHovered ? "#FFCF00" : "white" 
+  }), [isSelected, isHovered]);
+
    
     useFrame((state, dt) => {
       const targetPosition = isActive ? new THREE.Vector3(0, 0, 4.5) : originalPosition.current
@@ -100,19 +106,19 @@ function Frame({ url, position, rotation, isSelected, isHovered, onSelect, onDes
   
         </mesh>
         <Text 
-         maxWidth={0.5}
-          anchorX="left"
-           anchorY="top" 
-           position={[0.55, 0.2, 0.2]} 
-           fontSize={0.05} 
-           color={isSelected ? "#FFCF00" : isHovered ? "#FFCF00" : "white"}
-           toneMapped={false}    
-           onPointerOver={(e) => e.stopPropagation()} 
-            onPointerOut={(e) => e.stopPropagation()}    
-            fog={false}   
-           >
-          {props.name}
-        </Text>
+        maxWidth={0.5}
+        anchorX="left"
+        anchorY="top" 
+        position={[0.55, 0.2, 0.2]} 
+        fontSize={0.05} 
+        toneMapped={false}    
+        onPointerOver={(e) => e.stopPropagation()} 
+        onPointerOut={(e) => e.stopPropagation()}    
+        fog={false}
+        material={textMaterial}  // Application du material personnalisé
+      >
+        {props.name}
+      </Text>
       </group>
     )
   }
