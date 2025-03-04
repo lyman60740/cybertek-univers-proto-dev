@@ -50,7 +50,7 @@ const images = [
     rotation: [0, 0, 0], 
     url: 'https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/images/frein_a_main.jpg', 
     name: "(4) FREIN À MAIN",
-    link: "https://www.cybertek.fr/frein-à-main-162.aspx" 
+    link: "https://www.cybertek.fr/frein-a-main-162.aspx" 
   },
   { 
     position: [radius * 0.3, 0, center[2] - 0.5], 
