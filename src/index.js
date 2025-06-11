@@ -167,9 +167,9 @@ if (rootElement) {
       <>
         {/* Le composant LenisController gère la logique de scroll */}
         <LenisController />
-        {/* <Canvas dpr={[1, 1.5]} frameloop={"always"}>
+        <Canvas dpr={[1, 1.5]} frameloop={"always"}>
           <CarShowScene />
-        </Canvas> */}
+        </Canvas> 
       </>
     </Suspense>
   );
