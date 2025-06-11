@@ -105,13 +105,13 @@ function LenisController() {
     });
 
     // Désactive le scroll dès le départ
-    lenis.stop();
+    // lenis.stop();
 
     function raf(time) {
       // On lance le raf uniquement si window.isLoaded est true
-      if (window.isLoaded) {
+    
         lenis.raf(time);
-      }
+      
       requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
