@@ -27,7 +27,7 @@ export const Car = forwardRef(
     const gltf = useLoader(
       GLTFLoader,
       process.env.PUBLIC_URL +
-        "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev/public/models/car/alpine/alpinecar-off8.glb",
+        "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/models/car/alpine/alpincar-off8.glb",
       (loader) => {
         const dracoLoader = new DRACOLoader();
         dracoLoader.setDecoderPath(
