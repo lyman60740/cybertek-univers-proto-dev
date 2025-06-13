@@ -27,7 +27,7 @@ function useExternalRenderControl() {
   return canRender;
 }
 
-export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spotLightRef3, targetRef }) => {
+export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spotLightRef3, carRef }) => {
   const { camera } = useThree();
   const cameraTarget = useRef(new THREE.Vector3(0, 10, 5));
   const lookAtTarget = useRef(new THREE.Vector3(0, 0, 0));
@@ -37,6 +37,10 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spot
   const otherTxtElements = document.querySelectorAll(".bloc-txt__p p, .bloc-txt a");
   const canRender = useExternalRenderControl();
   const [isMobile, setIsMobile] = useState(false);
+
+  const orbitRadius = 10;
+const orbitHeight = 1;
+const angleRef = useRef({ value: 0 });
 
   useEffect(() => {
     // On importe le plugin au moment du montage
@@ -57,6 +61,8 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spot
   }, []);
 
   useEffect(() => {
+ if (!carRef.current) return;
+
     // ✅ Position initiale (évite la confusion)
     camera.position.set(0, 10, 5);
 
@@ -204,24 +210,28 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spot
           }, "<80%"); // 🔄 Démarre en même temps que l’animation de la caméra
         }
         tl.to(cameraTarget.current, {
-          x: 5,
-          y: 0.5,
-          z: -2.5,
+          y: 1,
           duration: 3,
           ease: "linear"
         }, "<");
-       if (targetRef.current) {
-  tl.to(targetRef.current.position, {
-    x: 2,
-    y: 0,
-    z: 0,
-    duration: 2,
-    ease: "power2.inOut"
-  }, "<"); // Commence juste après
-} else (
-  console.log('dont work')
-)
-
+tl.to(cameraTarget.current, {
+          x: 3,
+          z: -10,
+          duration: 3,
+          ease: "linear"
+        }, "<50%");
+tl.to(lookAtTarget.current, {
+          z: -8,
+          y: 1,
+          duration: 3,
+          ease: "linear"
+        }, "<");
+        tl.to(cameraTarget.current, {
+          x: 3,
+          z: -10,
+          duration: 3,
+          ease: "linear"
+        });
         if (groundRef.current) {
           tl.to(groundRef.current.material, {
             opacity: 0, // ✅ Disparition progressive
@@ -240,24 +250,45 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spot
               ease: "linear",
               duration: 0.5
             },
-            "<50%"
+            "<"
           );
         }
 
         if (spotLightRef3.current) {
           tl.to([spotLightRef3.current], {
-            intensity: 0.5, // Les lumières augmentent en intensité
+            intensity: 0.5,
             duration: 1,
             ease: "linear"
           }, "<");
+          tl.to([spotLightRef3.current.position], {
+            z: -10,
+            duration: 1,
+            ease: "linear",
+            onUpdate: () => {
+              spotLightRef3.current.position.needsUpdate = true;
+            }
+          }, "<");
         }
+
+        tl.to(angleRef.current, {
+  value: -Math.PI * 2, // un tour complet
+  duration: 5,
+  ease: "power2.inOut",
+  onUpdate: () => {
+    const angle = angleRef.current.value;
+    const x = Math.cos(angle) * orbitRadius;
+    const z = Math.sin(angle) * orbitRadius;
+
+    cameraTarget.current.set(x, orbitHeight, z); // 💡 position de la caméra sur le cercle
+  }
+});
       });
 
       tl.to({}, {}, "<50%");
     }
 
     return () => ScrollTrigger.getAll().forEach((t) => t.kill());
-  }, [targetRef, isMobile]);
+  }, [carRef.current, isMobile]);
 
   // 📌 Applique progressivement la position et la rotation
   useFrame(() => {
@@ -276,6 +307,9 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spot
   // Les useEffect suivants liés à Lenis (initialisation, synchronisation avec ScrollTrigger,
   // écoute de l'événement "loaded" et gestion du démarrage/arrêt) ont été retirés de ce fichier.
   // Ils sont désormais gérés dans index.js pour centraliser la logique de scroll fluide.
+
+  // TODO Je viens d'initier une nouvelle logique avec de la trigonometrie pour gerer plus proprement le traveling autour de la voiture 
+  // pour pouvoir faire un reel tour en une animation pour eviter les steps, il reste juste à la regler et eventuellement enlever l'ancienne logique avec la camera x
 
   return null;
 };

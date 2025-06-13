@@ -57,27 +57,21 @@ export const Car = forwardRef(
 
       // ✅ Optimisation des matériaux et ombres
       lod.traverse((object) => {
-        if (object instanceof THREE.Mesh) {
-          if (
-            ["wheel_FL", "wheel_FR", "wheel_RL", "wheel_RR"].includes(
-              object.name
-            )
-          ) {
-            object.userData.isWheel = true; // Marquage des roues
-          }
+  // ✅ Marquage des roues, qu'elles soient des Group ou Mesh
+  if (["Rim_LF", "Rim_RF", "Rim_LR", "Rim_RR"].includes(object.name)) {
+    object.userData.isWheel = true;
+  }
 
-          // ❌ Désactiver les ombres sur mobile
-          object.castShadow = !isMobile;
-          object.receiveShadow = !isMobile;
+  // ✅ Gestion des ombres et textures
+  if (object instanceof THREE.Mesh) {
+    object.castShadow = !isMobile;
+    object.receiveShadow = !isMobile;
 
-          // ✅ Réduire la qualité des textures sur mobile
-          if (object.material && object.material.map) {
-            object.material.map.anisotropy = isMobile ? 2 : 16;
-          }
-
-        
-        }
-      });
+    if (object.material && object.material.map) {
+      object.material.map.anisotropy = isMobile ? 2 : 16;
+    }
+  }
+});
 
       // ✅ Appliquer position, échelle et rotation
       lod.scale.set(...scale);
@@ -95,11 +89,14 @@ export const Car = forwardRef(
       // 🔄 Réduire les calculs sur mobile
       if (isMobile && Math.floor(state.clock.elapsedTime) % 2 !== 0) return;
 
-      lodModel.traverse((object) => {
-        if (object.userData.isWheel) {
-          object.rotation.x += delta * 1.8;
-        }
-      });
+      lodModel.levels.forEach(({ object }) => {
+  object.traverse((child) => {
+    if (child.userData.isWheel) {
+      child.rotation.x += delta * 1.8;
+    }
+  });
+});
+
     });
 
     // ✅ Si le modèle n'est pas encore prêt, ne rien afficher

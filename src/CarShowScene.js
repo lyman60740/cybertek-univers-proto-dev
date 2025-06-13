@@ -10,7 +10,7 @@ export const CarShowScene = () => {
   const spotLightRef2 = useRef();
   const spotLightRef3 = useRef();
   const groundRef = useRef();
-  const targetRef = useRef();
+  const carRef = useRef();
 
   // ✅ State pour conditionner le rendu du Ground
   const [showGround, setShowGround] = useState(false);
@@ -47,14 +47,14 @@ export const CarShowScene = () => {
         spotLightRef1={spotLightRef1}
         spotLightRef2={spotLightRef2}
         spotLightRef3={spotLightRef3}
-        targetRef={targetRef}
+        carRef={carRef}
       />
 
       <PerspectiveCamera makeDefault fov={50} position={[0, 10, 1]} />
       <color args={[0, 0, 0]} attach="background" />
 
       <Car
-        ref={targetRef}
+        ref={carRef}
         position={[-0.25, 0, -5]}
         rotation={[0, 0, 0]}
         scale={[1.5, 1.5, 1.5]}
@@ -87,9 +87,9 @@ export const CarShowScene = () => {
         intensity={0}
         angle={0.6}
         penumbra={0.5}
-        position={[-5, 5, -2]}
+        position={[5, 5, -2]}
         shadow-bias={-0.0001}
-        target={targetRef.current}
+        target={carRef.current}
       />
 
       <object3D position={[0, 2, 5]} />
