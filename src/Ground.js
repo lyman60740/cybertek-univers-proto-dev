@@ -41,6 +41,13 @@ export const Ground = forwardRef(({
     normal.offset.set(0, t % 1);
   });
 
+  useEffect(() => {
+  return () => {
+    normal.dispose();
+    roughness.dispose();
+  };
+}, []);
+
   return (
     <mesh ref={ref} {...props} rotation-x={-Math.PI * 0.5} position={position} transparent>
       <planeGeometry args={planeSize} />

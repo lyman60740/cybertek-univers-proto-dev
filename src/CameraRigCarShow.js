@@ -204,12 +204,23 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spot
           }, "<80%"); // 🔄 Démarre en même temps que l’animation de la caméra
         }
         tl.to(cameraTarget.current, {
-          x: -5,
+          x: 5,
           y: 0.5,
           z: -2.5,
           duration: 3,
           ease: "linear"
         }, "<");
+       if (targetRef.current) {
+  tl.to(targetRef.current.position, {
+    x: 2,
+    y: 0,
+    z: 0,
+    duration: 2,
+    ease: "power2.inOut"
+  }, "<"); // Commence juste après
+} else (
+  console.log('dont work')
+)
 
         if (groundRef.current) {
           tl.to(groundRef.current.material, {
