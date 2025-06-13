@@ -25,17 +25,15 @@ export const Car = forwardRef(
 
     // ✅ Charger le modèle GLB
     const gltf = useLoader(
-      GLTFLoader,
-      process.env.PUBLIC_URL +
-        "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/models/car/alpine/alpincar-off8.glb",
-      (loader) => {
-        const dracoLoader = new DRACOLoader();
-        dracoLoader.setDecoderPath(
-          "https://www.gstatic.com/draco/v1/decoders/"
-        );
-        loader.setDRACOLoader(dracoLoader);
-      }
-    );
+  GLTFLoader,
+  "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/models/car/alpine/alpincar-off8.glb",
+  (loader) => {
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
+    loader.setDRACOLoader(dracoLoader);
+  }
+);
+
 
     // ✅ Appliquer les optimisations
     useEffect(() => {
