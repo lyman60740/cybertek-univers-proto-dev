@@ -289,11 +289,13 @@ tl.to(carTargetPosition.current, {
   duration: 2.5,
   ease: "linear"
 });
-
+tl.to(carTargetPosition.current, { // Animation vide pour laisser un temps d'arrêt après la fin de la tl
+  duration: 1.5,
+});
        
       });
 
-      tl.to({}, {}, "<50%");
+      
     }
 
     return () => ScrollTrigger.getAll().forEach((t) => t.kill());
