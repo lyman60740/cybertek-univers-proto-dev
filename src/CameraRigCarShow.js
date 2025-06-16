@@ -27,7 +27,7 @@ function useExternalRenderControl() {
   return canRender;
 }
 
-export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spotLightRef3, carRef }) => {
+export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spotLightRef3, carRef, carReady  }) => {
   const { camera } = useThree();
   const cameraTarget = useRef(new THREE.Vector3(0, 10, 5));
   const lookAtTarget = useRef(new THREE.Vector3(0, 0, 0));
@@ -65,7 +65,7 @@ const carZ = useRef({ value: 0 });
 
 
   useEffect(() => {
- if (!carRef.current) return;
+ if (!carReady || !carRef.current) return;
 
     camera.position.set(0, 10, 5);
 
@@ -96,7 +96,13 @@ const carZ = useRef({ value: 0 });
         ease: "cubic-bezier(.21,.65,.67,1)"
       }, "<80%"); 
 
-    if (document.querySelector(".carshow-container")) {
+    if (
+      document.querySelector(".carshow-container") 
+      && spotLightRef1.current 
+      && spotLightRef2.current 
+      && spotLightRef3.current 
+      && groundRef.current
+    ) {
       gsap.registerPlugin(ScrollTrigger);
 
       const tl = gsap.timeline({
@@ -128,13 +134,13 @@ const carZ = useRef({ value: 0 });
       });
 
       mm.add("(min-width: 1000px)", () => {
-        if (spotLightRef1.current && spotLightRef2.current) {
+       
           tl.to(
             [spotLightRef2.current],
             {
               intensity: 1.5, 
               ease: "linear",
-              duration: 1
+              duration: 2
             }
           );
           tl.to(
@@ -142,11 +148,11 @@ const carZ = useRef({ value: 0 });
             {
               intensity: 2.5, 
               ease: "linear",
-              duration: 1
+              duration: 2
             },
             "<"
           );
-        }
+        
       });
 
       mm.add("(max-width: 999px)", () => {
@@ -206,28 +212,18 @@ const carZ = useRef({ value: 0 });
             opacity: 0,
             y: -20,
             stagger: 0.1,
-            duration: 0.5,
+            duration: 1,
             ease: "cubic-bezier(.21,.65,.67,1)"
           }, "<80%"); 
         }
-//         tl.to(cameraTarget.current, {
-//           y: 1,
-//           duration: 3,
-//           ease: "linear"
-//         }, "<");
-// tl.to(cameraTarget.current, {
-//           x: 3,
-//           z: -10,
-//           duration: 3,
-//           ease: "linear"
-//         }, "<50%");
+
 tl.to(orbitState.current, {
   height: 1,
-  // radius: 3, 
-  duration: 2,
-  ease: "power2.inOut"
+  duration: 3,
+  ease: "linear"
 }, "<");
-if (groundRef.current) {
+
+
           tl.to(groundRef.current.material, {
             opacity: 0, // ✅ Disparition progressive
             ease: "linear",
@@ -236,8 +232,7 @@ if (groundRef.current) {
               groundRef.current.material.needsUpdate = true;
             }
           }, "<"); 
-        }
-        if (spotLightRef1.current && spotLightRef2.current) {
+        
           tl.to(
             [spotLightRef2.current, spotLightRef1.current],
             {
@@ -247,97 +242,61 @@ if (groundRef.current) {
             },
             "<"
           );
-        }
-         if (spotLightRef3.current) {
+        
           tl.to([spotLightRef3.current], {
             intensity: .5,
             duration: 1,
             ease: "linear"
           }, "<");
           
-        }
+        
 tl.to(carZ.current, {
   value: 1.8,
-  duration: 2,
-  ease: "power2.inOut",
-  onUpdate: () => {
-    if (carRef.current) {
-      carRef.current.position.z = carZ.current.value;
-    }
-  } 
+  duration: 5,
+  ease: "linear",
 });
 
 tl.to(angleRef.current, {
-  value: -Math.PI * 0.05,
+  value: -Math.PI * 0.05, // 1ere demi rotation
   duration: 5,
-  ease: "power2.out"
+  ease: "linear"
 }, "<");
 tl.to(orbitState.current, {
   radius: 3, 
-  duration: 2,
-  ease: "power2.out"
+  duration: 5,
+  ease: "linear"
 }, "<");
 tl.to(angleRef.current, {
-  value: -Math.PI * .85,
-  duration: 2,
-  ease: "power2.inOut"
+  value: -Math.PI * .85, // 2eme demi rotation
+  duration: 5,
+  ease: "linear"
 });
-tl.to([spotLightRef3.current.position], {
-            x: -2,
-            duration: 2,
-            ease: "linear",
-            onUpdate: () => {
-              spotLightRef3.current.position.needsUpdate = true;
-            }
-          }, "<");
-tl.to(carZ.current, {
-  value: -7,
-  duration: 2,
-  ease: "power2.inOut",
-  onUpdate: () => {
-    if (carRef.current) {
-      carRef.current.position.z = carZ.current.value;
-    }
-  } 
-},"<50%");
 tl.to(orbitState.current, {
   radius: 7, 
-  duration: 2,
-  ease: "power2.out"
-}, "<20%");
-// tl.to(lookAtTarget.current, {
-//           z: -7.5,
-//           y: 1,
-//           duration: 2,
-//           ease: "linear"
-//         }, "<");
-// tl.to(orbitState.current, {
-//   radius: 10, 
-//   duration: 2,
-//   ease: "power2.inOut"
-// }, "<");
+  duration: 5,
+  ease: "linear"
+}, "<");
 
+  tl.to(spotLightRef3.current.position, {
+    x: -2,
+    duration: 2,
+    ease: "linear"
+  }, "<");
 
-
-        // tl.to(cameraTarget.current, {
-        //   x: 3,
-        //   z: -10,
-        //   duration: 3,
-        //   ease: "linear"
-        // });
-        
-        
-
-       
+tl.to(carZ.current, {
+  value: -7,
+  duration: 2.5,
+  ease: "linear",
+});
 
        
       });
 
-      tl.to({}, {}, "<50%");
+      // tl.to({}, {}, "<50%");
     }
 
     return () => ScrollTrigger.getAll().forEach((t) => t.kill());
-  }, [carRef.current, isMobile]);
+  }, [carReady, isMobile]);
 
   // 📌 Applique progressivement la position et la rotation
  useFrame(() => {
@@ -357,6 +316,10 @@ tl.to(orbitState.current, {
     new THREE.Vector3(0, 1, 0)
   );
   camera.quaternion.slerp(new THREE.Quaternion().setFromRotationMatrix(matrix), 0.1);
+
+  if (carRef.current) {
+  carRef.current.position.z = carZ.current.value;
+}
 });
 
 

@@ -16,6 +16,8 @@ export const CarShowScene = () => {
   // ✅ State pour conditionner le rendu du Ground
   const [showGround, setShowGround] = useState(false);
 
+  const [carReady, setCarReady] = useState(false);
+
   useEffect(() => {
     const mm = gsap.matchMedia();
 
@@ -56,6 +58,7 @@ export const CarShowScene = () => {
 
       <Car
         ref={carRef}
+        onLoaded={() => setCarReady(true)}
         position={[0, -.51, -5]}
         rotation={[0, 0, 0]}
         scale={[1.5, 1.5, 1.5]}

@@ -5,8 +5,7 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { LOD } from "three";
 import * as THREE from "three";
 
-export const Car = forwardRef(
-  ({ position = [], rotation = [0, 0, 0], scale = [1.5, 1.5, 1.5] }, ref) => {
+export const Car = forwardRef(({ position = [], rotation = [0, 0, 0], scale = [1.5, 1.5, 1.5], onLoaded }, ref) => {
     const [isMobile, setIsMobile] = useState(false);
     const [lodModel, setLodModel] = useState(null); // ✅ Stocke le LOD
 
@@ -80,6 +79,7 @@ export const Car = forwardRef(
 
       // ✅ Stocker le modèle avec LOD pour le rendre ensuite
       setLodModel(lod);
+      onLoaded?.();
     }, [gltf, position, rotation, scale, isMobile]);
 
     // ✅ Animation des roues avec un framerate réduit sur mobile
