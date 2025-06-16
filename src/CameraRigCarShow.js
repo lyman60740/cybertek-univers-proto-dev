@@ -31,6 +31,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spot
   const { camera } = useThree();
   const cameraTarget = useRef(new THREE.Vector3(0, 10, 5));
   const lookAtTarget = useRef(new THREE.Vector3(0, 0, 0));
+  const carTargetPosition = useRef(new THREE.Vector3(0, -.51, -5));
 
   const logoElements = document.querySelectorAll(".logo-cyb, .logo-alp, .sep");
   const blocTxtElements = document.querySelectorAll(".surTitre span, h2 span");
@@ -43,7 +44,7 @@ const orbitState = useRef({
   radius: 8   
 });
 const angleRef = useRef({ value: Math.PI / 2 });
-const carZ = useRef({ value: 0 });
+
 
   useEffect(() => {
     const { ScrollTrigger } = require("gsap/ScrollTrigger");
@@ -109,7 +110,7 @@ const carZ = useRef({ value: 0 });
         scrollTrigger: {
           trigger: ".carshow-container",
           start: isMobile ? "top-=70px top" : "top top",
-          end: "+=2000px",
+          end: isMobile ? "+=2000px" : "+=3000px",
           scrub: isMobile ? 1 : 2,
           pin: true,
           pinSpacing: true,
@@ -119,7 +120,7 @@ const carZ = useRef({ value: 0 });
               if (self.progress > 0.75) {
                 textAndOtherTl.timeScale(1).play(); // 🔥 Lecture normale
               } else {
-                textAndOtherTl.timeScale(1).reverse(); // ⏩ Retour 2x plus rapide
+                textAndOtherTl.timeScale(1).reverse(); 
               }
             });
             mm.add("(max-width: 999px)", () => {
@@ -250,10 +251,10 @@ tl.to(orbitState.current, {
           }, "<");
           
         
-tl.to(carZ.current, {
-  value: 1.8,
+tl.to(carTargetPosition.current, {
+  z: 1.8,
   duration: 5,
-  ease: "linear",
+  ease: "linear"
 });
 
 tl.to(angleRef.current, {
@@ -283,16 +284,16 @@ tl.to(orbitState.current, {
     ease: "linear"
   }, "<");
 
-tl.to(carZ.current, {
-  value: -7,
+tl.to(carTargetPosition.current, {
+  z: -7,
   duration: 2.5,
-  ease: "linear",
+  ease: "linear"
 });
 
        
       });
 
-      // tl.to({}, {}, "<50%");
+      tl.to({}, {}, "<50%");
     }
 
     return () => ScrollTrigger.getAll().forEach((t) => t.kill());
@@ -318,7 +319,7 @@ tl.to(carZ.current, {
   camera.quaternion.slerp(new THREE.Quaternion().setFromRotationMatrix(matrix), 0.1);
 
   if (carRef.current) {
-  carRef.current.position.z = carZ.current.value;
+   carRef.current.position.lerp(carTargetPosition.current, 0.1);
 }
 });
 
