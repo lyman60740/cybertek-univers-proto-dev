@@ -5,6 +5,7 @@ import React, { Suspense, useRef, useEffect, useState } from "react";
 import { PerspectiveCamera } from "@react-three/drei";
 import gsap from "gsap";
 
+
 export const CarShowScene = () => {
   const spotLightRef1 = useRef();
   const spotLightRef2 = useRef();
@@ -55,7 +56,7 @@ export const CarShowScene = () => {
 
       <Car
         ref={carRef}
-        position={[-0.25, 0, -5]}
+        position={[0, -.51, -5]}
         rotation={[0, 0, 0]}
         scale={[1.5, 1.5, 1.5]}
       />
@@ -85,9 +86,9 @@ export const CarShowScene = () => {
         ref={spotLightRef3}
         color={[1, 1, 1]}
         intensity={0}
-        angle={0.6}
+        angle={Math.PI}
         penumbra={0.5}
-        position={[5, 5, -2]}
+        position={[2, 5, 0]}
         shadow-bias={-0.0001}
         target={carRef.current}
       />

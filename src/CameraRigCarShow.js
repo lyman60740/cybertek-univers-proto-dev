@@ -35,15 +35,17 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spot
   const logoElements = document.querySelectorAll(".logo-cyb, .logo-alp, .sep");
   const blocTxtElements = document.querySelectorAll(".surTitre span, h2 span");
   const otherTxtElements = document.querySelectorAll(".bloc-txt__p p, .bloc-txt a");
-  const canRender = useExternalRenderControl();
+
   const [isMobile, setIsMobile] = useState(false);
 
-  const orbitRadius = 10;
-const orbitHeight = 1;
-const angleRef = useRef({ value: 0 });
+const orbitState = useRef({
+  height: 10,
+  radius: 8   
+});
+const angleRef = useRef({ value: Math.PI / 2 });
+const carZ = useRef({ value: 0 });
 
   useEffect(() => {
-    // On importe le plugin au moment du montage
     const { ScrollTrigger } = require("gsap/ScrollTrigger");
     gsap.registerPlugin(ScrollTrigger);
 
@@ -60,13 +62,13 @@ const angleRef = useRef({ value: 0 });
     });
   }, []);
 
+
+
   useEffect(() => {
  if (!carRef.current) return;
 
-    // ✅ Position initiale (évite la confusion)
     camera.position.set(0, 10, 5);
 
-    // 🛠️ Appliquer un quaternion propre dès le début
     const matrix = new THREE.Matrix4().lookAt(camera.position, lookAtTarget.current, new THREE.Vector3(0, 1, 0));
     camera.quaternion.setFromRotationMatrix(matrix);
   }, []);
@@ -92,9 +94,8 @@ const angleRef = useRef({ value: 0 });
         stagger: 0.3,
         duration: 0.4,
         ease: "cubic-bezier(.21,.65,.67,1)"
-      }, "<80%"); // "<" signifie que cette animation démarre en même temps que la précédente
+      }, "<80%"); 
 
-    // 📌 Timeline GSAP pour déplacer la caméra en douceur
     if (document.querySelector(".carshow-container")) {
       gsap.registerPlugin(ScrollTrigger);
 
@@ -131,7 +132,7 @@ const angleRef = useRef({ value: 0 });
           tl.to(
             [spotLightRef2.current],
             {
-              intensity: 1.5, // Les lumières augmentent en intensité
+              intensity: 1.5, 
               ease: "linear",
               duration: 1
             }
@@ -139,7 +140,7 @@ const angleRef = useRef({ value: 0 });
           tl.to(
             [spotLightRef1.current],
             {
-              intensity: 2.5, // Les lumières augmentent en intensité
+              intensity: 2.5, 
               ease: "linear",
               duration: 1
             },
@@ -153,7 +154,7 @@ const angleRef = useRef({ value: 0 });
           tl.to(
             [spotLightRef2.current],
             {
-              intensity: 1.5, // Les lumières augmentent en intensité
+              intensity: 1.5, 
               ease: "linear",
               duration: 0.3
             },
@@ -162,7 +163,7 @@ const angleRef = useRef({ value: 0 });
           tl.to(
             [spotLightRef1.current],
             {
-              intensity: 2.5, // Les lumières augmentent en intensité
+              intensity: 2.5, 
               ease: "linear",
               duration: 0.3
             },
@@ -176,7 +177,7 @@ const angleRef = useRef({ value: 0 });
             stagger: 0.1,
             duration: 0.25,
             ease: "cubic-bezier(.21,.65,.67,1)"
-          }, "<80%"); // 🔄 Démarre en même temps que l’animation de la caméra
+          }, "<80%"); 
         }
 
         tl.to(cameraTarget.current, {
@@ -189,13 +190,13 @@ const angleRef = useRef({ value: 0 });
 
         if (groundRef.current) {
           tl.to(groundRef.current.material, {
-            opacity: 0, // ✅ Disparition progressive
+            opacity: 0, 
             ease: "linear",
             duration: 0.5,
             onUpdate: () => {
-              groundRef.current.material.needsUpdate = true; // ✅ Forcer le rendu du changement d’opacité
+              groundRef.current.material.needsUpdate = true;
             }
-          }, "<"); // 🔄 Démarre en même temps que l’animation de la caméra
+          }, "<"); 
         }
       });
 
@@ -207,32 +208,26 @@ const angleRef = useRef({ value: 0 });
             stagger: 0.1,
             duration: 0.5,
             ease: "cubic-bezier(.21,.65,.67,1)"
-          }, "<80%"); // 🔄 Démarre en même temps que l’animation de la caméra
+          }, "<80%"); 
         }
-        tl.to(cameraTarget.current, {
-          y: 1,
-          duration: 3,
-          ease: "linear"
-        }, "<");
-tl.to(cameraTarget.current, {
-          x: 3,
-          z: -10,
-          duration: 3,
-          ease: "linear"
-        }, "<50%");
-tl.to(lookAtTarget.current, {
-          z: -8,
-          y: 1,
-          duration: 3,
-          ease: "linear"
-        }, "<");
-        tl.to(cameraTarget.current, {
-          x: 3,
-          z: -10,
-          duration: 3,
-          ease: "linear"
-        });
-        if (groundRef.current) {
+//         tl.to(cameraTarget.current, {
+//           y: 1,
+//           duration: 3,
+//           ease: "linear"
+//         }, "<");
+// tl.to(cameraTarget.current, {
+//           x: 3,
+//           z: -10,
+//           duration: 3,
+//           ease: "linear"
+//         }, "<50%");
+tl.to(orbitState.current, {
+  height: 1,
+  // radius: 3, 
+  duration: 2,
+  ease: "power2.inOut"
+}, "<");
+if (groundRef.current) {
           tl.to(groundRef.current.material, {
             opacity: 0, // ✅ Disparition progressive
             ease: "linear",
@@ -240,48 +235,102 @@ tl.to(lookAtTarget.current, {
             onUpdate: () => {
               groundRef.current.material.needsUpdate = true;
             }
-          }, "<"); // 🔄 Démarre en même temps que l’animation de la caméra
+          }, "<"); 
         }
         if (spotLightRef1.current && spotLightRef2.current) {
           tl.to(
             [spotLightRef2.current, spotLightRef1.current],
             {
-              intensity: 0, // Les lumières augmentent en intensité
+              intensity: 0, 
               ease: "linear",
               duration: 0.5
             },
             "<"
           );
         }
-
-        if (spotLightRef3.current) {
+         if (spotLightRef3.current) {
           tl.to([spotLightRef3.current], {
-            intensity: 0.5,
+            intensity: .5,
             duration: 1,
             ease: "linear"
           }, "<");
-          tl.to([spotLightRef3.current.position], {
-            z: -10,
-            duration: 1,
+          
+        }
+tl.to(carZ.current, {
+  value: 1.8,
+  duration: 2,
+  ease: "power2.inOut",
+  onUpdate: () => {
+    if (carRef.current) {
+      carRef.current.position.z = carZ.current.value;
+    }
+  } 
+});
+
+tl.to(angleRef.current, {
+  value: -Math.PI * 0.05,
+  duration: 5,
+  ease: "power2.out"
+}, "<");
+tl.to(orbitState.current, {
+  radius: 3, 
+  duration: 2,
+  ease: "power2.out"
+}, "<");
+tl.to(angleRef.current, {
+  value: -Math.PI * .85,
+  duration: 2,
+  ease: "power2.inOut"
+});
+tl.to([spotLightRef3.current.position], {
+            x: -2,
+            duration: 2,
             ease: "linear",
             onUpdate: () => {
               spotLightRef3.current.position.needsUpdate = true;
             }
           }, "<");
-        }
-
-        tl.to(angleRef.current, {
-  value: -Math.PI * 2, // un tour complet
-  duration: 5,
+tl.to(carZ.current, {
+  value: -7,
+  duration: 2,
   ease: "power2.inOut",
   onUpdate: () => {
-    const angle = angleRef.current.value;
-    const x = Math.cos(angle) * orbitRadius;
-    const z = Math.sin(angle) * orbitRadius;
+    if (carRef.current) {
+      carRef.current.position.z = carZ.current.value;
+    }
+  } 
+},"<50%");
+tl.to(orbitState.current, {
+  radius: 7, 
+  duration: 2,
+  ease: "power2.out"
+}, "<20%");
+// tl.to(lookAtTarget.current, {
+//           z: -7.5,
+//           y: 1,
+//           duration: 2,
+//           ease: "linear"
+//         }, "<");
+// tl.to(orbitState.current, {
+//   radius: 10, 
+//   duration: 2,
+//   ease: "power2.inOut"
+// }, "<");
 
-    cameraTarget.current.set(x, orbitHeight, z); // 💡 position de la caméra sur le cercle
-  }
-});
+
+
+        // tl.to(cameraTarget.current, {
+        //   x: 3,
+        //   z: -10,
+        //   duration: 3,
+        //   ease: "linear"
+        // });
+        
+        
+
+       
+
+       
       });
 
       tl.to({}, {}, "<50%");
@@ -291,25 +340,30 @@ tl.to(lookAtTarget.current, {
   }, [carRef.current, isMobile]);
 
   // 📌 Applique progressivement la position et la rotation
-  useFrame(() => {
-    camera.position.lerp(cameraTarget.current, 0.1);
+ useFrame(() => {
+  const angle = angleRef.current.value;
+  const radius = orbitState.current.radius;
+  const x = Math.cos(angle) * radius;
+  const z = Math.sin(angle) * radius;
+  const y = orbitState.current.height;
 
-    // ✅ LookAt interpolé pour éviter les sauts
-    const matrix = new THREE.Matrix4().lookAt(
-      camera.position,
-      lookAtTarget.current,
-      new THREE.Vector3(0, 1, 0)
-    );
-    camera.quaternion.slerp(new THREE.Quaternion().setFromRotationMatrix(matrix), 0.1);
-  });
+  cameraTarget.current.set(x, y, z);
+
+  camera.position.lerp(cameraTarget.current, 0.1);
+
+  const matrix = new THREE.Matrix4().lookAt(
+    camera.position,
+    lookAtTarget.current,
+    new THREE.Vector3(0, 1, 0)
+  );
+  camera.quaternion.slerp(new THREE.Quaternion().setFromRotationMatrix(matrix), 0.1);
+});
+
 
   // >>> LOGIQUE LENIS DÉPLACÉE DANS index.js <<<
   // Les useEffect suivants liés à Lenis (initialisation, synchronisation avec ScrollTrigger,
   // écoute de l'événement "loaded" et gestion du démarrage/arrêt) ont été retirés de ce fichier.
   // Ils sont désormais gérés dans index.js pour centraliser la logique de scroll fluide.
-
-  // TODO Je viens d'initier une nouvelle logique avec de la trigonometrie pour gerer plus proprement le traveling autour de la voiture 
-  // pour pouvoir faire un reel tour en une animation pour eviter les steps, il reste juste à la regler et eventuellement enlever l'ancienne logique avec la camera x
 
   return null;
 };
