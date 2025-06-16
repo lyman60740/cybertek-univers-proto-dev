@@ -75,12 +75,12 @@ const angleRef = useRef({ value: Math.PI / 2 });
   }, []);
 
   useEffect(() => {
+    const textAndOtherTl = gsap.timeline({ paused: true });
+
     gsap.set(blocTxtElements, {
       x: 30,
       autoAlpha: 0
     });
-
-    const textAndOtherTl = gsap.timeline({ paused: true });
 
     textAndOtherTl
       .to(blocTxtElements, {
@@ -225,21 +225,14 @@ tl.to(orbitState.current, {
 }, "<");
 
 
-          tl.to(groundRef.current.material, {
-            opacity: 0, // ✅ Disparition progressive
-            ease: "linear",
-            duration: 1,
-            onUpdate: () => {
-              groundRef.current.material.needsUpdate = true;
-            }
-          }, "<"); 
+
         
           tl.to(
             [spotLightRef2.current, spotLightRef1.current],
             {
               intensity: 0, 
               ease: "linear",
-              duration: 0.5
+              duration: 1
             },
             "<"
           );
@@ -248,7 +241,7 @@ tl.to(orbitState.current, {
             intensity: .5,
             duration: 1,
             ease: "linear"
-          }, "<");
+          },"<50%");
           
         
 tl.to(carTargetPosition.current, {
@@ -283,7 +276,14 @@ tl.to(orbitState.current, {
     duration: 2,
     ease: "linear"
   }, "<");
-
+          tl.to(groundRef.current.material, {
+            opacity: 0, // ✅ Disparition progressive
+            ease: "linear",
+            duration: 0.5,
+            onUpdate: () => {
+              groundRef.current.material.needsUpdate = true;
+            }
+          }, "<"); 
 tl.to(carTargetPosition.current, {
   z: -7,
   duration: 2.5,
@@ -330,6 +330,8 @@ tl.to(carTargetPosition.current, { // Animation vide pour laisser un temps d'arr
   // Les useEffect suivants liés à Lenis (initialisation, synchronisation avec ScrollTrigger,
   // écoute de l'événement "loaded" et gestion du démarrage/arrêt) ont été retirés de ce fichier.
   // Ils sont désormais gérés dans index.js pour centraliser la logique de scroll fluide.
+
+  // TODO Gérer l'apparition du texte et créer une animation adaptée au mobile
 
   return null;
 };
