@@ -170,13 +170,13 @@ tl.to(carTargetPosition.current, {
   duration: 0.5,
   ease: "power3.inout"
 });
-        tl.to(cameraTarget.current, {
-          x: 0,
-          y: 0.5,
-          z: 5,
-          duration: 0.5,
-          ease: "linear"
-        },"<");
+        // tl.to(cameraTarget.current, {
+        //   x: 0,
+        //   y: 0.5,
+        //   z: 5,
+        //   duration: 0.5,
+        //   ease: "linear"
+        // },"<");
         tl.to(angleRef.current, {
   value: -Math.PI * 0.5, 
   duration: 3,
@@ -236,7 +236,7 @@ tl.to(carTargetPosition.current, {
 tl.to(orbitState.current, {
   height: 1,
   duration: 3,
-  ease: "linear"
+  ease: "power3.inout"
 }, "<");
 
 
@@ -262,28 +262,28 @@ tl.to(orbitState.current, {
 tl.to(carTargetPosition.current, {
   z: 1.8,
   duration: 5,
-  ease: "linear"
-});
+   ease: "power3.inout"
+},"<90%");
 
 tl.to(angleRef.current, {
   value: -Math.PI * 0.05, // 1ere demi rotation
   duration: 5,
-  ease: "linear"
+   ease: "power3.inout"
 }, "<");
 tl.to(orbitState.current, {
   radius: 3, 
   duration: 5,
-  ease: "linear"
+   ease: "power3.inout"
 }, "<");
 tl.to(angleRef.current, {
   value: -Math.PI * .85, // 2eme demi rotation
   duration: 5,
-  ease: "linear"
+   ease: "power3.inout"
 });
 tl.to(orbitState.current, {
   radius: 7, 
   duration: 5,
-  ease: "linear"
+   ease: "power3.inout"
 }, "<");
 
   tl.to(spotLightRef3.current.position, {
@@ -302,7 +302,7 @@ tl.to(orbitState.current, {
 tl.to(carTargetPosition.current, {
   z: -7,
   duration: 2.5,
-  ease: "linear"
+   ease: "power3.inout"
 });
 tl.to(carTargetPosition.current, { // Animation vide pour laisser un temps d'arrêt après la fin de la tl
   duration: 1.5,
