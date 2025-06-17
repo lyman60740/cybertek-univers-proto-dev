@@ -48,8 +48,6 @@ const angleRef = useRef({ value: Math.PI / 2 });
 
 
   useEffect(() => {
-    const { ScrollTrigger } = require("gsap/ScrollTrigger");
-    gsap.registerPlugin(ScrollTrigger);
 
     // ✅ Rends GSAP globalement accessible
     window.gsap = gsap;
