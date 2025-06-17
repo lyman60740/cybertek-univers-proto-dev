@@ -110,7 +110,7 @@ const angleRef = useRef({ value: Math.PI / 2 });
         scrollTrigger: {
           trigger: ".carshow-container",
           start: isMobile ? "top-=70px top" : "top top",
-          end: isMobile ? "+=2000px" : "+=3000px",
+          end: isMobile ? "+=1000px" : "+=3000px",
           scrub: isMobile ? 1 : 2,
           pin: true,
           pinSpacing: true,
@@ -134,49 +134,29 @@ const angleRef = useRef({ value: Math.PI / 2 });
         }
       });
 
-      mm.add("(min-width: 1000px)", () => {
-       
+
+
+      mm.add("(max-width: 999px)", () => {
+ 
           tl.to(
             [spotLightRef2.current],
             {
               intensity: 1.5, 
               ease: "linear",
-              duration: 2
-            }
+              duration: 0.3
+            },
+            "<"
           );
           tl.to(
             [spotLightRef1.current],
             {
               intensity: 2.5, 
               ease: "linear",
-              duration: 2
+              duration: 0.3
             },
             "<"
           );
         
-      });
-
-      mm.add("(max-width: 999px)", () => {
-        if (spotLightRef1.current && spotLightRef2.current) {
-          tl.to(
-            [spotLightRef2.current],
-            {
-              intensity: 1.5, 
-              ease: "linear",
-              duration: 0.3
-            },
-            "<"
-          );
-          tl.to(
-            [spotLightRef1.current],
-            {
-              intensity: 2.5, 
-              ease: "linear",
-              duration: 0.3
-            },
-            "<"
-          );
-        }
         if (logoElements) {
           tl.to(logoElements, {
             opacity: 0,
@@ -208,6 +188,25 @@ const angleRef = useRef({ value: Math.PI / 2 });
       });
 
       mm.add("(min-width: 1000px)", () => {
+
+  tl.to(
+            [spotLightRef2.current],
+            {
+              intensity: 1.5, 
+              ease: "linear",
+              duration: 2
+            }
+          );
+          tl.to(
+            [spotLightRef1.current],
+            {
+              intensity: 2.5, 
+              ease: "linear",
+              duration: 2
+            },
+            "<"
+          );
+
         if (logoElements) {
           tl.to(logoElements, {
             opacity: 0,
