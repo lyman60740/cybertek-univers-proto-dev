@@ -109,7 +109,7 @@ const angleRef = useRef({ value: Math.PI / 2 });
         scrollTrigger: {
           trigger: ".carshow-container",
           start: isMobile ? "top-=70px top" : "top top",
-          end: isMobile ? "+=1000px" : "+=3000px",
+          end: isMobile ? "+=1000px" : "+=4000px",
           scrub: isMobile ? 1 : 2,
           pin: true,
           pinSpacing: true,
