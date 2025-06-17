@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./style.css";
 
 const mm = gsap.matchMedia();
+gsap.registerPlugin(ScrollTrigger);
 
 function useExternalRenderControl() {
   const [canRender, setCanRender] = useState(false);
@@ -104,7 +105,7 @@ const angleRef = useRef({ value: Math.PI / 2 });
       && spotLightRef3.current 
       && groundRef.current
     ) {
-      gsap.registerPlugin(ScrollTrigger);
+      
 
       const tl = gsap.timeline({
         scrollTrigger: {
