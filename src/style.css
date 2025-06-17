@@ -652,7 +652,7 @@ border-radius: 50%;
   max-width: 600px !important;
   padding: 140px 0 40px 0;
   box-sizing: border-box;
-  margin-bottom: -100vh;
+  /* margin-bottom: -100vh; */
   }
   .bloc-txt {
   justify-content: flex-start;

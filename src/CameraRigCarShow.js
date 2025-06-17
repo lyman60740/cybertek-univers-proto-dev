@@ -123,7 +123,7 @@ const angleRef = useRef({ value: Math.PI / 2 });
               }
             });
             mm.add("(max-width: 999px)", () => {
-              if (self.progress > 0.5) {
+              if (self.progress > 0.99) {
                 textAndOtherTl.timeScale(1).play(); // 🔥 Lecture normale
               } else {
                 textAndOtherTl.timeScale(1).reverse(); // ⏩ Retour 2x plus rapide
@@ -165,14 +165,31 @@ const angleRef = useRef({ value: Math.PI / 2 });
             ease: "cubic-bezier(.21,.65,.67,1)"
           }, "<80%"); 
         }
-
+tl.to(carTargetPosition.current, {
+  z: -1,
+  duration: 0.5,
+  ease: "power3.inout"
+});
         tl.to(cameraTarget.current, {
           x: 0,
           y: 0.5,
           z: 5,
           duration: 0.5,
           ease: "linear"
-        });
+        },"<");
+        tl.to(angleRef.current, {
+  value: -Math.PI * 0.5, 
+  duration: 3,
+  ease: "power3.inout",
+
+
+});
+tl.to(carTargetPosition.current, {
+  z: 20,
+  duration: 0.5,
+  ease: "power3.inout"
+},">20%");
+
 
         if (groundRef.current) {
           tl.to(groundRef.current.material, {
@@ -309,14 +326,14 @@ tl.to(carTargetPosition.current, { // Animation vide pour laisser un temps d'arr
 
   cameraTarget.current.set(x, y, z);
 
-  camera.position.lerp(cameraTarget.current, 0.1);
+  camera.position.lerp(cameraTarget.current, 1);
 
   const matrix = new THREE.Matrix4().lookAt(
     camera.position,
     lookAtTarget.current,
     new THREE.Vector3(0, 1, 0)
   );
-  camera.quaternion.slerp(new THREE.Quaternion().setFromRotationMatrix(matrix), 0.1);
+  camera.quaternion.slerp(new THREE.Quaternion().setFromRotationMatrix(matrix), 1);
 
   if (carRef.current) {
    carRef.current.position.lerp(carTargetPosition.current, 0.1);
