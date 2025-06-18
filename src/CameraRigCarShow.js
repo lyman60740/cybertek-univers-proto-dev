@@ -118,7 +118,7 @@ const angleRef = useRef({ value: Math.PI / 2 });
           markers: false,
           onUpdate: (self) => {
             mm.add("(min-width: 1000px)", () => {
-              if (self.progress > 0.75) {
+              if (self.progress > 0.9) {
                 textAndOtherTl.timeScale(1).play(); // 🔥 Lecture normale
               } else {
                 textAndOtherTl.timeScale(1).reverse(); 
