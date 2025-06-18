@@ -281,7 +281,7 @@ tl.to(angleRef.current, {
   value: -Math.PI * .85, // 2eme demi rotation
   duration: 5,
    ease: "power3.inout"
-});
+},"<95%");
 tl.to(orbitState.current, {
   radius: 7, 
   duration: 5,
@@ -303,9 +303,9 @@ tl.to(orbitState.current, {
           }, "<"); 
 tl.to(carTargetPosition.current, {
   z: -7,
-  duration: 2.5,
+  duration: 5,
    ease: "power3.inout"
-});
+},"<95%");
 tl.to(carTargetPosition.current, { // Animation vide pour laisser un temps d'arrêt après la fin de la tl
   duration: 1.5,
 });
