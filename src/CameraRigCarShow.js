@@ -36,7 +36,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spot
 
   const logoElements = document.querySelectorAll(".logo-cyb, .logo-alp, .sep");
   const blocTxtElements = document.querySelectorAll(".carshow-container .surTitre span, .carshow-container h3");
-  const otherTxtElements = document.querySelector(".carshow-container p");
+  const otherTxtElements = document.querySelectorAll(".carshow-container .cbk_diaporama-produit-sm__content-wrapper p, .cbk_diaporama-produit-sm__link");
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -75,28 +75,27 @@ const angleRef = useRef({ value: Math.PI / 2 });
 
   useEffect(() => {
     const textAndOtherTl = gsap.timeline({ paused: true });
-    if(blocTxtElements && otherTxtElements) {
+    if (blocTxtElements.length && otherTxtElements.length) {
+  gsap.set(blocTxtElements, {
+    x: 30,
+    autoAlpha: 0
+  });
 
-    gsap.set(blocTxtElements, {
-      x: 30,
-      autoAlpha: 0
-    });
-
-    textAndOtherTl
-      .to(blocTxtElements, {
-        x: 0,
-        autoAlpha: 1,
-        stagger: 0.3,
-        duration: 0.4,
-        ease: "cubic-bezier(.21,.65,.67,1)"
-      })
-      .to(otherTxtElements, {
-        autoAlpha: 1,
-        stagger: 0.3,
-        duration: 0.4,
-        ease: "cubic-bezier(.21,.65,.67,1)"
-      }, "<80%"); 
-    }
+  textAndOtherTl
+    .to(blocTxtElements, {
+      x: 0,
+      autoAlpha: 1,
+      stagger: 0.3,
+      duration: 0.4,
+      ease: "cubic-bezier(.21,.65,.67,1)"
+    })
+    .to(otherTxtElements, {
+      autoAlpha: 1,
+      stagger: 0.3,
+      duration: 0.4,
+      ease: "cubic-bezier(.21,.65,.67,1)"
+    }, "<80%");
+}
    
 
     if (

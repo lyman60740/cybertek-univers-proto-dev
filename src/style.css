@@ -203,7 +203,10 @@ margin-top: 20px;
 opacity: 0;
 }
 
-
+.cbk_diaporama-produit-sm__content-wrapper p {
+  opacity: 0;
+  visibility: hidden;
+}
 
 
 .loader-wrap {
