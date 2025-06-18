@@ -35,8 +35,8 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spot
   const carTargetPosition = useRef(new THREE.Vector3(0, -.51, -5));
 
   const logoElements = document.querySelectorAll(".logo-cyb, .logo-alp, .sep");
-  const blocTxtElements = document.querySelectorAll(".surTitre span, h2 span");
-  const otherTxtElements = document.querySelectorAll(".bloc-txt__p p, .bloc-txt a");
+  const blocTxtElements = document.querySelectorAll(".carshow-container .surTitre span, .carshow-container h3");
+  const otherTxtElements = document.querySelector(".carshow-container p");
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -75,6 +75,7 @@ const angleRef = useRef({ value: Math.PI / 2 });
 
   useEffect(() => {
     const textAndOtherTl = gsap.timeline({ paused: true });
+    if(blocTxtElements && otherTxtElements) {
 
     gsap.set(blocTxtElements, {
       x: 30,
@@ -95,6 +96,8 @@ const angleRef = useRef({ value: Math.PI / 2 });
         duration: 0.4,
         ease: "cubic-bezier(.21,.65,.67,1)"
       }, "<80%"); 
+    }
+   
 
     if (
       document.querySelector(".carshow-container") 
