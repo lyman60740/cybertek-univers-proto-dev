@@ -117,6 +117,18 @@ function LenisController() {
       ScrollTrigger.update()
     })
 
+    // Synchronisation avec ScrollTrigger (seulement la synchronisation, pas les animations)
+    ScrollTrigger.scrollerProxy(document.body, {
+      scrollTop(value) {
+        return arguments.length
+          ? lenis.scrollTo(value, { immediate: true })
+          : lenis.scroll;
+      },
+      getBoundingClientRect() {
+        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+      },
+    });
+
     ScrollTrigger.refresh();
 
     // Lorsque le chargement est terminé (indiqué par l'événement "loaded"), on démarre Lenis
