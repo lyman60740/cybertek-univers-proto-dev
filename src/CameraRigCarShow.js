@@ -315,49 +315,49 @@ tl.addLabel("startRotation");
         tl.to(".carshow-txt-1", {
   autoAlpha: 1,
   duration: 1.5,
-  yPercent: -50,
+  y: 0,
   ease: 'power2.out',
 }, "startRotation+=1"); // 25% de 10s
 
 tl.to(".carshow-txt-1", {
   autoAlpha: 0,
   duration: 0.5,
-  yPercent: -100,
+  y: -30,
   ease: 'power2.in'
 }, "startRotation+=3"); // disparition après 2s
 
 tl.to(".carshow-txt-2", {
   autoAlpha: 1,
   duration: 1.5,
-  yPercent: -50,
+  y: 0,
   ease: 'power2.out',
 }, "startRotation+=4"); // 50%
 
 tl.to(".carshow-txt-2", {
   autoAlpha: 0,
   duration: 0.5,
-  yPercent: -100,
+  y: -30,
   ease: 'power3.in'
 }, "startRotation+=5.5");
 
 tl.to(".carshow-txt-3", {
   autoAlpha: 1,
   duration: 1.5,
-  yPercent: -50,
+  y: 0,
   ease: 'power3.in',
 }, "startRotation+=6"); // 50%
 
 tl.to(".carshow-txt-3", {
   autoAlpha: 0,
   duration: 0.5,
-  yPercent: -100,
+  y: -30,
   ease: 'power3.in'
 }, "startRotation+=8");
 
 tl.to(".carshow-txt-4 div", {
   autoAlpha: 1,
   duration: 2,
-  yPercent: 0,
+  y: 0,
   stagger: 0.2,
   ease: 'power3.out',
 }, "startRotation+=10"); // 50%
