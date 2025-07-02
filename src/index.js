@@ -93,16 +93,19 @@ const categoryElement = document.getElementById("category");
 // ====================
 function LenisController() {
   useEffect(() => {
+    
+    // Toujours démarrer en haut de la page
+    window.scrollTo(0, 0);
 
     const lenis = new Lenis({
       duration: 1.5,             // Ajuste la vitesse du smooth scroll
       smoothWheel: true,         // Active le scroll fluide avec la molette
       smoothTouch: true,         // Active le scroll fluide sur mobile
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      wrapper: document.body,
-      content: document.querySelector(".us-container"),
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) // Courbe d'accélération
     });
 
+    // Désactive le scroll dès le départ
+    // lenis.stop();
 
     function raf(time) {
       // On lance le raf uniquement si window.isLoaded est true
@@ -129,13 +132,17 @@ function LenisController() {
       },
     });
 
+    ScrollTrigger.addEventListener("refresh", () =>
+      lenis.scrollTo(0, { immediate: true })
+    );
     ScrollTrigger.refresh();
 
     // Lorsque le chargement est terminé (indiqué par l'événement "loaded"), on démarre Lenis
     const handleLoaded = () => {
       lenis.start();
+      lenis.scrollTo(0, { immediate: true });
       // Déclenche un événement 'scroll' pour notifier les écouteurs (comme ta navbar)
-      window.dispatchEvent(new Event('scroll'));
+  window.dispatchEvent(new Event('scroll'));
     };
     window.addEventListener("loaded", handleLoaded);
 
