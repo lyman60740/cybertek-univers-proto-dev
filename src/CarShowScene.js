@@ -1,15 +1,18 @@
 import { Ground } from "./Ground";
 import { Car } from "./Car";
 import { CameraRigCarShow } from "./CameraRigCarShow";
-import React, { Suspense, useRef, useEffect, useState } from "react";
+import React, { Suspense, useRef, useEffect, useState, useMemo } from "react";
 import { PerspectiveCamera } from "@react-three/drei";
 import gsap from "gsap";
+import * as THREE from "three";
+import GUI from "lil-gui";
 
 
 export const CarShowScene = () => {
   const spotLightRef1 = useRef();
   const spotLightRef2 = useRef();
   const spotLightRef3 = useRef();
+  const ambientLightRef = useRef();
   const groundRef = useRef();
   const carRef = useRef();
 
@@ -17,6 +20,67 @@ export const CarShowScene = () => {
   const [showGround, setShowGround] = useState(false);
 
   const [carReady, setCarReady] = useState(false);
+
+   // ✅ lil-gui controls setup
+  useEffect(() => {
+    const gui = new GUI();
+
+    const ambientFolder = gui.addFolder("Ambient Light");
+    const ambientParams = {
+      color: "#ffffff",
+      intensity: 0,
+    };
+
+    ambientFolder.addColor(ambientParams, "color").onChange((value) => {
+      if (ambientLightRef.current) {
+        ambientLightRef.current.color = new THREE.Color(value);
+      }
+    });
+    ambientFolder.add(ambientParams, "intensity", 0.5, 2, 0.01).onChange((value) => {
+      if (ambientLightRef.current) {
+        ambientLightRef.current.intensity = value;
+      }
+    });
+
+    const spotFolder = gui.addFolder("Spotlights");
+    const spot1Params = {
+      color: "#1713c2",
+      intensity: 0,
+    };
+    const spot2Params = {
+      color: "#ffd000",
+      intensity: 0,
+    };
+    const spot3Params = {
+      color: "#ffffff",
+      intensity: 0,
+    };
+
+    spotFolder.addColor(spot1Params, "color").name("Spot 1 Color").onChange((value) => {
+      if (spotLightRef1.current) spotLightRef1.current.color = new THREE.Color(value);
+    });
+    spotFolder.add(spot1Params, "intensity", 0, 10, 0.01).name("Spot 1 Intensity").onChange((value) => {
+      if (spotLightRef1.current) spotLightRef1.current.intensity = value;
+    });
+
+    spotFolder.addColor(spot2Params, "color").name("Spot 2 Color").onChange((value) => {
+      if (spotLightRef2.current) spotLightRef2.current.color = new THREE.Color(value);
+    });
+    spotFolder.add(spot2Params, "intensity", 0, 10, 0.01).name("Spot 2 Intensity").onChange((value) => {
+      if (spotLightRef2.current) spotLightRef2.current.intensity = value;
+    });
+
+    spotFolder.addColor(spot3Params, "color").name("Spot 3 Color").onChange((value) => {
+      if (spotLightRef3.current) spotLightRef3.current.color = new THREE.Color(value);
+    });
+    spotFolder.add(spot3Params, "intensity", 0, 10, 0.01).name("Spot 3 Intensity").onChange((value) => {
+      if (spotLightRef3.current) spotLightRef3.current.intensity = value;
+    });
+
+    return () => {
+      gui.destroy(); // Clean up GUI on unmount
+    };
+  }, []);
 
   useEffect(() => {
     const mm = gsap.matchMedia();
@@ -43,6 +107,8 @@ export const CarShowScene = () => {
     };
   }, []);
 
+  const carPosition = useMemo(() => new THREE.Vector3(-20, -0.51, 0), []);
+
   return (
     <>
       <CameraRigCarShow
@@ -51,16 +117,19 @@ export const CarShowScene = () => {
         spotLightRef2={spotLightRef2}
         spotLightRef3={spotLightRef3}
         carRef={carRef}
+        carPosition={carPosition}
       />
 
       <PerspectiveCamera makeDefault fov={50} position={[0, 10, 1]} />
       <color args={[0, 0, 0]} attach="background" />
 
+      <ambientLight ref={ambientLightRef} intensity={0.5} color="#ffffff" />
+
       <Car
         ref={carRef}
         onLoaded={() => setCarReady(true)}
-        position={[0, -.51, -5]}
-        rotation={[0, 0, 0]}
+        rotation={[0, Math.PI / 2, 0]}
+        position={carPosition.toArray()} 
         scale={[1.5, 1.5, 1.5]}
       />
 
@@ -70,7 +139,7 @@ export const CarShowScene = () => {
         intensity={0}
         angle={0.6}
         penumbra={0.5}
-        position={[3, 5, 0]}
+        position={[0, 5, 3]}
         shadow-bias={-0.0001}
         
       />
@@ -80,7 +149,7 @@ export const CarShowScene = () => {
         intensity={0}
         angle={0.6}
         penumbra={0.5}
-        position={[-3, 5, 0]}
+        position={[0, 5, -3]}
         shadow-bias={-0.0001}
        
       />

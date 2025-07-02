@@ -37,8 +37,8 @@ export const Ground = forwardRef(({
 
   useFrame((state) => {
     let t = -state.clock.getElapsedTime() * scrollSpeed;
-    roughness.offset.set(0, t % 1);
-    normal.offset.set(0, t % 1);
+    roughness.offset.set(-t % 1, 0);
+    normal.offset.set(-t % 1, 0);
   });
 
   useEffect(() => {

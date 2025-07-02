@@ -93,12 +93,13 @@ color: white;
 
 .carshow-container {
 position: relative;
-height: 100vh;
+min-height: 100vh;
 width: 100%;
 display: flex;
 justify-content: flex-end;
 align-items: center;
 gap: 20px;
+pointer-events: none;
 
 }
 .feature-box span {
@@ -134,12 +135,14 @@ margin: 0 auto;
 .container__bloc-txt {
 display: flex;
 justify-content:flex-end;
+    position: relative;
 
 }
 
 .bloc-txt {
+  position: absolute;
+    left: 0;
 z-index: 2;
-position: relative;
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -147,6 +150,8 @@ gap: 5px;
 height: 100%;
 width: 50%;
 padding: 0 20px;
+    color: white;
+    opacity: 0;
 }
 .surTitre {
 color: #878787;
@@ -184,7 +189,6 @@ gap: 5px;
 }
 .bloc-txt__p p {
 margin: 0;
-opacity: 0;
 font-size: 16px;
 color: #878787;
 font-weight: 500;
@@ -200,12 +204,10 @@ font-weight: 600;
 width: max-content;
 text-decoration: none;
 margin-top: 20px;
-opacity: 0;
 }
 
 .cbk_diaporama-produit-sm__content-wrapper p {
-  opacity: 0;
-  visibility: hidden;
+
 }
 
 
