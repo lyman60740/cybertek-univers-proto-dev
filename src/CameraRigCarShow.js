@@ -404,7 +404,7 @@ y: 30,
 
             ease: 'power3.out'
           },
-          '<80%'
+          'startRotation+=10'
         )
         tl.to(carTargetPosition.current, {
           // Animation vide pour laisser un temps d'arrêt après la fin de la tl
