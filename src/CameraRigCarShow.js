@@ -315,7 +315,7 @@ tl.addLabel("startRotation");
         tl.to(".carshow-txt-1", {
   autoAlpha: 1,
   duration: 1.5,
-  yPercent: 0,
+  yPercent: -50,
   ease: 'power2.out',
 }, "startRotation+=1.5"); // 25% de 10s
 
@@ -329,7 +329,7 @@ tl.to(".carshow-txt-1", {
 tl.to(".carshow-txt-2", {
   autoAlpha: 1,
   duration: 1.5,
-  yPercent: 0,
+  yPercent: -50,
   ease: 'power2.out',
 }, "startRotation+=4"); // 50%
 
@@ -343,7 +343,7 @@ tl.to(".carshow-txt-2", {
 tl.to(".carshow-txt-3", {
   autoAlpha: 1,
   duration: 1.5,
-  yPercent: 0,
+  yPercent: -50,
   ease: 'power2.out',
 }, "startRotation+=6.5"); // 50%
 
@@ -354,10 +354,10 @@ tl.to(".carshow-txt-3", {
   ease: 'power2.in'
 }, "startRotation+=8");
 
-tl.to(".carshow-txt-4", {
+tl.to(".carshow-txt-4 div", {
   autoAlpha: 1,
   duration: 2,
-  yPercent: 0,
+  yPercent: -50,
   stagger: 0.2,
   ease: 'power2.out',
 }, "startRotation+=9"); // 50%
