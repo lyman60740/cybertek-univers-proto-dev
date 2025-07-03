@@ -100,7 +100,8 @@ export const Car = forwardRef(({ position = [], rotation = [0, 0, 0], scale = [1
       if (!lodModel) return;
 
       // 🔄 Réduire les calculs sur mobile
-      if (isMobile && Math.floor(state.clock.elapsedTime) % 2 !== 0) return;
+      // if (isMobile && Math.floor(state.clock.elapsedTime * 30) % 2 !== 0) return;
+
 
       lodModel.levels.forEach(({ object }) => {
   object.traverse((child) => {
