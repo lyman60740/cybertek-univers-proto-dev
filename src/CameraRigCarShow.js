@@ -284,14 +284,9 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
 
             ease: 'power3.out'
           },
-          'startRotation+=12'
+          'startRotation+=10'
         )
-        tl.to(carTargetPosition.current, {
-          // Animation vide pour laisser un temps d'arrêt après la fin de la tl
-          duration: 1
-        })
-      })
-      tl.to(
+        tl.to(
           '.carshow-txt-4 div',
           {
             autoAlpha: 1,
@@ -302,6 +297,12 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
           },
           '<30%'
         ) // 50%
+        tl.to(carTargetPosition.current, {
+          // Animation vide pour laisser un temps d'arrêt après la fin de la tl
+          duration: 1
+        })
+      })
+      
 
       mm.add('(min-width: 1000px)', () => {
         // allume les lights
