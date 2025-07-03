@@ -24,6 +24,17 @@ export const CarShowScene = () => {
 
   const [carReady, setCarReady] = useState(false);
 
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+  const mm = gsap.matchMedia()
+
+  mm.add('(max-width: 999px)', () => setIsMobile(true))
+  mm.add('(min-width: 1000px)', () => setIsMobile(false))
+
+
+  return () => mm.revert()
+}, [])
    // ✅ lil-gui controls setup
   // useEffect(() => {
   //   const gui = new GUI();
@@ -74,26 +85,6 @@ export const CarShowScene = () => {
   //   };
   // }, []);
 
-  useEffect(() => {
-    const mm = gsap.matchMedia();
-
-    // ✅ Active le Ground uniquement si min-width >= 800px
-    mm.add("(min-width: 1000px)", () => {
-      setShowGround(true); // Active le rendu du Ground
-    });
-
-    // mm.add("(max-width: 999px)", () => {
-    //   setShowGround(false); // Désactive le rendu du Ground
-
-
-
-    // });
-
-    // ✅ Cleanup à la destruction du composant
-    return () => {
-      mm.revert();
-    };
-  }, []);
 
   const carPosition = useMemo(() => new THREE.Vector3(-20, -0.51, 0), []);
 
@@ -106,7 +97,12 @@ export const CarShowScene = () => {
         carRef={carRef}
         carPosition={carPosition}
       />
-      <fog attach="fog" args={['#000000', 17, 18]} />
+      
+      {isMobile ? (
+  <fog attach="fog" args={['#000000', 19, 20]} /> // 📱 mobile
+) : (
+  <fog attach="fog" args={['#000000', 17, 18]} /> // 💻 desktop
+)}
 <Environment files="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev/public/hdri/studio_small_09_1k.hdr" background={false} />
 
       <PerspectiveCamera makeDefault fov={50} position={[0, 10, 1]} />
