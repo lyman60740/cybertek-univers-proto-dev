@@ -212,7 +212,9 @@ margin-top: 20px;
 .carshow-txt-4 {
   opacity: 1 !important;
 }
-
+.carshow-txt-4 div {
+  opacity: 0;
+}
 .loader-wrap {
   position: fixed;
   height: 100vh;

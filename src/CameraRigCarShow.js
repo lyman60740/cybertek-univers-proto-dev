@@ -173,9 +173,6 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             stagger: 0.1,
             duration: 1,
             ease: 'cubic-bezier(.21,.65,.67,1)',
-            onStart: () => {
-              console.log('logoElements disparait')
-            }
           })
         }
 
@@ -185,9 +182,6 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             height: 2,
             duration: 3,
             ease: 'power3.inout',
-            onStart: () => {
-              console.log('orbitState height 1')
-            }
           },
           '<'
         )
@@ -204,9 +198,6 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             x: 0,
             duration: 2.5,
             ease: 'linear',
-            onStart: () => {
-              console.log('carTargetPosition z=0')
-            }
           },
           '<'
         )
@@ -286,18 +277,6 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
         )
 
         tl.to(
-          '.carshow-txt-4 div',
-          {
-            autoAlpha: 1,
-            duration: 2,
-            y: 0,
-            stagger: 0.2,
-            ease: 'power3.out'
-          },
-          'startRotation+=10'
-        ) // 50%
-
-        tl.to(
           carTargetPosition.current,
           {
             x: 15,
@@ -312,6 +291,17 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
           duration: 1
         })
       })
+      tl.to(
+          '.carshow-txt-4 div',
+          {
+            autoAlpha: 1,
+            duration: 2,
+            y: 0,
+            stagger: 0.2,
+            ease: 'power3.out'
+          },
+          '<30%'
+        ) // 50%
 
       mm.add('(min-width: 1000px)', () => {
         // allume les lights
@@ -340,9 +330,6 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             stagger: 0.1,
             duration: 1,
             ease: 'cubic-bezier(.21,.65,.67,1)',
-            onStart: () => {
-              console.log('logoElements disparait')
-            }
           })
         }
 
@@ -352,9 +339,6 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             height: 1,
             duration: 3,
             ease: 'power3.inout',
-            onStart: () => {
-              console.log('orbitState height 1')
-            }
           },
           '<'
         )
@@ -374,9 +358,6 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             x: -8.75,
             duration: 2.5,
             ease: 'linear',
-            onStart: () => {
-              console.log('carTargetPosition z=0')
-            }
           },
           '<'
         )
