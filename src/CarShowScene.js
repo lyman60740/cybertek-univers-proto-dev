@@ -107,7 +107,7 @@ export const CarShowScene = () => {
         carPosition={carPosition}
       />
       <fog attach="fog" args={['#000000', 10, 20]} />
-<Environment files="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-proto-simracing-page/public/hdri/studio_small_09_1k.hdr" background={false} />
+<Environment files="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev/public/hdri/studio_small_09_1k.hdr" background={false} />
 
       <PerspectiveCamera makeDefault fov={50} position={[0, 10, 1]} />
       <color args={[0, 0, 0]} attach="background" />
