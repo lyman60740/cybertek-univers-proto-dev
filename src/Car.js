@@ -63,13 +63,26 @@ export const Car = forwardRef(({ position = [], rotation = [0, 0, 0], scale = [1
 
   // ✅ Gestion des ombres et textures
   if (object instanceof THREE.Mesh) {
-    object.castShadow = !isMobile;
-    object.receiveShadow = !isMobile;
+  object.castShadow = !isMobile;
+  object.receiveShadow = !isMobile;
 
-    if (object.material && object.material.map) {
-      object.material.map.anisotropy = isMobile ? 2 : 16;
-    }
+  if (object.material) {
+    const oldMat = object.material;
+    const newMat = new THREE.MeshPhysicalMaterial({
+  color: oldMat.color,
+  map: oldMat.map,
+  metalness: 0.3,          // plus réaliste
+  roughness: 0.6,          // augmente la "matité"
+  envMapIntensity: 0.5,    // réduit la force des reflets HDRI
+  clearcoat: 0.2,          // léger vernis
+  clearcoatRoughness: 0.3, // vernis diffus, pas miroir
+});
+
+    newMat.map && (newMat.map.anisotropy = isMobile ? 2 : 16);
+
+    object.material = newMat;
   }
+}
 });
 
       // ✅ Appliquer position, échelle et rotation

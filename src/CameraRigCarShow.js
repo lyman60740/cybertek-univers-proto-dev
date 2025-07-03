@@ -32,7 +32,7 @@ function useExternalRenderControl() {
   return canRender
 }
 
-export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spotLightRef3, carRef, carReady, carPosition }) => {
+export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carRef, carReady, carPosition }) => {
   const { camera } = useThree()
   const cameraTarget = useRef(new THREE.Vector3(0, 10, 5))
   const lookAtTarget = useRef(new THREE.Vector3(0, hauteurTarget, 0))
@@ -109,14 +109,13 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spot
       document.querySelector('.carshow-container') &&
       spotLightRef1.current &&
       spotLightRef2.current &&
-      spotLightRef3.current &&
       groundRef.current
     ) {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: '.carshow-container',
-          start: isMobile ? 'top-=70px top' : 'top top',
-          end: isMobile ? '+=1000px' : '+=4000px',
+          start: isMobile ? 'top top' : 'top top',
+          end: isMobile ? '+=2000px' : '+=4000px',
           scrub: isMobile ? 1 : 2,
           pin: true,
           pinSpacing: true,
@@ -141,105 +140,177 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spot
             if (e.progress < 0.15) {
               if (lightsOn.current !== true && spotLightRef2.current && spotLightRef1.current) {
                 lightsOn.current = true
-                console.log('light on')
               }
             }
-            //  else {
-            //   if (lightsOn.current !== false && spotLightRef2.current && spotLightRef1.current) {
-            //     lightsOn.current = false
-            //     console.log('light off')
-            //     // éteint les lights
-            //     gsap.to(spotLightRef2.current, {
-            //       intensity: 0,
-            //       ease: 'power3.in',
-            //       duration: 0.3
-            //     })
-
-            //     gsap.to(spotLightRef1.current, {
-            //       intensity: 0,
-            //       ease: 'power3.in',
-            //       duration: 0.3
-            //     })
-            //   }
-            // }
-          }
+          },
         }
       })
 
       mm.add('(max-width: 999px)', () => {
+        orbitState.current.radius = 12;
+        // allume les lights
+        gsap.to(spotLightRef2.current, {
+          intensity: 1.5,
+          ease: 'power3.in',
+          duration: 1,
+        })
+        gsap.to(spotLightRef1.current, {
+          intensity: 2.5,
+          ease: 'power3.in',
+          duration: 1
+        })
+
+        gsap.to(carTargetPosition.current, {
+          x: -7,
+          duration: 2,
+
+          ease: 'power3.out'
+        })
+        if (logoElements) {
+          tl.to(logoElements, {
+            opacity: 0,
+            y: -20,
+            stagger: 0.1,
+            duration: 1,
+            ease: 'cubic-bezier(.21,.65,.67,1)',
+            onStart: () => {
+              console.log('logoElements disparait')
+            }
+          })
+        }
+
         tl.to(
-          [spotLightRef2.current],
+          orbitState.current,
           {
-            intensity: 1.5,
-            ease: 'linear',
-            duration: 0.3
-          },
-          '<'
-        )
-        tl.to(
-          [spotLightRef1.current],
-          {
-            intensity: 2.5,
-            ease: 'linear',
-            duration: 0.3
+            height: 2,
+            duration: 3,
+            ease: 'power3.inout',
+            onStart: () => {
+              console.log('orbitState height 1')
+            }
           },
           '<'
         )
 
-        if (logoElements) {
-          tl.to(
-            logoElements,
-            {
-              opacity: 0,
-              y: -20,
-              stagger: 0.1,
-              duration: 0.25,
-              ease: 'cubic-bezier(.21,.65,.67,1)'
-            },
-            '<80%'
-          )
-        }
-        tl.to(carTargetPosition.current, {
-          z: -1,
-          duration: 0.5,
-          ease: 'power3.inout'
-        })
-        // tl.to(cameraTarget.current, {
-        //   x: 0,
-        //   y: 0.5,
-        //   z: 5,
-        //   duration: 0.5,
-        //   ease: "linear"
-        // },"<");
+        tl.addLabel('startRotation')
         tl.to(angleRef.current, {
-          value: -Math.PI * 0.5,
-          duration: 3,
-          ease: 'power3.inout'
+          value: Math.PI,
+          duration: 10,
+          ease: "linear"
         })
         tl.to(
           carTargetPosition.current,
           {
-            z: 20,
-            duration: 0.5,
-            ease: 'power3.inout'
+            x: 0,
+            duration: 2.5,
+            ease: 'linear',
+            onStart: () => {
+              console.log('carTargetPosition z=0')
+            }
           },
-          '>20%'
+          '<'
+        )
+        tl.fromTo(
+          '.carshow-txt-1',
+          {
+            y: 30
+          },
+          {
+            autoAlpha: 1,
+            duration: 1.5,
+            y: 0,
+            ease: 'power2.out'
+          },
+          'startRotation+=1'
+        ) // 25% de 10s
+
+        tl.to(
+          '.carshow-txt-1',
+          {
+            autoAlpha: 0,
+            duration: 0.5,
+            y: -30,
+            ease: 'power2.in'
+          },
+          'startRotation+=3'
+        ) // disparition après 2s
+
+        tl.fromTo(
+          '.carshow-txt-2',
+          {
+            y: 30
+          },
+          {
+            autoAlpha: 1,
+            duration: 1.5,
+            y: 0,
+            ease: 'power2.out'
+          },
+          'startRotation+=4'
+        ) // 50%
+
+        tl.to(
+          '.carshow-txt-2',
+          {
+            autoAlpha: 0,
+            duration: 0.5,
+            y: -30,
+            ease: 'power3.in'
+          },
+          'startRotation+=5.5'
         )
 
-        if (groundRef.current) {
-          tl.to(
-            groundRef.current.material,
-            {
-              opacity: 0,
-              ease: 'linear',
-              duration: 0.5,
-              onUpdate: () => {
-                groundRef.current.material.needsUpdate = true
-              }
-            },
-            '<'
-          )
-        }
+        tl.fromTo(
+          '.carshow-txt-3',
+          {
+            y: 30
+          },
+          {
+            autoAlpha: 1,
+            duration: 1.5,
+            y: 0,
+            ease: 'power3.in'
+          },
+          'startRotation+=6'
+        ) // 50%
+
+        tl.to(
+          '.carshow-txt-3',
+          {
+            autoAlpha: 0,
+            duration: 0.5,
+            y: -30,
+            ease: 'power3.in'
+          },
+          'startRotation+=8'
+        )
+
+        tl.to(
+          '.carshow-txt-4 div',
+          {
+            autoAlpha: 1,
+            duration: 2,
+            y: 0,
+            stagger: 0.2,
+            ease: 'power3.out'
+          },
+          'startRotation+=10'
+        ) // 50%
+
+        tl.to(
+          carTargetPosition.current,
+          {
+            x: 15,
+            duration: 1,
+
+            ease: 'power3.out'
+          },
+          'startRotation+=12'
+        )
+        tl.to(carTargetPosition.current, {
+          // Animation vide pour laisser un temps d'arrêt après la fin de la tl
+          duration: 1
+        })
       })
 
       mm.add('(min-width: 1000px)', () => {
@@ -312,7 +383,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, spot
         tl.fromTo(
           '.carshow-txt-1',
           {
-y: 30,
+            y: 30
           },
           {
             autoAlpha: 1,
@@ -337,7 +408,7 @@ y: 30,
         tl.fromTo(
           '.carshow-txt-2',
           {
-y: 30,
+            y: 30
           },
           {
             autoAlpha: 1,
@@ -362,7 +433,7 @@ y: 30,
         tl.fromTo(
           '.carshow-txt-3',
           {
-y: 30,
+            y: 30
           },
           {
             autoAlpha: 1,
