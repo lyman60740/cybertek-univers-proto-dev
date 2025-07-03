@@ -150,12 +150,12 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
         orbitState.current.radius = 12;
         // allume les lights
         gsap.to(spotLightRef2.current, {
-          intensity: 1.5,
+          intensity: 2.5,
           ease: 'power3.in',
           duration: 1,
         })
         gsap.to(spotLightRef1.current, {
-          intensity: 2.5,
+          intensity: 3.5,
           ease: 'power3.in',
           duration: 1
         })
