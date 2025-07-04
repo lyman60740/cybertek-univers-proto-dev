@@ -116,7 +116,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
         scrollTrigger: {
           trigger: '.carshow-container',
           start: isMobile ? 'top top' : 'top top',
-          end: isMobile ? '+=2000px' : '+=4000px',
+          end: isMobile ? '+=3000px' : '+=4000px',
           scrub: isMobile ? 1 : 2,
           pin: true,
           pinSpacing: true,
@@ -190,7 +190,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
         tl.addLabel('startRotation')
         tl.to(angleRef.current, {
           value: Math.PI,
-          duration: 10,
+          duration: 11,
           ease: "linear"
         })
         tl.to(
@@ -225,7 +225,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             ease: 'power2.in'
           },
           'startRotation+=3'
-        ) // disparition après 2s
+        ) 
 
         tl.fromTo(
           '.carshow-txt-2',
@@ -274,7 +274,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             y: -30,
             ease: 'power3.in'
           },
-          'startRotation+=7.5'
+          'startRotation+=8'
         )
         tl.fromTo(
           '.carshow-txt-3 p:nth-of-type(2)',
@@ -287,7 +287,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             y: 0,
             ease: 'power3.in'
           },
-          'startRotation+=8'
+          'startRotation+=9'
         ) // 50%
 
         tl.to(
@@ -298,7 +298,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             y: -30,
             ease: 'power3.in'
           },
-          'startRotation+=9.5'
+          'startRotation+=11'
         )
 
         tl.to(
@@ -309,7 +309,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
 
             ease: 'power3.out'
           },
-          'startRotation+=10'
+          'startRotation+=11'
         )
         tl.to(
           '.carshow-txt-4 div',
