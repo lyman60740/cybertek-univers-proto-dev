@@ -10,8 +10,7 @@ const mm = gsap.matchMedia()
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(CustomEase)
 
-
-ScrollTrigger.config({ autoRefreshEvents: "" })
+ScrollTrigger.config({ autoRefreshEvents: '' })
 
 const hauteurTarget = 1
 
@@ -79,7 +78,6 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
     const matrix = new THREE.Matrix4().lookAt(camera.position, lookAtTarget.current, new THREE.Vector3(0, hauteurTarget, 0))
     camera.quaternion.setFromRotationMatrix(matrix)
   }, [])
-  
 
   useEffect(() => {
     const textAndOtherTl = gsap.timeline({ paused: true })
@@ -109,12 +107,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
         )
     }
 
-    if (
-      document.querySelector('.carshow-container') &&
-      spotLightRef1.current &&
-      spotLightRef2.current &&
-      groundRef.current
-    ) {
+    if (document.querySelector('.carshow-container') && spotLightRef1.current && spotLightRef2.current && groundRef.current) {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: '.carshow-container',
@@ -124,39 +117,38 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
           pin: true,
           pinSpacing: true,
           markers: false,
-          onUpdate: (self) => {
+          onUpdate: (e) => {
             mm.add('(min-width: 1000px)', () => {
-              if (self.progress > 0.9) {
+              if (e.progress > 0.9) {
                 textAndOtherTl.timeScale(1).play() // 🔥 Lecture normale
               } else {
                 textAndOtherTl.timeScale(1).reverse()
               }
             })
             mm.add('(max-width: 999px)', () => {
-              if (self.progress > 0.99) {
+              if (e.progress > 0.99) {
                 textAndOtherTl.timeScale(1).play() // 🔥 Lecture normale
               } else {
                 textAndOtherTl.timeScale(1).reverse() // ⏩ Retour 2x plus rapide
               }
             })
-          },
-          onUpdate: (e) => {
+
             if (e.progress < 0.15) {
               if (lightsOn.current !== true && spotLightRef2.current && spotLightRef1.current) {
                 lightsOn.current = true
               }
             }
-          },
+          }
         }
       })
 
       mm.add('(max-width: 999px)', () => {
-        orbitState.current.radius = 12;
+        orbitState.current.radius = 12
         // allume les lights
         gsap.to(spotLightRef2.current, {
           intensity: 2.5,
           ease: 'power3.in',
-          duration: 1,
+          duration: 1
         })
         gsap.to(spotLightRef1.current, {
           intensity: 3.5,
@@ -176,7 +168,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             y: -20,
             stagger: 0.1,
             duration: 1,
-            ease: 'cubic-bezier(.21,.65,.67,1)',
+            ease: 'cubic-bezier(.21,.65,.67,1)'
           })
         }
 
@@ -185,7 +177,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
           {
             height: 2,
             duration: 3,
-            ease: 'power3.inout',
+            ease: 'power3.inout'
           },
           '<'
         )
@@ -194,14 +186,14 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
         tl.to(angleRef.current, {
           value: Math.PI,
           duration: 11,
-          ease: "linear"
+          ease: 'linear'
         })
         tl.to(
           carTargetPosition.current,
           {
             x: 0,
             duration: 2.5,
-            ease: 'linear',
+            ease: 'linear'
           },
           '<'
         )
@@ -228,7 +220,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             ease: 'power2.in'
           },
           'startRotation+=3'
-        ) 
+        )
 
         tl.fromTo(
           '.carshow-txt-2',
@@ -330,7 +322,6 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
           duration: 1
         })
       })
-      
 
       mm.add('(min-width: 1000px)', () => {
         // allume les lights
@@ -358,7 +349,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             y: -20,
             stagger: 0.1,
             duration: 1,
-            ease: 'cubic-bezier(.21,.65,.67,1)',
+            ease: 'cubic-bezier(.21,.65,.67,1)'
           })
         }
 
@@ -367,7 +358,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
           {
             height: 1,
             duration: 3,
-            ease: 'power3.inout',
+            ease: 'power3.inout'
           },
           '<'
         )
@@ -381,12 +372,15 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             'M0,0 C0.009,0.029 0.117,0.234 0.246,0.242 0.429,0.252 0.322,0.5 0.5,0.5 0.585,0.5 0.561,0.732 0.743,0.747 0.889,0.758 0.909,1 1,1 '
           )
         })
-        tl.to(
+        tl.fromTo(
           carTargetPosition.current,
+          {
+            x: -7
+          },
           {
             x: -8.75,
             duration: 2.5,
-            ease: 'linear',
+            ease: 'linear'
           },
           '<'
         )
@@ -518,24 +512,20 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
   })
 
   // 📱 Correction iOS/Android : ne refresh ScrollTrigger que pour un vrai "resize" (largeur)
-useEffect(() => {
-  let lastWidth = window.innerWidth
+  useEffect(() => {
+    let lastWidth = window.innerWidth
 
-  const handleResize = () => {
-    if (window.innerWidth !== lastWidth) {
-      lastWidth = window.innerWidth
-      ScrollTrigger.refresh()
+    const handleResize = () => {
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth
+        ScrollTrigger.refresh()
+      }
+      // Si la largeur ne bouge pas : on NE FAIT RIEN, jamais, même si la hauteur change
     }
-    // Si la largeur ne bouge pas : on NE FAIT RIEN, jamais, même si la hauteur change
-  }
 
-  window.addEventListener('resize', handleResize)
-  return () => window.removeEventListener('resize', handleResize)
-}, [])
-
-
-
-
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   // >>> LOGIQUE LENIS DÉPLACÉE DANS index.js <<<
   // Les useEffect suivants liés à Lenis (initialisation, synchronisation avec ScrollTrigger,
