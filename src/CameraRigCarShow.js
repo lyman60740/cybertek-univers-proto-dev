@@ -10,6 +10,9 @@ const mm = gsap.matchMedia()
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(CustomEase)
 
+
+ScrollTrigger.config({ autoRefreshEvents: "" })
+
 const hauteurTarget = 1
 
 function useExternalRenderControl() {
@@ -513,6 +516,26 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
       carRef.current.position.lerp(carTargetPosition.current, 0.1)
     }
   })
+
+  // 📱 Correction iOS/Android : ne refresh ScrollTrigger que pour un vrai "resize" (largeur)
+useEffect(() => {
+  let lastWidth = window.innerWidth
+
+  const handleResize = () => {
+    if (window.innerWidth !== lastWidth) {
+      lastWidth = window.innerWidth
+      ScrollTrigger.refresh()
+    }
+    // Si la largeur ne bouge pas : on NE FAIT RIEN, jamais, même si la hauteur change
+  }
+
+  window.addEventListener('resize', handleResize)
+  return () => window.removeEventListener('resize', handleResize)
+}, [])
+
+
+
+
 
   // >>> LOGIQUE LENIS DÉPLACÉE DANS index.js <<<
   // Les useEffect suivants liés à Lenis (initialisation, synchronisation avec ScrollTrigger,
