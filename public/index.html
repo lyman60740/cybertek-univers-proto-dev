@@ -48,13 +48,12 @@
                     
                 </div>
                 <div class="cbk_diaporama-produit-sm__right-wrapper bloc-txt carshow-txt-3">
-                    <div class="cbk_diaporama-produit-sm__content-wrapper">
-                        <h3 class="cbk_diaporama-produit-sm__title">
-                            Bundle Logitech 
-                        </h3>
-                        <p ><span style="font-family: Outfit, sans-serif; font-size: 13px;">BLOC 3</span></p>
-                    </div>
-                    
+                    <p>
+                      PREMIER P
+                    </p>
+                    <p>
+                      DEUXIEME P
+                    </p>
                 </div>
                
                 <div class="cbk_diaporama-produit-sm__right-wrapper bloc-txt carshow-txt-4">
@@ -164,98 +163,7 @@
       }
       window.scrollTo(0, 0);
     </script>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        let isLoaded = false
-        const title = document.querySelector('h1')
-        const usLoader = document.querySelector('.us-loader')
-        const loaderWrap = document.querySelector('.loader-wrap')
-        const usLoaderDiv = document.querySelector('.us-loader div')
-        const usLoaderSpan = document.querySelector('.us-loader span')
-        const catLine = document.querySelector('.cat-line')
-        const catLineDivs = gsap.utils.toArray('.cat-line div')
-        const lis = gsap.utils.toArray('.hero-banner ul li span')
-        const lisDiv = gsap.utils.toArray('.hero-banner ul li div')
 
-        gsap.set(title, {
-          y: 20
-        })
-        gsap.set(usLoaderDiv, {
-          scaleX: 0
-        })
-        gsap.set(usLoaderSpan, { textContent: '0%' })
-
-        const tl = gsap.timeline()
-        tl.to(usLoaderDiv, {
-          scaleX: 1,
-          ease: 'power3.inOut',
-          duration: 3.5,
-          onUpdate: function () {
-            const progress = Math.round(this.progress() * 100)
-            usLoaderSpan.textContent = `${progress}%`
-          }
-        })
-        tl.to(
-          ':root',
-          {
-            '--leftSpan': '95vw',
-            ease: 'power3.inOut',
-            duration: 3.5
-          },
-          '<'
-        )
-        tl.to(loaderWrap, {
-          autoAlpha: 0,
-          ease: 'linear',
-          duration: 0.5,
-          onComplete: () => {
-            window.isLoaded = true
-            window.dispatchEvent(new CustomEvent('loaded'))
-          }
-        }).to(title, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.5
-        })
-        tl.to(
-          catLine,
-          {
-            scaleX: 1,
-            ease: 'power3.inOut',
-            duration: 1
-          },
-          '<'
-        )
-          .to(
-            catLineDivs,
-            {
-              scaleY: 1,
-              ease: 'power3.inOut',
-              duration: 0.5
-            },
-            '<30%'
-          )
-          .to(
-            lisDiv,
-            {
-              scaleY: 1,
-              ease: 'power3.inOut',
-              duration: 0.5,
-              stagger: 0.1
-            },
-            '<50%'
-          )
-          .to(
-            lis,
-            {
-              autoAlpha: 1,
-              yPercent: 0,
-              duration: 0.5
-            },
-            '<'
-          )
-      })
-    </script>
 
     <script>
       gsap.registerPlugin(ScrollTrigger)

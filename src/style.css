@@ -209,10 +209,10 @@ margin-top: 20px;
 .cbk_diaporama-produit-sm__content-wrapper p {
 
 }
-.carshow-txt-4 {
+.carshow-txt-4, .carshow-txt-3 {
   opacity: 1 !important;
 }
-.carshow-txt-4 div {
+.carshow-txt-4 div, .carshow-txt-3 P {
   opacity: 0;
 }
 .loader-wrap {

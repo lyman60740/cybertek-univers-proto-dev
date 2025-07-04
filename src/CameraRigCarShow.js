@@ -76,6 +76,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
     const matrix = new THREE.Matrix4().lookAt(camera.position, lookAtTarget.current, new THREE.Vector3(0, hauteurTarget, 0))
     camera.quaternion.setFromRotationMatrix(matrix)
   }, [])
+  
 
   useEffect(() => {
     const textAndOtherTl = gsap.timeline({ paused: true })
@@ -248,11 +249,11 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             y: -30,
             ease: 'power3.in'
           },
-          'startRotation+=5.5'
+          'startRotation+=5'
         )
 
         tl.fromTo(
-          '.carshow-txt-3',
+          '.carshow-txt-3 p:nth-of-type(1)',
           {
             y: 30
           },
@@ -266,14 +267,38 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
         ) // 50%
 
         tl.to(
-          '.carshow-txt-3',
+          '.carshow-txt-3 p:nth-of-type(1)',
           {
             autoAlpha: 0,
             duration: 0.5,
             y: -30,
             ease: 'power3.in'
           },
+          'startRotation+=7.5'
+        )
+        tl.fromTo(
+          '.carshow-txt-3 p:nth-of-type(2)',
+          {
+            y: 30
+          },
+          {
+            autoAlpha: 1,
+            duration: 1.5,
+            y: 0,
+            ease: 'power3.in'
+          },
           'startRotation+=8'
+        ) // 50%
+
+        tl.to(
+          '.carshow-txt-3 p:nth-of-type(2)',
+          {
+            autoAlpha: 0,
+            duration: 0.5,
+            y: -30,
+            ease: 'power3.in'
+          },
+          'startRotation+=9.5'
         )
 
         tl.to(
