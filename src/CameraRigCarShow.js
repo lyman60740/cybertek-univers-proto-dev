@@ -366,7 +366,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
         tl.addLabel('startRotation')
         tl.to(angleRef.current, {
           value: Math.PI * 2,
-          duration: 10,
+          duration: 12,
           ease: CustomEase.create(
             'custom',
             'M0,0 C0.009,0.029 0.117,0.234 0.246,0.242 0.429,0.252 0.322,0.5 0.5,0.5 0.585,0.5 0.561,0.732 0.743,0.747 0.889,0.758 0.909,1 1,1 '
@@ -434,8 +434,8 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
           'startRotation+=5.5'
         )
 
-        tl.fromTo(
-          '.carshow-txt-3',
+         tl.fromTo(
+          '.carshow-txt-3 p:nth-of-type(1)',
           {
             y: 30
           },
@@ -449,7 +449,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
         ) // 50%
 
         tl.to(
-          '.carshow-txt-3',
+          '.carshow-txt-3 p:nth-of-type(1)',
           {
             autoAlpha: 0,
             duration: 0.5,
@@ -457,6 +457,30 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             ease: 'power3.in'
           },
           'startRotation+=8'
+        )
+        tl.fromTo(
+          '.carshow-txt-3 p:nth-of-type(2)',
+          {
+            y: 30
+          },
+          {
+            autoAlpha: 1,
+            duration: 1.5,
+            y: 0,
+            ease: 'power3.in'
+          },
+          'startRotation+=9'
+        ) // 50%
+
+        tl.to(
+          '.carshow-txt-3 p:nth-of-type(2)',
+          {
+            autoAlpha: 0,
+            duration: 0.5,
+            y: -30,
+            ease: 'power3.in'
+          },
+          'startRotation+=11'
         )
 
         tl.to(
@@ -468,7 +492,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             stagger: 0.2,
             ease: 'power3.out'
           },
-          'startRotation+=10'
+          'startRotation+=12'
         ) // 50%
 
         tl.to(
@@ -479,7 +503,7 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
 
             ease: 'power3.out'
           },
-          'startRotation+=10'
+          'startRotation+=11'
         )
         tl.to(carTargetPosition.current, {
           // Animation vide pour laisser un temps d'arrêt après la fin de la tl
