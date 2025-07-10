@@ -42,6 +42,12 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
   const lookAtTarget = useRef(new THREE.Vector3(0, hauteurTarget, 0))
   const carTargetPosition = useRef(carPosition.clone())
 
+  const logoElements = document.querySelectorAll('.logo-cyb, .logo-alp, .sep')
+  const blocTxtElements = document.querySelectorAll('.carshow-container .surTitre span, .carshow-container h3')
+  const otherTxtElements = document.querySelectorAll(
+    '.carshow-container .cbk_diaporama-produit-sm__content-wrapper p, .cbk_diaporama-produit-sm__link'
+  )
+
   const [isMobile, setIsMobile] = useState(false)
 
   const orbitState = useRef({
@@ -76,12 +82,12 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
   useEffect(() => {
 
     if (document.querySelector('.carshow-container')) {
-      setTimeout(() => {
+     
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: '.carshow-container',
           start: isMobile ? 'top top' : 'top top',
-          end:  isMobile ? '+=3000px' : '+=4000px',
+          end:  '+=4000px',
           scrub: isMobile ? 1 : 2,
           pin: true,
           pinSpacing: true,
@@ -109,29 +115,7 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
           },
           '<'
         )
-  tl.fromTo(
-          '.carshow-txt-1',
-          {
-            y: 30
-          },
-          {
-            autoAlpha: 1,
-            duration: 1.5,
-            y: 0,
-            ease: 'power2.out'
-          },
-          '<30%'
-        ) // 25% de 10s
 
-        tl.to(
-          '.carshow-txt-1',
-          {
-            autoAlpha: 0,
-            duration: 0.5,
-            y: -30,
-            ease: 'power2.in'
-          }
-        )
         tl.addLabel('startRotation')
         tl.to(angleRef.current, {
           value: Math.PI * 2,
@@ -147,7 +131,30 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
         //   },
         //   '<'
         // )
-      
+        tl.fromTo(
+          '.carshow-txt-1',
+          {
+            y: 30
+          },
+          {
+            autoAlpha: 1,
+            duration: 1.5,
+            y: 0,
+            ease: 'power2.out'
+          },
+          'startRotation+=1'
+        ) // 25% de 10s
+
+        tl.to(
+          '.carshow-txt-1',
+          {
+            autoAlpha: 0,
+            duration: 0.5,
+            y: -30,
+            ease: 'power2.in'
+          },
+          'startRotation+=3'
+        )
 
         tl.fromTo(
           '.carshow-txt-2',
@@ -160,7 +167,7 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
             y: 0,
             ease: 'power2.out'
           },
-          'startRotation+=1'
+          'startRotation+=4'
         ) // 50%
 
         tl.to(
@@ -171,7 +178,7 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
             y: -30,
             ease: 'power3.in'
           },
-          'startRotation+=4'
+          'startRotation+=5'
         )
 
         tl.fromTo(
@@ -185,7 +192,7 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
             y: 0,
             ease: 'power3.in'
           },
-          'startRotation+=5'
+          'startRotation+=6'
         ) // 50%
 
         tl.to(
@@ -417,7 +424,7 @@ x: -7,
           duration: 1
         })
       })
-      }, 1000);
+      
     }
 
     return () => ScrollTrigger.getAll().forEach((t) => t.kill())

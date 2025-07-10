@@ -18,57 +18,6 @@ export const CarShowScene = () => {
   const [carReady, setCarReady] = useState(false);
 
 
-   // ✅ lil-gui controls setup
-  // useEffect(() => {
-  //   const gui = new GUI();
-
-  //   const ambientFolder = gui.addFolder("Ambient Light");
-  //   const ambientParams = {
-  //     color: "#ffffff",
-  //     intensity: 0,
-  //   };
-
-  //   ambientFolder.addColor(ambientParams, "color").onChange((value) => {
-  //     if (ambientLightRef.current) {
-  //       ambientLightRef.current.color = new THREE.Color(value);
-  //     }
-  //   });
-  //   ambientFolder.add(ambientParams, "intensity", 0, 2, 0.01).onChange((value) => {
-  //     if (ambientLightRef.current) {
-  //       ambientLightRef.current.intensity = value;
-  //     }
-  //   });
-
-  //   const spotFolder = gui.addFolder("Spotlights");
-  //   const spot1Params = {
-  //     color: "#1713c2",
-  //     intensity: 0,
-  //   };
-  //   const spot2Params = {
-  //     color: "#ffd000",
-  //     intensity: 0,
-  //   };
-
-  //   spotFolder.addColor(spot1Params, "color").name("Spot 1 Color").onChange((value) => {
-  //     if (spotLightRef1.current) spotLightRef1.current.color = new THREE.Color(value);
-  //   });
-  //   spotFolder.add(spot1Params, "intensity", 0, 10, 0.01).name("Spot 1 Intensity").onChange((value) => {
-  //     if (spotLightRef1.current) spotLightRef1.current.intensity = value;
-  //   });
-
-  //   spotFolder.addColor(spot2Params, "color").name("Spot 2 Color").onChange((value) => {
-  //     if (spotLightRef2.current) spotLightRef2.current.color = new THREE.Color(value);
-  //   });
-  //   spotFolder.add(spot2Params, "intensity", 0, 10, 0.01).name("Spot 2 Intensity").onChange((value) => {
-  //     if (spotLightRef2.current) spotLightRef2.current.intensity = value;
-  //   });
-
-  //   return () => {
-  //     gui.destroy(); // Clean up GUI on unmount
-  //   };
-  // }, []);
-
-
   const carPosition = useMemo(() => new THREE.Vector3(-20, -0.51, 0), []);
 const dirLightRef = useRef();
  useEffect(() => {
@@ -77,6 +26,18 @@ const dirLightRef = useRef();
       dirLightRef.current.target.updateMatrixWorld();
     }
   }, []);
+
+   const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+  const mm = gsap.matchMedia()
+
+  mm.add('(max-width: 999px)', () => setIsMobile(true))
+  mm.add('(min-width: 1000px)', () => setIsMobile(false))
+
+
+  return () => mm.revert()
+}, [])
 
   // useHelper(dirLightRef, THREE.DirectionalLightHelper, 3, 'cyan');
   return (
@@ -87,8 +48,12 @@ const dirLightRef = useRef();
         carPosition={carPosition}
       />
       
+    {isMobile ? (
+  <fog attach="fog" args={['#15151a', 19, 30]} /> // 📱 mobile
+) : (
+ <fog attach="fog" args={['#15151a', 15, 20]} /> // 💻 desktop
+)}
    
-  <fog attach="fog" args={['#15151a', 15, 20]} /> // 💻 desktop
 
 {/* <Environment files="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev/public/hdri/studio_small_09_1k.hdr" background={false} /> */}
 
@@ -102,9 +67,9 @@ const dirLightRef = useRef();
   <planeGeometry args={[10, 0.15]} />
   <meshBasicMaterial color="white" />
 </mesh>
-<LogoOnGround url="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/images/cyb-white.png" x={3} z={0} height={0.5} ratio={5} />
-<LogoOnGround url="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/images/alpine-white.png" x={4} z={-0.12} height={2} ratio={3} />
-<LogoOnGround url="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/images/cross.png" x={3.5} z={0} height={0.3} ratio={1} />
+<LogoOnGround url="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/images/cyb-white.png" x={3} z={0} height={0.5} ratio={5} animEnd={isMobile ? -12 : -8}/>
+<LogoOnGround url="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/images/alpine-white.png" x={4} z={-0.12} height={2} ratio={3} animEnd={isMobile ? -12 : -8}/>
+<LogoOnGround url="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/images/cross.png" x={3.5} z={0} height={0.3} ratio={1} animEnd={isMobile ? -12 : -8} />
 
       <Car
         ref={carRef}
