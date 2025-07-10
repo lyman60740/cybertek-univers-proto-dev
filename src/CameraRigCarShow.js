@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { CustomEase } from 'gsap/CustomEase'
 import './style.css'
 
+
 const mm = gsap.matchMedia()
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(CustomEase)
@@ -35,6 +36,7 @@ function useExternalRenderControl() {
 }
 
 export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
+
   const { camera } = useThree()
   const cameraTarget = useRef(new THREE.Vector3(0, 10, 5))
   const lookAtTarget = useRef(new THREE.Vector3(0, hauteurTarget, 0))
@@ -405,10 +407,13 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
           'startRotation+=12'
         ) // 50%
 
-        tl.to(
+        tl.fromTo(
           carTargetPosition.current,
           {
-            x: -2,
+x: -7,
+          },
+          {
+            x: -3,
             duration: 1,
 
             ease: 'power3.out'

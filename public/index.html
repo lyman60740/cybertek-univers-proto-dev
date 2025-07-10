@@ -146,6 +146,14 @@
         window.history.scrollRestoration = 'manual';
       }
       window.scrollTo(0, 0);
+
+      localStorage.removeItem('3d_ready');
+window.addEventListener('load', function() {
+  // loader...
+  setTimeout(() => {
+    localStorage.setItem('3d_ready', '1');
+  }, 1000);
+});
     </script>
 
 

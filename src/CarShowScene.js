@@ -3,7 +3,7 @@ import { Car } from "./Car";
 import { LogoOnGround } from "./LogoOnGround";
 import { CameraRigCarShow } from "./CameraRigCarShow";
 import React, { useRef, useEffect, useState, useMemo } from "react";
-import { PerspectiveCamera } from "@react-three/drei";
+import { PerspectiveCamera, useHelper   } from "@react-three/drei";
 import gsap from "gsap";
 import * as THREE from "three";
 import GUI from "lil-gui";
@@ -80,7 +80,15 @@ export const CarShowScene = () => {
 
 
   const carPosition = useMemo(() => new THREE.Vector3(-20, -0.51, 0), []);
+const dirLightRef = useRef();
+ useEffect(() => {
+    if (dirLightRef.current) {
+      dirLightRef.current.target.position.set(0, 0, 0); // vise le centre
+      dirLightRef.current.target.updateMatrixWorld();
+    }
+  }, []);
 
+  // useHelper(dirLightRef, THREE.DirectionalLightHelper, 3, 'cyan');
   return (
     <>
       <CameraRigCarShow
@@ -90,7 +98,7 @@ export const CarShowScene = () => {
       />
       
    
-  <fog attach="fog" args={['#15151a', 10, 20]} /> // 💻 desktop
+  <fog attach="fog" args={['#15151a', 15, 20]} /> // 💻 desktop
 
 {/* <Environment files="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev/public/hdri/studio_small_09_1k.hdr" background={false} /> */}
 
@@ -116,30 +124,29 @@ export const CarShowScene = () => {
         scale={[1.5, 1.5, 1.5]}
       />
 <directionalLight
-  position={[0, 2, 0]}
-  intensity={4.2}
-  castShadow
-  shadow-mapSize-width={1024}
-  shadow-mapSize-height={1024}
+  position={[-2, 5, 0]}
+  intensity={2.2}
+  ref={dirLightRef}
 />
 
         <Ground
           ref={groundRef}
           position={[0, -.53, 0]}
-          planeSize={[20, 40]}
+          planeSize={[40, 40]}
           normalScale={[20, 40]}
           roughnessValue={0.7}
+          metalnessValue={0}
           mixBlur={0}
           mixStrength={0}
           resolution={256}
           mirror={1}
           depthScale={0}
-          scrollSpeed={0.228}
+          scrollSpeed={0.1}
           color={[0.082, 0.082, 0.102]}
         />
 
       
-      <Effects />
+      {/* <Effects /> */}
       
     </>
   );

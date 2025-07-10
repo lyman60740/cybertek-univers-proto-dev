@@ -12,11 +12,19 @@ import { useInView } from "./useInView";
 import gsap from "gsap";
 import Lenis from "@studio-freight/lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { use3DReady } from "./use3DReady";
+import { Stats } from "@react-three/drei";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const mm = gsap.matchMedia();
-
+var isMobile;
+mm.add('(min-width: 1000px)', () => {
+      isMobile = false
+    })
+    mm.add('(max-width: 999px)', () => {
+      isMobile = true;
+    })
 const radius = 2.5; // Rayon du cercle (ajuste selon ton besoin)
 const center = [0, 0, 1.5]; // Point central de la scène
 const angleOffset = Math.PI / 9; // Angle supplémentaire pour ajuster la courbure
@@ -161,16 +169,26 @@ function LenisController() {
 // Rendu de l'application
 // ====================
 
+function App() {
+  const is3DReady = use3DReady();
+console.log("is3DReady ?", is3DReady);
+  if (!is3DReady) return null; // Ou <Loader />
+
+  return (
+    <>
+      <LenisController />
+      <Canvas dpr={window.devicePixelRatio > 1.1 && !isMobile ? [1, 2] : 1} frameloop="always">
+        <CarShowScene />
+        {/* <Stats /> */}
+      </Canvas>
+    </>
+  );
+}
+
 if (rootElement) {
   createRoot(rootElement).render(
     <Suspense fallback={null}>
-      <>
-        {/* Le composant LenisController gère la logique de scroll */}
-        <LenisController />
-        <Canvas dpr={[1, 1.5]} frameloop={"always"}>
-          <CarShowScene />
-        </Canvas> 
-      </>
+      <App />
     </Suspense>
   );
 }
