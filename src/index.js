@@ -175,43 +175,43 @@ if (rootElement) {
   );
 }
 
-mm.add("(min-width: 1000px)", () => {   
-  if (cadresElement) {
-    createRoot(cadresElement).render(
-      <Suspense fallback={null}>
-        <>
-          {/* Ne pas supprimer les parties commentées ci-dessous */}
-          <Canvas
-            dpr={[1, 1.5]}
-            camera={{ fov: 20, position: [0, 0.5, 10] }}
-            frameloop={"always"}
-          >
-            <CadresScene images={images} />
-          </Canvas>
-        </>
-      </Suspense>
-    );
-  }
-});
+// mm.add("(min-width: 1000px)", () => {   
+//   if (cadresElement) {
+//     createRoot(cadresElement).render(
+//       <Suspense fallback={null}>
+//         <>
+//           {/* Ne pas supprimer les parties commentées ci-dessous */}
+//           <Canvas
+//             dpr={[1, 1.5]}
+//             camera={{ fov: 20, position: [0, 0.5, 10] }}
+//             frameloop={"always"}
+//           >
+//             <CadresScene images={images} />
+//           </Canvas>
+//         </>
+//       </Suspense>
+//     );
+//   }
+// });
 
-mm.add("(max-width: 999px)", () => {   
-  if (cadresElement) {
-    createRoot(cadresElement).render(
-      <Suspense fallback={null}>
-        <>
-          {/* Ne pas supprimer les parties commentées ci-dessous */}
-          <Canvas
-            dpr={[1, 1.5]}
-            camera={{ fov: 30, position: [0, 0.5, 10] }}
-            frameloop={"demand"}
-          >
-            <MobileCadres images={images} />
-          </Canvas>
-        </>
-      </Suspense>
-    );
-  }
-});
+// mm.add("(max-width: 999px)", () => {   
+//   if (cadresElement) {
+//     createRoot(cadresElement).render(
+//       <Suspense fallback={null}>
+//         <>
+//           {/* Ne pas supprimer les parties commentées ci-dessous */}
+//           <Canvas
+//             dpr={[1, 1.5]}
+//             camera={{ fov: 30, position: [0, 0.5, 10] }}
+//             frameloop={"demand"}
+//           >
+//             <MobileCadres images={images} />
+//           </Canvas>
+//         </>
+//       </Suspense>
+//     );
+//   }
+// });
 
 // mm.add("(min-width: 800px)", ()=> {   
 //   if (categoryElement) {

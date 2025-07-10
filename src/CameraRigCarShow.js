@@ -34,7 +34,7 @@ function useExternalRenderControl() {
   return canRender
 }
 
-export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carRef, carReady, carPosition }) => {
+export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
   const { camera } = useThree()
   const cameraTarget = useRef(new THREE.Vector3(0, 10, 5))
   const lookAtTarget = useRef(new THREE.Vector3(0, hauteurTarget, 0))
@@ -50,11 +50,9 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
 
   const orbitState = useRef({
     height: 10,
-    radius: 8
+    radius: 6.2
   })
   const angleRef = useRef({ value: 0 })
-
-  const lightsOn = useRef(null)
 
   useEffect(() => {
     // ✅ Rends GSAP globalement accessible
@@ -80,97 +78,30 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
   }, [])
 
   useEffect(() => {
-    const textAndOtherTl = gsap.timeline({ paused: true })
-    if (blocTxtElements.length && otherTxtElements.length) {
-      gsap.set(blocTxtElements, {
-        x: 30,
-        autoAlpha: 0
-      })
 
-      textAndOtherTl
-        .to(blocTxtElements, {
-          x: 0,
-          autoAlpha: 1,
-          stagger: 0.3,
-          duration: 0.4,
-          ease: 'cubic-bezier(.21,.65,.67,1)'
-        })
-        .to(
-          otherTxtElements,
-          {
-            autoAlpha: 1,
-            stagger: 0.3,
-            duration: 0.4,
-            ease: 'cubic-bezier(.21,.65,.67,1)'
-          },
-          '<80%'
-        )
-    }
-
-    if (document.querySelector('.carshow-container') && spotLightRef1.current && spotLightRef2.current && groundRef.current) {
+    if (document.querySelector('.carshow-container')) {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: '.carshow-container',
           start: isMobile ? 'top top' : 'top top',
-          end: isMobile ? '+=3000px' : '+=4000px',
+          end:  '+=4000px',
           scrub: isMobile ? 1 : 2,
           pin: true,
           pinSpacing: true,
           markers: false,
-          onUpdate: (e) => {
-            mm.add('(min-width: 1000px)', () => {
-              if (e.progress > 0.9) {
-                textAndOtherTl.timeScale(1).play() // 🔥 Lecture normale
-              } else {
-                textAndOtherTl.timeScale(1).reverse()
-              }
-            })
-            mm.add('(max-width: 999px)', () => {
-              if (e.progress > 0.99) {
-                textAndOtherTl.timeScale(1).play() // 🔥 Lecture normale
-              } else {
-                textAndOtherTl.timeScale(1).reverse() // ⏩ Retour 2x plus rapide
-              }
-            })
-
-            if (e.progress < 0.15) {
-              if (lightsOn.current !== true && spotLightRef2.current && spotLightRef1.current) {
-                lightsOn.current = true
-              }
-            }
-          }
         }
       })
 
       mm.add('(max-width: 999px)', () => {
         orbitState.current.radius = 12
-        // allume les lights
-        gsap.to(spotLightRef2.current, {
-          intensity: 2.5,
-          ease: 'power3.in',
-          duration: 1
-        })
-        gsap.to(spotLightRef1.current, {
-          intensity: 3.5,
-          ease: 'power3.in',
-          duration: 1
-        })
+
 
         gsap.to(carTargetPosition.current, {
-          x: -7,
+          x: -1,
           duration: 2,
 
           ease: 'power3.out'
         })
-        if (logoElements) {
-          tl.to(logoElements, {
-            opacity: 0,
-            y: -20,
-            stagger: 0.1,
-            duration: 1,
-            ease: 'cubic-bezier(.21,.65,.67,1)'
-          })
-        }
 
         tl.to(
           orbitState.current,
@@ -184,19 +115,19 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
 
         tl.addLabel('startRotation')
         tl.to(angleRef.current, {
-          value: Math.PI,
+          value: Math.PI * 2,
           duration: 11,
           ease: 'linear'
         })
-        tl.to(
-          carTargetPosition.current,
-          {
-            x: 0,
-            duration: 2.5,
-            ease: 'linear'
-          },
-          '<'
-        )
+        // tl.to(
+        //   carTargetPosition.current,
+        //   {
+        //     x: 0,
+        //     duration: 2.5,
+        //     ease: 'linear'
+        //   },
+        //   '<'
+        // )
         tl.fromTo(
           '.carshow-txt-1',
           {
@@ -324,18 +255,6 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
       })
 
       mm.add('(min-width: 1000px)', () => {
-        // allume les lights
-        gsap.to(spotLightRef2.current, {
-          intensity: 1.5,
-          ease: 'power3.in',
-          duration: 1
-        })
-
-        gsap.to(spotLightRef1.current, {
-          intensity: 2.5,
-          ease: 'power3.in',
-          duration: 1
-        })
 
         gsap.to(carTargetPosition.current, {
           x: -7,
@@ -343,15 +262,6 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
 
           ease: 'power3.out'
         })
-        if (logoElements) {
-          tl.to(logoElements, {
-            opacity: 0,
-            y: -20,
-            stagger: 0.1,
-            duration: 1,
-            ease: 'cubic-bezier(.21,.65,.67,1)'
-          })
-        }
 
         tl.to(
           orbitState.current,
@@ -372,18 +282,18 @@ export const CameraRigCarShow = ({ groundRef, spotLightRef1, spotLightRef2, carR
             'M0,0 C0.009,0.029 0.117,0.234 0.246,0.242 0.429,0.252 0.322,0.5 0.5,0.5 0.585,0.5 0.561,0.732 0.743,0.747 0.889,0.758 0.909,1 1,1 '
           )
         })
-        tl.fromTo(
-          carTargetPosition.current,
-          {
-            x: -7
-          },
-          {
-            x: -8.75,
-            duration: 2.5,
-            ease: 'linear'
-          },
-          '<'
-        )
+        // tl.fromTo(
+        //   carTargetPosition.current,
+        //   {
+        //     x: -7
+        //   },
+        //   {
+        //     x: -8.75,
+        //     duration: 2.5,
+        //     ease: 'linear'
+        //   },
+        //   '<'
+        // )
         tl.fromTo(
           '.carshow-txt-1',
           {

@@ -74,7 +74,7 @@ export const Car = forwardRef(({ position = [], rotation = [0, 0, 0], scale = [1
   metalness: 0.3,          // plus réaliste
   roughness: 0.6,          // augmente la "matité"
   envMapIntensity: 0.5,    // réduit la force des reflets HDRI
-  clearcoat: 0.2,          // léger vernis
+  clearcoat: 0.6,          // léger vernis
   clearcoatRoughness: 0.3, // vernis diffus, pas miroir
 });
 
