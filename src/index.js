@@ -78,19 +78,10 @@ function LenisController() {
     );
     ScrollTrigger.refresh();
 
-    // Lorsque le chargement est terminé (indiqué par l'événement "loaded"), on démarre Lenis
-    const handleLoaded = () => {
-      lenis.start();
-      lenis.scrollTo(0, { immediate: true });
-      // Déclenche un événement 'scroll' pour notifier les écouteurs (comme ta navbar)
-  window.dispatchEvent(new Event('scroll'));
-    };
-    window.addEventListener("loaded", handleLoaded);
-
     return () => {
       lenis.destroy();
       ScrollTrigger.getAll().forEach((t) => t.kill());
-      window.removeEventListener("loaded", handleLoaded);
+
     };
   }, []);
 

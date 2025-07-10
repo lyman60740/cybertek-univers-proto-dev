@@ -25,7 +25,7 @@ export const Car = forwardRef(({ position = [], rotation = [0, 0, 0], scale = [1
     // ✅ Charger le modèle GLB
     const gltf = useLoader(
   GLTFLoader,
-  "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/models/car/alpine/alpincar-off10.glb",
+  "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/models/car/alpine/alpincar-off-ratio-0-0500.glb",
   (loader) => {
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");

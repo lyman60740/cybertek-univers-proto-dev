@@ -10,6 +10,10 @@
     
   </head>
   <body>
+        <script>
+                // On bloque le scroll au départ
+document.body.classList.add("cyb3d-loading");
+    </script>
     <!-- https://cybertek-r3f-carshow.vercel.app -->
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div class="us-container">
@@ -141,19 +145,15 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script>
-      if ('scrollRestoration' in window.history) {
-        window.history.scrollRestoration = 'manual';
-      }
-      window.scrollTo(0, 0);
+        <script>
+        localStorage.setItem('3d_ready', '0');
 
-      localStorage.removeItem('3d_ready');
-window.addEventListener('load', function() {
-  // loader...
-  setTimeout(() => {
-    localStorage.setItem('3d_ready', '1');
-  }, 1000);
-});
+          setTimeout(() => {
+            localStorage.setItem('3d_ready', '1');
+            document.body.classList.remove("cyb3d-loading");
+          }, 5000);
+       
+
     </script>
 
 
