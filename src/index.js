@@ -172,14 +172,14 @@ function LenisController() {
 function App() {
   const is3DReady = use3DReady();
 console.log("is3DReady ?", is3DReady);
-  if (!is3DReady) return null; // Ou <Loader />
+  if (!is3DReady) return null; 
 
   return (
     <>
       <LenisController />
       <Canvas dpr={window.devicePixelRatio > 1.1 && !isMobile ? [1, 2] : 1} frameloop="always">
         <CarShowScene />
-        {/* <Stats /> */}
+        <Stats />
       </Canvas>
     </>
   );

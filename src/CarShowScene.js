@@ -17,17 +17,7 @@ export const CarShowScene = () => {
 
   const [carReady, setCarReady] = useState(false);
 
-  const [isMobile, setIsMobile] = useState(false)
 
-  useEffect(() => {
-  const mm = gsap.matchMedia()
-
-  mm.add('(max-width: 999px)', () => setIsMobile(true))
-  mm.add('(min-width: 1000px)', () => setIsMobile(false))
-
-
-  return () => mm.revert()
-}, [])
    // ✅ lil-gui controls setup
   // useEffect(() => {
   //   const gui = new GUI();
