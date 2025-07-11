@@ -5,117 +5,108 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { LOD } from "three";
 import * as THREE from "three";
 
-export const Car = forwardRef(({ position = [], rotation = [0, 0, 0], scale = [1.5, 1.5, 1.5], onLoaded }, ref) => {
-    const [isMobile, setIsMobile] = useState(false);
-    const [lodModel, setLodModel] = useState(null); // ✅ Stocke le LOD
-
-    // ✅ Détection des mobiles avec matchMedia
-    useEffect(() => {
-      const mediaQuery = window.matchMedia("(max-width: 799px)");
-      setIsMobile(mediaQuery.matches);
-
-      const handleResize = () => setIsMobile(mediaQuery.matches);
-      mediaQuery.addEventListener("change", handleResize);
-
-      return () => {
-        mediaQuery.removeEventListener("change", handleResize);
-      };
-    }, []);
-
-    // ✅ Charger le modèle GLB
-    const gltf = useLoader(
-  GLTFLoader,
-  "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/models/car/alpine/alpincar-off-ratio-0-0500010.glb",
-  (loader) => {
-    const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
-    loader.setDRACOLoader(dracoLoader);
-  }
-);
-
-
-    // ✅ Appliquer les optimisations
-    useEffect(() => {
-      if (!gltf) return;
-
-      const scene = gltf.scene;
-
-      // 🔥 Appliquer les niveaux de détail (LOD)
-      const lod = new LOD();
-      lod.addLevel(scene.clone(), 0); // Détail complet (proche)
-
-      if (isMobile) {
-        const lowPolyModel = scene.clone();
-        lowPolyModel.traverse((obj) => {
-          if (obj.isMesh) {
-            obj.geometry = obj.geometry.toNonIndexed(); // Réduction de la géométrie
-          }
-        });
-        lod.addLevel(lowPolyModel, 10); // Modèle simplifié à distance
-      }
-
-      // ✅ Optimisation des matériaux et ombres
-      lod.traverse((object) => {
-  // ✅ Marquage des roues, qu'elles soient des Group ou Mesh
-  if (["Rim_LF", "Rim_RF", "Rim_LR", "Rim_RR"].includes(object.name)) {
-    object.userData.isWheel = true;
-  }
-
-  // ✅ Gestion des ombres et textures
-  if (object instanceof THREE.Mesh) {
-  object.castShadow = !isMobile;
-  object.receiveShadow = !isMobile;
-
-  if (object.material) {
-    const oldMat = object.material;
-    const newMat = new THREE.MeshPhysicalMaterial({
-  color: oldMat.color,
-  map: oldMat.map,
-  metalness: 0.3,          // plus réaliste
-  roughness: 0.6,          // augmente la "matité"
-  envMapIntensity: 0.5,    // réduit la force des reflets HDRI
-  clearcoat: 0.6,          // léger vernis
-  clearcoatRoughness: 0.3, // vernis diffus, pas miroir
-});
-
-    newMat.map && (newMat.map.anisotropy = isMobile ? 2 : 16);
-
-    object.material = newMat;
-  }
-}
-});
-
-      // ✅ Appliquer position, échelle et rotation
-      lod.scale.set(...scale);
-      lod.position.set(...position);
-      lod.rotation.set(...rotation);
-
-      // ✅ Stocker le modèle avec LOD pour le rendre ensuite
-      setLodModel(lod);
-      onLoaded?.();
-    }, [gltf, position, rotation, scale, isMobile]);
-
-    // ✅ Animation des roues avec un framerate réduit sur mobile
-    useFrame((state, delta) => {
-      if (!lodModel) return;
-
-      // 🔄 Réduire les calculs sur mobile
-      // if (isMobile && Math.floor(state.clock.elapsedTime * 30) % 2 !== 0) return;
-
-
-      lodModel.levels.forEach(({ object }) => {
-  object.traverse((child) => {
-    if (child.userData.isWheel) {
-      child.rotation.x += delta * 1.8;
+// 👉 Le composant qui charge selon l’URL reçue
+const CarModel = forwardRef(({ url, position, rotation, scale, isMobile, onLoaded }, ref) => {
+  const gltf = useLoader(
+    GLTFLoader,
+    url,
+    (loader) => {
+      const dracoLoader = new DRACOLoader();
+      dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
+      loader.setDRACOLoader(dracoLoader);
     }
-  });
-});
+  );
+  const [lodModel, setLodModel] = useState(null);
 
+  useEffect(() => {
+    if (!gltf) return;
+
+    const scene = gltf.scene;
+    const lod = new LOD();
+    lod.addLevel(scene.clone(), 0);
+
+    if (isMobile) {
+      const lowPolyModel = scene.clone();
+      lowPolyModel.traverse((obj) => {
+        if (obj.isMesh) obj.geometry = obj.geometry.toNonIndexed();
+      });
+      lod.addLevel(lowPolyModel, 10);
+    }
+
+    lod.traverse((object) => {
+      if (["Rim_LF", "Rim_RF", "Rim_LR", "Rim_RR"].includes(object.name)) {
+        object.userData.isWheel = true;
+      }
+      if (object instanceof THREE.Mesh) {
+        object.castShadow = !isMobile;
+        object.receiveShadow = !isMobile;
+        if (object.material) {
+          const oldMat = object.material;
+          const newMat = new THREE.MeshPhysicalMaterial({
+            color: oldMat.color,
+            map: oldMat.map,
+            metalness: 0.3,
+            roughness: 0.6,
+            envMapIntensity: 0.5,
+            clearcoat: 0.6,
+            clearcoatRoughness: 0.3,
+          });
+          newMat.map && (newMat.map.anisotropy = isMobile ? 2 : 16);
+          object.material = newMat;
+        }
+      }
     });
 
-    // ✅ Si le modèle n'est pas encore prêt, ne rien afficher
-    if (!lodModel) return null;
+    lod.scale.set(...scale);
+    lod.position.set(...position);
+    lod.rotation.set(...rotation);
 
-    return <primitive ref={ref} object={lodModel} />;
-  }
-);
+    setLodModel(lod);
+    onLoaded?.();
+  }, [gltf, position, rotation, scale, isMobile]);
+
+  useFrame((state, delta) => {
+    if (!lodModel) return;
+    lodModel.levels.forEach(({ object }) => {
+      object.traverse((child) => {
+        if (child.userData.isWheel) child.rotation.x += delta * 1.8;
+      });
+    });
+  });
+
+  if (!lodModel) return null;
+  return <primitive ref={ref} object={lodModel} />;
+});
+
+
+// 👉 Le composant parent, qui choisit l’URL
+export const Car = forwardRef((props, ref) => {
+  const [isMobile, setIsMobile] = useState(null);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 799px)");
+    setIsMobile(mediaQuery.matches);
+    const handleResize = () => setIsMobile(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleResize);
+    return () => {
+      mediaQuery.removeEventListener("change", handleResize);
+    };
+  }, []);
+
+  // URLs de modèles
+  const desktopUrl = "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/models/car/alpine/alpincar-off-ratio-0-0500010.glb";
+  const mobileUrl = "https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/models/car/alpine/mobile-alpincar-off-ratio-0-050001.glb";
+  // Remplace mobileUrl par ton modèle mobile réel
+
+  // On attend d’avoir déterminé le type d’appareil
+  if (isMobile === null) return null;
+
+  return (
+    <CarModel
+      ref={ref}
+      url={isMobile ? mobileUrl : desktopUrl}
+      isMobile={isMobile}
+      {...props}
+    />
+  );
+});
