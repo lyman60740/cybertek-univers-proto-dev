@@ -1,8 +1,8 @@
 import React, { Suspense, useRef, useEffect, useState } from 'react'
 import { useThree, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { gsap, ScrollTrigger } from "gsap/all";
+
 import { CustomEase } from 'gsap/CustomEase'
 import './style.css'
 
