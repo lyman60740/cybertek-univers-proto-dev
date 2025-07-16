@@ -7,7 +7,7 @@ import { PerspectiveCamera, useHelper   } from "@react-three/drei";
 import gsap from "gsap";
 import * as THREE from "three";
 import GUI from "lil-gui";
-import { Effects } from './Effects'
+
 
 
 export const CarShowScene = () => {

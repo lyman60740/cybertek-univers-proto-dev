@@ -153,7 +153,7 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
             y: -30,
             ease: 'power2.in'
           },
-          'startRotation+=3'
+          'startRotation+=5'
         )
 
         tl.fromTo(
@@ -167,7 +167,7 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
             y: 0,
             ease: 'power2.out'
           },
-          'startRotation+=4'
+          'startRotation+=5'
         ) // 50%
 
         tl.to(
@@ -178,57 +178,10 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
             y: -30,
             ease: 'power3.in'
           },
-          'startRotation+=5'
+          'startRotation+=10'
         )
 
-        tl.fromTo(
-          '.carshow-txt-3 p:nth-of-type(1)',
-          {
-            y: 30
-          },
-          {
-            autoAlpha: 1,
-            duration: 1.5,
-            y: 0,
-            ease: 'power3.in'
-          },
-          'startRotation+=6'
-        ) // 50%
-
-        tl.to(
-          '.carshow-txt-3 p:nth-of-type(1)',
-          {
-            autoAlpha: 0,
-            duration: 0.5,
-            y: -30,
-            ease: 'power3.in'
-          },
-          'startRotation+=8'
-        )
-        tl.fromTo(
-          '.carshow-txt-3 p:nth-of-type(2)',
-          {
-            y: 30
-          },
-          {
-            autoAlpha: 1,
-            duration: 1.5,
-            y: 0,
-            ease: 'power3.in'
-          },
-          'startRotation+=9'
-        ) // 50%
-
-        tl.to(
-          '.carshow-txt-3 p:nth-of-type(2)',
-          {
-            autoAlpha: 0,
-            duration: 0.5,
-            y: -30,
-            ease: 'power3.in'
-          },
-          'startRotation+=11'
-        )
+       
 
         tl.to(
           carTargetPosition.current,
@@ -274,6 +227,17 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
           },
           '<'
         )
+
+        tl.addLabel('startRotation')
+        tl.to(angleRef.current, {
+          value: Math.PI * 2,
+          duration: 12,
+          ease: CustomEase.create(
+            'custom',
+            'M0,0 C0.009,0.029 0.117,0.234 0.246,0.242 0.429,0.252 0.322,0.5 0.5,0.5 0.585,0.5 0.561,0.732 0.743,0.747 0.889,0.758 0.909,1 1,1 '
+          )
+        })
+
  tl.fromTo(
           '.carshow-txt-1',
           {
@@ -285,7 +249,7 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
             y: 0,
             ease: 'power2.out'
           },
-          '<30%'
+          'startRotation+=1'
         ) 
 
         tl.to(
@@ -295,31 +259,9 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
             duration: 0.5,
             y: -30,
             ease: 'power2.in'
-          }
+          },
+          'startRotation+=5'
         )
-        tl.addLabel('startRotation')
-        tl.to(angleRef.current, {
-          value: Math.PI * 2,
-          duration: 12,
-          ease: CustomEase.create(
-            'custom',
-            'M0,0 C0.009,0.029 0.117,0.234 0.246,0.242 0.429,0.252 0.322,0.5 0.5,0.5 0.585,0.5 0.561,0.732 0.743,0.747 0.889,0.758 0.909,1 1,1 '
-          )
-        })
-        // tl.fromTo(
-        //   carTargetPosition.current,
-        //   {
-        //     x: -7
-        //   },
-        //   {
-        //     x: -8.75,
-        //     duration: 2.5,
-        //     ease: 'linear'
-        //   },
-        //   '<'
-        // )
-       
-
         tl.fromTo(
           '.carshow-txt-2',
           {
@@ -331,7 +273,7 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
             y: 0,
             ease: 'power2.out'
           },
-          'startRotation+=1'
+          'startRotation+=6'
         ) // 50%
 
         tl.to(
@@ -342,57 +284,9 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
             y: -30,
             ease: 'power3.in'
           },
-          'startRotation+=3'
-        )
-
-         tl.fromTo(
-          '.carshow-txt-3 p:nth-of-type(1)',
-          {
-            y: 30
-          },
-          {
-            autoAlpha: 1,
-            duration: 1.5,
-            y: 0,
-            ease: 'power3.in'
-          },
-          'startRotation+=4'
-        ) // 50%
-
-        tl.to(
-          '.carshow-txt-3 p:nth-of-type(1)',
-          {
-            autoAlpha: 0,
-            duration: 0.5,
-            y: -30,
-            ease: 'power3.in'
-          },
-          'startRotation+=7'
-        )
-        tl.fromTo(
-          '.carshow-txt-3 p:nth-of-type(2)',
-          {
-            y: 30
-          },
-          {
-            autoAlpha: 1,
-            duration: 1.5,
-            y: 0,
-            ease: 'power3.in'
-          },
-          'startRotation+=8'
-        ) // 50%
-
-        tl.to(
-          '.carshow-txt-3 p:nth-of-type(2)',
-          {
-            autoAlpha: 0,
-            duration: 0.5,
-            y: -30,
-            ease: 'power3.in'
-          },
           'startRotation+=11'
         )
+
 
         tl.to(
           '.carshow-txt-4 div',
