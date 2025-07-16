@@ -92,7 +92,7 @@ console.log('go tl mobile')
         scrollTrigger: {
           trigger: '.carshow-container',
           start:'top top',
-          end:  '+=2000px',
+          end:  '+=3000px',
           scrub:  1 ,
           pin: true,
           pinSpacing: true,
