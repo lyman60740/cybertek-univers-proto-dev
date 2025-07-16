@@ -67,7 +67,7 @@ const dirLightRef = useRef();
   <planeGeometry args={[10, 0.15]} />
   <meshBasicMaterial color="white" />
 </mesh>
-<LogoOnGround url="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/images/cyb-white.png" x={3} z={0} height={0.5} ratio={5} animEnd={isMobile ? -12 : -8}/>
+<LogoOnGround url="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/images/cyb-white1.png" x={3} z={0} height={0.5} ratio={5} animEnd={isMobile ? -12 : -8}/>
 <LogoOnGround url="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/images/alpine-white.png" x={4} z={-0.12} height={2} ratio={3} animEnd={isMobile ? -12 : -8}/>
 <LogoOnGround url="https://cdn.jsdelivr.net/gh/lyman60740/cybertek-univers-proto-dev@master/build/images/cross.png" x={3.5} z={0} height={0.3} ratio={1} animEnd={isMobile ? -12 : -8} />
 
@@ -83,6 +83,7 @@ const dirLightRef = useRef();
   intensity={2.2}
   ref={dirLightRef}
 />
+
 
         <Ground
           ref={groundRef}
