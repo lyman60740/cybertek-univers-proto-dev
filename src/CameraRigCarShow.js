@@ -87,7 +87,7 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
         scrollTrigger: {
           trigger: '.carshow-container',
           start: isMobile ? 'top top' : 'top top',
-          end: isMobile ? '+=4000px' : '+=2000px',
+          end: isMobile ? '+=2000px' : '+=4000px',
           scrub: isMobile ? 1 : 2,
           pin: true,
           pinSpacing: true,
