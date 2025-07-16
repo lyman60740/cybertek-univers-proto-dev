@@ -1,8 +1,8 @@
 import React, { Suspense, useRef, useEffect, useState } from 'react'
 import { useThree, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import { gsap, ScrollTrigger } from "gsap/all";
-
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { CustomEase } from 'gsap/CustomEase'
 import './style.css'
 
@@ -67,7 +67,6 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
 
     mm.add('(max-width: 999px)', () => {
       setIsMobile(true)
-      console.log('go mobile')
     })
   }, [])
 
@@ -84,21 +83,19 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
 
     if (document.querySelector('.carshow-container')) {
      
-
-      if(isMobile) {
-
-console.log('go tl mobile')
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: '.carshow-container',
-          start:'top top',
-          end:  '+=4000px',
-          scrub:  1 ,
+          start: isMobile ? 'top top' : 'top top',
+          end: '+=4000px',
+          scrub: isMobile ? 1 : 2,
           pin: true,
           pinSpacing: true,
           markers: false,
         }
       })
+
+      mm.add('(max-width: 999px)', () => {
         orbitState.current.radius = 12
 
 
@@ -211,21 +208,10 @@ console.log('go tl mobile')
           // Animation vide pour laisser un temps d'arrêt après la fin de la tl
           duration: 1
         })
-            }
-
-      if(!isMobile) {
-
-const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.carshow-container',
-          start:'top top',
-          end: '+=4000px',
-          scrub: 2,
-          pin: true,
-          pinSpacing: true,
-          markers: false,
-        }
       })
+
+      mm.add('(min-width: 1000px)', () => {
+
         gsap.to(carTargetPosition.current, {
           x: -7,
           duration: 2,
@@ -331,8 +317,7 @@ x: -7,
           // Animation vide pour laisser un temps d'arrêt après la fin de la tl
           duration: 1
         })
-             
-      }
+      })
       
     }
 
