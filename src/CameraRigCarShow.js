@@ -67,6 +67,7 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
 
     mm.add('(max-width: 999px)', () => {
       setIsMobile(true)
+      console.log('go mobile')
     })
   }, [])
 
@@ -83,19 +84,21 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
 
     if (document.querySelector('.carshow-container')) {
      
+
+      if(isMobile) {
+
+console.log('go tl mobile')
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: '.carshow-container',
-          start: isMobile ? 'top top' : 'top top',
-          end:  isMobile ? '+=2000px': '+=4000px',
-          scrub: isMobile ? 1 : 2,
+          start:'top top',
+          end:  '+=2000px',
+          scrub:  1 ,
           pin: true,
           pinSpacing: true,
           markers: false,
         }
       })
-
-      mm.add('(max-width: 999px)', () => {
         orbitState.current.radius = 12
 
 
@@ -208,10 +211,21 @@ export const CameraRigCarShow = ({ carRef, carReady, carPosition }) => {
           // Animation vide pour laisser un temps d'arrêt après la fin de la tl
           duration: 1
         })
+            }
+
+      if(!isMobile) {
+
+const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.carshow-container',
+          start:'top top',
+          end: '+=4000px',
+          scrub: 2,
+          pin: true,
+          pinSpacing: true,
+          markers: false,
+        }
       })
-
-      mm.add('(min-width: 1000px)', () => {
-
         gsap.to(carTargetPosition.current, {
           x: -7,
           duration: 2,
@@ -317,7 +331,8 @@ x: -7,
           // Animation vide pour laisser un temps d'arrêt après la fin de la tl
           duration: 1
         })
-      })
+             
+      }
       
     }
 
