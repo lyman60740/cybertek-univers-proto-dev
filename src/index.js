@@ -101,7 +101,7 @@ console.log("is3DReady ?", is3DReady);
   return (
     <>
       <LenisController />
-      <Canvas dpr={window.devicePixelRatio > 1.1 && !isMobile ? [1, 2] : 1} frameloop="always">
+      <Canvas dpr={[1, 2]} frameloop="always">
         <CarShowScene />
         <Stats />
       </Canvas>
